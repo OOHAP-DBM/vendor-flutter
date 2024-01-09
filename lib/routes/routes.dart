@@ -10,4 +10,6 @@ class Routes {
   static const String createPasswordScreen = 'createPasswordScreen';
   static const String createProfileScreen = 'createProfileScreen';
   static const String dashboardScreen = 'dashboardScreen';
+  static const String addhoardingScreen='addhoardingScreen';
+  static const String secondhoardingScreen='secondhoardingscreen';
 }

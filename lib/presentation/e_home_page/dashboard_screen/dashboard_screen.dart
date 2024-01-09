@@ -84,12 +84,13 @@ class DashboardScreen extends StatelessWidget {
                             width: ScaleSize.width(40),
                             backgroundColor: CustomColors.buttonColor,
                             onTap: () {
-                              CustomSnackBar(
-                                      color: Colors.redAccent,
-                                      text: 'Hording clicked',
-                                      second: 1,
-                                      icon: Icons.image)
-                                  .showSnackBar(context);
+                              NavigateUtils.pushNamedReplacement(context, Routes.addhoardingScreen);
+                              // CustomSnackBar(
+                              //         color: Colors.redAccent,
+                              //         text: 'Hording clicked',
+                              //         second: 1,
+                              //         icon: Icons.image)
+                              //     .showSnackBar(context);
                             },
                             text: '+ Add Hoarding'),
                       ],

@@ -1,5 +1,8 @@
 import 'package:flutter/services.dart';
 import 'package:oohapp/core/app_export.dart';
+import 'package:oohapp/presentation/add_hoarding/first_add_hoarding_page.dart/add_hoarding_page.dart';
+import 'package:oohapp/presentation/b_splash_screen/splash_screen.dart';
+import 'package:oohapp/presentation/c_onboarding_screen/intro_page/page_one.dart';
 import 'package:oohapp/presentation/e_home_page/dashboard_screen/dashboard_screen.dart';
 import 'package:oohapp/presentation/e_home_page/home_page.dart';
 import 'package:oohapp/presentation/e_home_page/profile_screen/profile_screen.dart';
@@ -39,12 +42,15 @@ class MyApp extends StatelessWidget {
                 .withOpacity(0.5), // Set unselected item color
           ),*/
         ),
-        /*  initialRoute: Routes.mainScreen,
-        onGenerateRoute: RoutesGenerator.generateRoutes,*/
+        //  initialRoute: Routes.splashScreen,
+        //  onGenerateRoute: RoutesGenerator.generateRoutes,
+        home: const AddHoardingScreen(),
+         
+       
         // home: const CreateProfileScreen(),
         //  home: LoginWithPasswordScreen(),
         // home: DashboardScreen(),
-        home: HomePage(),
+        // home: PageOne(),
         // home: ProfileScreen(),
       ),
     );

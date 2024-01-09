@@ -105,15 +105,8 @@ class CreateProfileScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15.0,
                 ),
-                const CustomTextFormField(
-                  placeholder: 'First Name*',
-                  // maxLength: 10,
-                  // keyboardType: TextInputType.number,
-                  hintText: 'Enter first Name',
-                ),
-                const SizedBox(
-                  height: 15.0,
-                ),
+             
+             
                 const CustomTextFormField(
                   placeholder: 'Mobile Number*',
                   // maxLength: 10,

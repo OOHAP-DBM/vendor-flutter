@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:oohapp/core/app_export.dart';
+import 'package:oohapp/core/app_export.dart'; // Replace with your actual import path
+import 'package:oohapp/presentation/c_onboarding_screen/cubit/charcter_count/character_count_cubit.dart'; // Replace with your actual import path
 
-import 'package:oohapp/presentation/c_onboarding_screen/cubit/charcter_count/character_count_cubit.dart';
-
-class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
+class NewCustomTextFormField extends StatelessWidget {
+  const NewCustomTextFormField({
     Key? key,
     this.onPressed,
     this.color,
@@ -22,12 +21,13 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.maxLines,
     this.hintText,
+    this.lasttext,
     this.labelText,
     this.maxLength,
     this.keyboardType,
     this.placeholder,
-    this.showCharacterCount = false, // New property for character count
-    this.onChanged, // New property for onChanged
+    this.showCharacterCount = false,
+    this.onChanged,
   }) : super(key: key);
 
   final VoidCallback? onPressed;
@@ -45,12 +45,13 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final int? maxLines;
   final String? hintText;
+  final String? lasttext;
   final String? labelText;
   final int? maxLength;
   final TextInputType? keyboardType;
   final String? placeholder;
   final bool? showCharacterCount;
-  final void Function(String)? onChanged; // New property for onChanged
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +65,12 @@ class CustomTextFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText.calloutText(
-            text: placeholder,
-            color: CustomColors.blackColor,
-          ),
-          const SizedBox(
-            height: 8.0,
-          ),
+          if (placeholder != null)
+            CustomText.calloutText(
+              text: placeholder!,
+              color: CustomColors.blackColor,
+            ),
+          const SizedBox(height: 8.0),
           Container(
             height: height ?? ScaleSize.height(5.66),
             decoration: BoxDecoration(
@@ -85,19 +85,13 @@ class CustomTextFormField extends StatelessWidget {
                   keyboardType: keyboardType,
                   maxLength: maxLength,
                   controller: controller,
-                  obscureText: obscureText!,
+                  obscureText: obscureText ?? false,
                   maxLines: maxLines,
-                  onChanged: (text) {
-                    if (onChanged != null) {
-                      onChanged!(text);
-                    }
-                    if (showCharacterCount == true) {
-                      context.read<CharacterCountCubit>().updateCharacterCount(text.length);
-                    }
-                  },
+                  onChanged: onChanged,
                   decoration: InputDecoration(
                     focusColor: CustomColors.inactiveButton,
-                    labelStyle: const TextStyle(color: CustomColors.inactiveButton),
+                    labelStyle:
+                        const TextStyle(color: CustomColors.inactiveButton),
                     contentPadding: const EdgeInsets.symmetric(
                       vertical: 2.0,
                       horizontal: 8.0,
@@ -109,7 +103,8 @@ class CustomTextFormField extends StatelessWidget {
                     ),
                     counterText: '',
                     border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: CustomColors.blackColor),
+                      borderSide:
+                          const BorderSide(color: CustomColors.blackColor),
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                     icon: icon,
@@ -141,6 +136,27 @@ class CustomTextFormField extends StatelessWidget {
                             color: CustomColors.blackColor,
                           );
                         },
+                      ),
+                    ),
+                  ),
+                if (lasttext != null && lasttext!.isNotEmpty)
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: GestureDetector(
+                      onTap: onPressed,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          lasttext!,
+                          style: TextStyle(
+                            color: Color(0xFF0089E1),
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w500,
+                            height: 0,
+                          ),
+                        ),
                       ),
                     ),
                   ),

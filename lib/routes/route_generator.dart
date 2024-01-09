@@ -1,5 +1,9 @@
 import 'package:oohapp/core/constants/app_constant.dart';
 import 'package:oohapp/presentation/a_main_screen/main_screen.dart';
+import 'package:oohapp/presentation/add_hoarding/first_add_hoarding_page.dart/add_hoarding_page.dart';
+import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/second_hoarding_page.dart';
+
+import 'package:oohapp/presentation/c_onboarding_screen/cubit/charcter_count/character_count_cubit.dart';
 import 'package:oohapp/presentation/d_authentication/login_screen/login_otp_screen/login_otp_screen.dart';
 import 'package:oohapp/presentation/d_authentication/login_screen/login_screen.dart';
 import 'package:oohapp/presentation/d_authentication/login_screen/login_with_password_screen/login_with_password_screen.dart';
@@ -59,6 +63,17 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
         );
+        case Routes.addhoardingScreen:
+          return MaterialPageRoute(
+              builder: (_) => BlocProvider(
+                create: (context) => CharacterCountCubit(),
+                child: const AddHoardingScreen(),
+              ),
+            );
+            case Routes.secondhoardingScreen:
+            return MaterialPageRoute(
+              builder: (_)=> const SecondAddHoardingPage()
+            );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

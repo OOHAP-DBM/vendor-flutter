@@ -24,6 +24,8 @@ class ImageConstant {
   // google logo
 
   static String google = '$imagePath/google.png';
+  // arrow logo
+  static String arrowback='$imagePath/arrow_back.png';
 
 
 }
