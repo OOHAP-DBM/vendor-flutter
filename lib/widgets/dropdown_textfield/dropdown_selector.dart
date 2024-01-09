@@ -84,7 +84,7 @@ class CustomTextFieldSelector extends StatelessWidget {
         child: DropdownButton<String>(
           value: selectedChoice,
           hint: CustomText.calloutText(
-            text: hintText ?? 'Choose Business type',
+            text: hintText ,
             color: CustomColors.inactiveButton,
           ),
           items: choices?.map((String choice) {

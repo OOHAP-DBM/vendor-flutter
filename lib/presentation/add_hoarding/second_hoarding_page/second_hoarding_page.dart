@@ -311,7 +311,7 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                   return CustomButton(
                     onTap: () {
                       NavigateUtils.pushNamedReplacement(
-                          context, Routes.secondhoardingScreen);
+                          context, Routes.gettingstartedfirstScreen);
                     },
                     text: 'Save & Finish',
                     backgroundColor: (state is SecondHoardingValidState)

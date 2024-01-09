@@ -27,6 +27,7 @@ dependencies:
   custom_navigation_bar: ^0.8.2
   syncfusion_flutter_charts: ^21.2.4
   image_picker: ^1.0.6
+  google_maps_flutter: ^2.5.2
 
 dev_dependencies:
   flutter_test:

@@ -12,4 +12,7 @@ class Routes {
   static const String dashboardScreen = 'dashboardScreen';
   static const String addhoardingScreen='addhoardingScreen';
   static const String secondhoardingScreen='secondhoardingscreen';
+  static const String gettingstartedfirstScreen='gettingstartedfirstScreen';
+  static const String firsthoardinglocationScreen='firsthoardinglocationScreen';
+  static const String secondhoardinglocationScreen='secondhoardinglocationScreen';
 }

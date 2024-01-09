@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:oohapp/core/app_export.dart';
 
 import 'package:oohapp/presentation/c_onboarding_screen/cubit/charcter_count/character_count_cubit.dart';
@@ -26,8 +25,8 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength,
     this.keyboardType,
     this.placeholder,
-    this.showCharacterCount = false, // New property for character count
-    this.onChanged, // New property for onChanged
+    this.showCharacterCount = false, 
+    this.onChanged, 
   }) : super(key: key);
 
   final VoidCallback? onPressed;
@@ -50,7 +49,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? placeholder;
   final bool? showCharacterCount;
-  final void Function(String)? onChanged; // New property for onChanged
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {

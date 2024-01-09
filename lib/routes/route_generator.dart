@@ -1,6 +1,9 @@
 import 'package:oohapp/core/constants/app_constant.dart';
 import 'package:oohapp/presentation/a_main_screen/main_screen.dart';
 import 'package:oohapp/presentation/add_hoarding/first_add_hoarding_page.dart/add_hoarding_page.dart';
+import 'package:oohapp/presentation/add_hoarding/getting_started/first_page_getting_started/first_page_getting_started.dart';
+import 'package:oohapp/presentation/add_hoarding/hoarding_location/first_hoarding_location_page.dart';
+import 'package:oohapp/presentation/add_hoarding/hoarding_location/second_location_hoarding_page.dart';
 import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/second_hoarding_page.dart';
 
 import 'package:oohapp/presentation/c_onboarding_screen/cubit/charcter_count/character_count_cubit.dart';
@@ -73,6 +76,18 @@ class RoutesGenerator {
             case Routes.secondhoardingScreen:
             return MaterialPageRoute(
               builder: (_)=> const SecondAddHoardingPage()
+            );
+            case Routes.gettingstartedfirstScreen:
+            return MaterialPageRoute(
+              builder: (_)=>const  GettingStartedFirstPage()
+            );
+            case Routes.firsthoardinglocationScreen:
+            return MaterialPageRoute(
+              builder: (_)=> const FirstHoardingLocationPage()
+            );
+            case Routes.secondhoardinglocationScreen:
+            return MaterialPageRoute(
+              builder:(_)=> const SecondLocationHoardingPage()
             );
       default:
         return MaterialPageRoute(
