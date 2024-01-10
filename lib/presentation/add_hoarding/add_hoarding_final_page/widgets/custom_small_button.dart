@@ -32,7 +32,7 @@ class CustomSmallButton extends StatelessWidget {
           height: height??46,
           padding: const EdgeInsets.all(8),
           decoration: ShapeDecoration(
-            color: Colors.white,
+            color: backgroundColor,
             shape: RoundedRectangleBorder(
               side: const BorderSide(width: 1, color: Color(0xFF282C3E)),
               borderRadius: BorderRadius.circular(3),

@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:oohapp/core/app_export.dart';
 import 'package:oohapp/presentation/add_hoarding/first_add_hoarding_page.dart/add_hoarding_page.dart';
-import 'package:oohapp/presentation/add_hoarding/first_add_hoarding_page.dart/cubic/add_hoarding_bloc.dart';
+
 
 import 'package:oohapp/widgets/custom_bloc_provider.dart';
 
@@ -39,12 +39,9 @@ class MyApp extends StatelessWidget {
                 .withOpacity(0.5), // Set unselected item color
           ),*/
         ),
-        //  initialRoute: Routes.splashScreen,
-        //  onGenerateRoute: RoutesGenerator.generateRoutes,
-        home: BlocProvider<AddHoardingBloc>(
-          create: (context) => AddHoardingBloc(),
-          child: const AddHoardingScreen(),
-        ),
+         initialRoute: Routes.splashScreen,
+         onGenerateRoute: RoutesGenerator.generateRoutes,
+        
          
        
         // home: const CreateProfileScreen(),

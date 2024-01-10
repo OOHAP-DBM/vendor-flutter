@@ -1,7 +1,7 @@
 
 import 'package:oohapp/core/app_export.dart';
 
-import 'package:oohapp/presentation/c_onboarding_screen/cubit/charcter_count/character_count_cubit.dart';
+import 'package:oohapp/core/constants/global_cubit/character_count_cubit.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -25,8 +25,8 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLength,
     this.keyboardType,
     this.placeholder,
-    this.showCharacterCount = false, 
-    this.onChanged, 
+    this.showCharacterCount = false, // New property for character count
+    this.onChanged, // New property for onChanged
   }) : super(key: key);
 
   final VoidCallback? onPressed;
@@ -49,13 +49,15 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? placeholder;
   final bool? showCharacterCount;
-  final void Function(String)? onChanged;
+  final void Function(String)? onChanged; // New property for onChanged
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
       alignment: Alignment.center,
-      height: height ?? ScaleSize.height(9.66),
+      height: (showCharacterCount!)?ScaleSize.height(12.7):ScaleSize.height(9.66),
+      
       width: width ?? ScaleSize.width(100),
       decoration: BoxDecoration(
         color: color,
@@ -123,29 +125,31 @@ class CustomTextFormField extends StatelessWidget {
                     suffixIcon: suffixIcon,
                   ),
                 ),
-                if (showCharacterCount == true)
-                  Positioned(
-                    bottom: 0,
-                    right: 8,
-                    child: Container(
-                      padding: const EdgeInsets.all(4.0),
-                      decoration: BoxDecoration(
-                        color: CustomColors.grey,
-                        borderRadius: BorderRadius.circular(4.0),
-                      ),
-                      child: BlocBuilder<CharacterCountCubit, int>(
-                        builder: (context, count) {
-                          return CustomText.calloutText(
-                            text: '$count/${maxLength ?? 0}',
-                            color: CustomColors.blackColor,
-                          );
-                        },
-                      ),
-                    ),
-                  ),
+                
               ],
             ),
+            
           ),
+          SizedBox(height: 2,),
+          if (showCharacterCount == true)
+              BlocBuilder<CharacterCountCubit, int>(
+                builder: (context, count) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Align(
+                      alignment: AlignmentDirectional.bottomEnd,
+                      child: Text(
+                        
+                        '$count/${maxLength ?? 0} Characters',
+                        style: TextStyle(
+                          color: CustomColors.blackColor,
+                          fontSize: 12, 
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
         ],
       ),
     );

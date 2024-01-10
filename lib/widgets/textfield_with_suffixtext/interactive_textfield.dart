@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oohapp/core/app_export.dart'; // Replace with your actual import path
-import 'package:oohapp/presentation/c_onboarding_screen/cubit/charcter_count/character_count_cubit.dart'; // Replace with your actual import path
+import 'package:oohapp/core/constants/global_cubit/character_count_cubit.dart'; // Replace with your actual import path
 
 class NewCustomTextFormField extends StatelessWidget {
   const NewCustomTextFormField({

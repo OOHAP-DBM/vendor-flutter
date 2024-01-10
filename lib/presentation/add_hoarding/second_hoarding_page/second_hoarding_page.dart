@@ -1,8 +1,7 @@
 import 'dart:io';
 
-import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/cubic/second_hoarding_bloc.dart';
-import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/cubic/second_hoarding_event.dart';
-import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/cubic/second_hoarding_state.dart';
+import 'package:oohapp/core/constants/global_cubit/form_validation_cubit.dart';
+
 import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/ifsc_finder_bloc/ifsc_finder_bloc.dart';
 import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/ifsc_finder_bloc/ifsc_finder_event.dart';
 import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/ifsc_finder_bloc/ifsc_finder_state.dart';
@@ -181,6 +180,7 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
 
   @override
   Widget build(BuildContext context) {
+        final formValidationCubit = BlocProvider.of<FormValidationCubit>(context);
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Business Details',
@@ -233,13 +233,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               CustomTextFormField(
                 controller: accountholdernameController,
                 onChanged: (val) {
-                  BlocProvider.of<SecondHoardingBloc>(context).add(
-                      SecondHoardingTextChangedEvent(
-                          banknameController.text,
-                          accountholdernameController.text,
-                          accountController.text,
-                          ifsccodeController.text,
-                          selectedFile!));
+                     formValidationCubit.validateField(
+                      'bank name ', banknameController.text);
                 },
                 placeholder: 'Account Holder Name*',
                 // maxLength: 15,
@@ -252,13 +247,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               CustomTextFormField(
                 controller: accountController,
                 onChanged: (val) {
-                  BlocProvider.of<SecondHoardingBloc>(context).add(
-                      SecondHoardingTextChangedEvent(
-                          banknameController.text,
-                          accountholdernameController.text,
-                          accountController.text,
-                          ifsccodeController.text,
-                          selectedFile!));
+                      formValidationCubit.validateField(
+                      'account holder', accountholdernameController.text);
                 },
                 placeholder: 'Account Number*',
                 // maxLength: 15,
@@ -268,13 +258,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               NewCustomTextFormField(
                 controller: ifsccodeController,
                 onChanged: (val) {
-                  BlocProvider.of<SecondHoardingBloc>(context).add(
-                      SecondHoardingTextChangedEvent(
-                          banknameController.text,
-                          accountholdernameController.text,
-                          accountController.text,
-                          ifsccodeController.text,
-                          selectedFile!));
+     formValidationCubit.validateField(
+                      'account number', accountController.text);
                 },
                 placeholder: 'IFSC Code*',
                 hintText: "Enter IFSC Code",
@@ -306,20 +291,21 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               SizedBox(
                 height: 20,
               ),
-              BlocBuilder<SecondHoardingBloc, SecondHoardingState>(
-                builder: (context, state) {
-                  return CustomButton(
-                    onTap: () {
-                      NavigateUtils.pushNamedReplacement(
-                          context, Routes.gettingstartedfirstScreen);
-                    },
-                    text: 'Save & Finish',
-                    backgroundColor: (state is SecondHoardingValidState)
-                        ? Color(0xFFDDDDDD)
-                        : Color(0xFF282C3E),
-                  );
+CustomButton(
+                onTap: () {
+                  if (formValidationCubit.isFormValid()) {
+                    NavigateUtils.pushNamedReplacement(
+                        context, Routes.gettingstartedfirstScreen);
+                  } else {
+             
+                  }
                 },
+                text: 'Save & Finish',
+                backgroundColor: formValidationCubit.isFormValid()
+                    ? Color(0xFFDDDDDD)
+                    : Color(0xFF282C3E),
               )
+           
             ],
           ),
         ),
