@@ -1,6 +1,7 @@
 import 'package:oohapp/core/constants/app_constant.dart';
 import 'package:oohapp/presentation/a_main_screen/main_screen.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/add_hoarding_final_page_first.dart';
+import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/add_hoarding_final_second_page/add_hoarding_second_final_page.dart';
 import 'package:oohapp/presentation/add_hoarding/first_add_hoarding_page.dart/add_hoarding_page.dart';
 
 import 'package:oohapp/presentation/add_hoarding/getting_started/first_page_getting_started/first_page_getting_started.dart';
@@ -9,7 +10,6 @@ import 'package:oohapp/presentation/add_hoarding/hoarding_location/hoarding_loca
 import 'package:oohapp/presentation/add_hoarding/hoarding_location/second_location_hoarding_page.dart';
 
 import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/second_hoarding_page.dart';
-
 
 import 'package:oohapp/presentation/d_authentication/login_screen/login_otp_screen/login_otp_screen.dart';
 import 'package:oohapp/presentation/d_authentication/login_screen/login_screen.dart';
@@ -28,7 +28,7 @@ class RoutesGenerator {
     switch (settings.name) {
       case Routes.mainScreen:
         return MaterialPageRoute(
-            builder: (_) => const MainScreen(),
+          builder: (_) => const MainScreen(),
         );
       case Routes.splashScreen:
         return MaterialPageRoute(
@@ -70,37 +70,32 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
         );
-       
-            case Routes.gettingstartedfirstScreen:
-            return MaterialPageRoute(
-              builder: (_)=>const  GettingStartedFirstPage()
-            );
-           case Routes.addhoardingScreen:
+
+      case Routes.gettingstartedfirstScreen:
+        return MaterialPageRoute(
+            builder: (_) => const GettingStartedFirstPage());
+      case Routes.addhoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const AddHoardingScreen(),
         );
       case Routes.secondhoardingScreen:
         return MaterialPageRoute(
           builder: (_) => const SecondAddHoardingPage(),
-
         );
-        case Routes.firsthoardinglocationScreen:
+      case Routes.firsthoardinglocationScreen:
         return MaterialPageRoute(
-          builder: (_)=>const FirstHoardingLocationPage()
-        );
-          case Routes.secondhoardinglocationScreen:
+            builder: (_) => const FirstHoardingLocationPage());
+      case Routes.secondhoardinglocationScreen:
         return MaterialPageRoute(
-          builder: (_)=>const SecondLocationHoardingPage()
-        );
-        case Routes.fisthoardinglocationentryScreen:
+            builder: (_) => const SecondLocationHoardingPage());
+      case Routes.fisthoardinglocationentryScreen:
         return MaterialPageRoute(
-          builder: (_)=> FirstHoardingLocationEntryPage()
-        );
-        case Routes.finalfirstaddhoardingScreen:
+            builder: (_) => FirstHoardingLocationEntryPage());
+      case Routes.finalfirstaddhoardingScreen:
+        return MaterialPageRoute(builder: (_) => FinalAddHoardingFirstPage());
+      case Routes.finalsecondaddhoardingScreeen:
         return MaterialPageRoute(
-          builder: (_)=>const FinalAddHoardingFirstPage()
-        );
-        
+            builder: (_) => const FinalAddHoardingSecondPage());
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

@@ -28,6 +28,7 @@ dependencies:
   syncfusion_flutter_charts: ^21.2.4
   image_picker: ^1.0.6
   google_maps_flutter: ^2.5.2
+  dotted_border: ^2.1.0
 
 dev_dependencies:
   flutter_test:

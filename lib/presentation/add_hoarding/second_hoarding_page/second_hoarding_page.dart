@@ -20,12 +20,11 @@ class SecondAddHoardingPage extends StatefulWidget {
 }
 
 class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
-  
   void showIFSCFinder(BuildContext context) {
-    TextEditingController bankController=TextEditingController();
-    TextEditingController stateController=TextEditingController();
-    TextEditingController cityController=TextEditingController();
-    TextEditingController branchController=TextEditingController();
+    TextEditingController bankController = TextEditingController();
+    TextEditingController stateController = TextEditingController();
+    TextEditingController cityController = TextEditingController();
+    TextEditingController branchController = TextEditingController();
     showModalBottomSheet(
       context: context,
       builder: (BuildContext bc) {
@@ -38,7 +37,6 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
           ),
-
           child: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -50,15 +48,13 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                 height: 20,
               ),
               CustomTextField(
-                     onDropdownChanged: (val) {
+                onDropdownChanged: (val) {
                   BlocProvider.of<IFSCFinderBloc>(context).add(
                       DropdownSelectionChanged(
                           bankController.text,
-                         cityController.text,
+                          cityController.text,
                           stateController.text,
-                          branchController.text
-                         )
-                         );
+                          branchController.text));
                 },
                 controller: bankController,
                 hintText: 'choose bank',
@@ -69,15 +65,13 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               ),
               CustomTextField(
                 controller: stateController,
-                     onDropdownChanged: (val) {
+                onDropdownChanged: (val) {
                   BlocProvider.of<IFSCFinderBloc>(context).add(
                       DropdownSelectionChanged(
                           bankController.text,
-                         cityController.text,
+                          cityController.text,
                           stateController.text,
-                          branchController.text
-                         )
-                         );
+                          branchController.text));
                 },
                 hintText: 'choose state',
                 choices: ['UP', 'Rajasthan', 'MP'],
@@ -87,15 +81,13 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               ),
               CustomTextField(
                 controller: cityController,
-                     onDropdownChanged: (val) {
+                onDropdownChanged: (val) {
                   BlocProvider.of<IFSCFinderBloc>(context).add(
                       DropdownSelectionChanged(
                           bankController.text,
-                         cityController.text,
+                          cityController.text,
                           stateController.text,
-                          branchController.text
-                         )
-                         );
+                          branchController.text));
                 },
                 hintText: 'choose city',
                 choices: ['Lucknow', 'Kanpur', 'Delhi'],
@@ -105,15 +97,13 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               ),
               CustomTextField(
                 controller: branchController,
-                     onDropdownChanged: (val) {
+                onDropdownChanged: (val) {
                   BlocProvider.of<IFSCFinderBloc>(context).add(
                       DropdownSelectionChanged(
                           bankController.text,
-                         cityController.text,
+                          cityController.text,
                           stateController.text,
-                          branchController.text
-                         )
-                         );
+                          branchController.text));
                 },
                 hintText: 'choose branch',
                 choices: ['gomtinagar', 'pahadganj', 'raniganj'],
@@ -122,42 +112,37 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                 height: 20,
               ),
               Padding(
-                padding: const EdgeInsets.only(left:50),
+                padding: const EdgeInsets.only(left: 50),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                 BlocBuilder<IFSCFinderBloc, IFSCFinderState>(
-                builder: (context, state) {
-                  return CustomButton(
-                    onTap: () {
-                     
-                    },
-                    text: 'Cancel',
-                    backgroundColor: (state is IFSCFinderValidState)
-                        ? Color(0xFFDDDDDD)
-                        : Color(0xFFDDDDDD),
-                  );
-                },
-              ),
-                     BlocBuilder<IFSCFinderBloc, IFSCFinderState>(
-                builder: (context, state) {
-                  return CustomButton(
-                    onTap: () {
-                     
-                    },
-                    text: 'Save',
-                    backgroundColor: (state is IFSCFinderValidState)
-                        ? Color(0xFFDDDDDD)
-                        :  Color(0xFF282C3E),
-                  );
-                },
-              ),
+                    BlocBuilder<IFSCFinderBloc, IFSCFinderState>(
+                      builder: (context, state) {
+                        return CustomButton(
+                          onTap: () {},
+                          text: 'Cancel',
+                          backgroundColor: (state is IFSCFinderValidState)
+                              ? Color(0xFFDDDDDD)
+                              : Color(0xFFDDDDDD),
+                        );
+                      },
+                    ),
+                    BlocBuilder<IFSCFinderBloc, IFSCFinderState>(
+                      builder: (context, state) {
+                        return CustomButton(
+                          onTap: () {},
+                          text: 'Save',
+                          backgroundColor: (state is IFSCFinderValidState)
+                              ? Color(0xFFDDDDDD)
+                              : Color(0xFF282C3E),
+                        );
+                      },
+                    ),
                   ],
                 ),
               )
             ],
           ),
-        
         );
       },
     );
@@ -180,7 +165,7 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-        final formValidationCubit = BlocProvider.of<FormValidationCubit>(context);
+    final formValidationCubit = BlocProvider.of<FormValidationCubit>(context);
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Business Details',
@@ -233,7 +218,7 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               CustomTextFormField(
                 controller: accountholdernameController,
                 onChanged: (val) {
-                     formValidationCubit.validateField(
+                  formValidationCubit.validateField(
                       'bank name ', banknameController.text);
                 },
                 placeholder: 'Account Holder Name*',
@@ -247,7 +232,7 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               CustomTextFormField(
                 controller: accountController,
                 onChanged: (val) {
-                      formValidationCubit.validateField(
+                  formValidationCubit.validateField(
                       'account holder', accountholdernameController.text);
                 },
                 placeholder: 'Account Number*',
@@ -258,7 +243,7 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               NewCustomTextFormField(
                 controller: ifsccodeController,
                 onChanged: (val) {
-     formValidationCubit.validateField(
+                  formValidationCubit.validateField(
                       'account number', accountController.text);
                 },
                 placeholder: 'IFSC Code*',
@@ -291,21 +276,18 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
               SizedBox(
                 height: 20,
               ),
-CustomButton(
+              CustomButton(
                 onTap: () {
                   if (formValidationCubit.isFormValid()) {
                     NavigateUtils.pushNamedReplacement(
                         context, Routes.gettingstartedfirstScreen);
-                  } else {
-             
-                  }
+                  } else {}
                 },
                 text: 'Save & Finish',
                 backgroundColor: formValidationCubit.isFormValid()
                     ? Color(0xFFDDDDDD)
                     : Color(0xFF282C3E),
               )
-           
             ],
           ),
         ),
