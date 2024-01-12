@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/app_export.dart';
 import '../../../../widgets/custom_text.dart';
 
 class TagsInputField extends StatefulWidget {
@@ -46,33 +47,66 @@ class _TagsInputFieldState extends State<TagsInputField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-     CustomText.primaryTitle(
-              text: 'Add Audience',
-              color:Colors.black,
-
-            ),
-            SizedBox(
-              height: 12,
-            ),
-        TextField(
-          controller: _textController,
-          decoration: InputDecoration(
-            hintText: 'Add target audience',
-            border: OutlineInputBorder(),
-            suffixIcon: IconButton(
-              icon: Icon(Icons.add),
-              onPressed: () => _addTag(_textController.text),
-            ),
-          ),
-          onSubmitted: _addTag,
+        CustomText.primaryTitle(
+          text: 'Add Audience',
+          color: Colors.black,
         ),
-        SizedBox(height: 8),
+        const SizedBox(
+          height: 12,
+        ),
+        Container(
+          height: ScaleSize.height(5.66),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
+          child: TextField(
+            onTapOutside: (event) {
+              FocusManager.instance.primaryFocus?.unfocus();
+            },
+            controller: _textController,
+            decoration: InputDecoration(
+              hintText: 'Add target audience',
+              focusColor: CustomColors.inactiveButton,
+              labelStyle: const TextStyle(color: CustomColors.inactiveButton),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 2.0,
+                horizontal: 8.0,
+              ),
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: CustomColors.blackColor,
+                ),
+              ),
+              counterText: '',
+              border: OutlineInputBorder(
+                borderSide: const BorderSide(color: CustomColors.blackColor),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.add),
+                onPressed: () => _addTag(_textController.text),
+              ),
+            ),
+            onSubmitted: _addTag,
+          ),
+        ),
+        const SizedBox(height: 8),
         Wrap(
           spacing: 8.0,
           runSpacing: 4.0,
           children: _tags.map((tag) {
             return Chip(
-              label: Text(tag),
+              backgroundColor: const Color(0xFFD9F2E6),
+              label: Text(
+                tag,
+                style: const TextStyle(
+                  color: Color(0xFF1E1B18),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                  height: 0,
+                ),
+              ),
               onDeleted: () => _removeTag(tag),
             );
           }).toList(),

@@ -10,6 +10,7 @@ class CustomSmallButton extends StatelessWidget {
     this.width,
     this.backgroundColor,
     this.textColor,
+this.iconOnTap,
   });
 
   final VoidCallback onTap;
@@ -20,6 +21,7 @@ class CustomSmallButton extends StatelessWidget {
   final Widget? child;
   final double? height;
   final double? width;
+  final VoidCallback? iconOnTap;
 
   @override
   Widget build(BuildContext context) {

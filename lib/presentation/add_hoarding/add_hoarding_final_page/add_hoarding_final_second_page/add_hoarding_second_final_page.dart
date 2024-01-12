@@ -15,6 +15,9 @@ class FinalAddHoardingSecondPage extends StatefulWidget {
 
 class _FinalAddHoardingSecondPageState
     extends State<FinalAddHoardingSecondPage> {
+  bool showByWeeklyUI = false;
+  bool showByMonthlyUI = false;
+  bool showByYearlyUI = false;
       TextEditingController basepriceController=TextEditingController();
       TextEditingController printingController=TextEditingController();
       TextEditingController mountingController=TextEditingController();
@@ -23,7 +26,7 @@ class _FinalAddHoardingSecondPageState
   @override
   Widget build(BuildContext context) {
         final formValidationCubit = BlocProvider.of<FormValidationCubit>(context);
-    bool showadditionalUI = false;
+   
 
     return Scaffold(
       appBar: CustomAppBar(
@@ -124,31 +127,50 @@ class _FinalAddHoardingSecondPageState
                const SizedBox(
                 height: 16,
               ),
-              NewCustomSliderButton(
-                title: 'By Weekly',
-                onToggle: (isOn) {
-                  setState(() {
-                    showadditionalUI = isOn;
-                  });
-                },
-              ),
-              if (showadditionalUI) _buildAdditionalUI(),
-              const SizedBox(height: 16,),
+ NewCustomSliderButton(
+  title: 'By Weekly',
+  initialValue: showByWeeklyUI,
+  onToggle: (isOn) {
+    setState(() {
+      showByWeeklyUI = isOn;
+    });
+  },
+),
+if (showByWeeklyUI) _buildAdditionalUI('weekly'),
 
-               const NewCustomSliderButton(title: 'By Monthly'),
-                 if (showadditionalUI) _buildAdditionalUI(),
-              const SizedBox(height: 16,),
-               const NewCustomSliderButton(title: 'By Yearly'),
-                 if (showadditionalUI) _buildAdditionalUI(),
+NewCustomSliderButton(
+  title: 'By Monthly',
+  initialValue: showByMonthlyUI,
+  onToggle: (isOn) {
+    setState(() {
+      showByMonthlyUI = isOn;
+    });
+  },
+),
+if (showByMonthlyUI) _buildAdditionalUI('monthly'),
+
+NewCustomSliderButton(
+  title: 'By Yearly',
+  initialValue: showByYearlyUI,
+  onToggle: (isOn) {
+    setState(() {
+      showByYearlyUI = isOn;
+    });
+  },
+),
+if (showByYearlyUI) _buildAdditionalUI('yearly'),
+
               const SizedBox(height: 32,),
                  CustomButton(
                 onTap: () {
-                  if (formValidationCubit.isFormValid()) {
-                    NavigateUtils.pushNamedReplacement(
-                        context, Routes.finalsecondaddhoardingScreeen);
-                  } else {
+                     NavigateUtils.pushNamedReplacement(
+                        context, Routes.uploadimagehoardingpage);
+                  // if (formValidationCubit.isFormValid()) {
+                  //   NavigateUtils.pushNamedReplacement(
+                  //       context, Routes.finalsecondaddhoardingScreeen);
+                  // } else {
              
-                  }
+                  // }
                 },
                 text: 'Continue',
                 backgroundColor: formValidationCubit.isFormValid()
@@ -162,8 +184,30 @@ class _FinalAddHoardingSecondPageState
       ),
     );
   }
+Widget _buildAdditionalUI(String type) {
+  // Define the widget that you want to return for each type
+  Widget additionalWidget;
+  switch (type) {
+    case 'weekly':
+      additionalWidget = _buildAdditional();
+      break;
+    case 'monthly':
+      additionalWidget = _buildAdditional();
+      break;
+    case 'yearly':
+      additionalWidget = _buildAdditional();
+      break;
+    default:
+      // Return an empty Container for the default case
+      additionalWidget = Container();
+      break;
+  }
+  return additionalWidget;
+}
 
-  Widget _buildAdditionalUI() {
+
+
+  Widget _buildAdditional() {
     return Padding(
       padding:  const EdgeInsets.only(left: 16, right: 16, top: 16),
       child: Column(

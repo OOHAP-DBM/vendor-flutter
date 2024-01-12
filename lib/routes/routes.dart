@@ -18,4 +18,5 @@ class Routes {
   static const String fisthoardinglocationentryScreen='firsthoardinglocationentryScreen';
   static const String finalfirstaddhoardingScreen='finalfirstaddhoardingScreen';
   static const String finalsecondaddhoardingScreeen='finalsecondaddhoardingScreen';
+  static const String uploadimagehoardingpage='uploadimagehoardingpage';
 }

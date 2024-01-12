@@ -10,6 +10,7 @@ import 'package:oohapp/presentation/add_hoarding/hoarding_location/hoarding_loca
 import 'package:oohapp/presentation/add_hoarding/hoarding_location/second_location_hoarding_page.dart';
 
 import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/second_hoarding_page.dart';
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_logo_page.dart';
 
 import 'package:oohapp/presentation/d_authentication/login_screen/login_otp_screen/login_otp_screen.dart';
 import 'package:oohapp/presentation/d_authentication/login_screen/login_screen.dart';
@@ -84,7 +85,7 @@ class RoutesGenerator {
         );
       case Routes.firsthoardinglocationScreen:
         return MaterialPageRoute(
-            builder: (_) => const FirstHoardingLocationPage());
+            builder: (_) =>  FirstHoardingLocationPage());
       case Routes.secondhoardinglocationScreen:
         return MaterialPageRoute(
             builder: (_) => const SecondLocationHoardingPage());
@@ -96,6 +97,10 @@ class RoutesGenerator {
       case Routes.finalsecondaddhoardingScreeen:
         return MaterialPageRoute(
             builder: (_) => const FinalAddHoardingSecondPage());
+            case Routes.uploadimagehoardingpage:
+            return MaterialPageRoute(
+              builder: (_)=>const UploadHoardingLogoPage()
+            );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

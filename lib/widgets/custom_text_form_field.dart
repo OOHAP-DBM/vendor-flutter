@@ -26,11 +26,13 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType,
     this.placeholder,
     this.showCharacterCount = false, // New property for character count
-    this.onChanged, // New property for onChanged
+    this.onChanged, 
+    this.newcolor// New property for onChanged
   }) : super(key: key);
 
   final VoidCallback? onPressed;
   final Color? color;
+    final Color? newcolor;
   final String? text;
   final Widget? child;
   final double? height;
@@ -49,7 +51,8 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? placeholder;
   final bool? showCharacterCount;
-  final void Function(String)? onChanged; // New property for onChanged
+  final void Function(String)? onChanged;
+   // New property for onChanged
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +78,7 @@ class CustomTextFormField extends StatelessWidget {
           Container(
             height: height ?? ScaleSize.height(5.66),
             decoration: BoxDecoration(
-              color: color,
+              color: newcolor,
             ),
             child: Stack(
               children: [

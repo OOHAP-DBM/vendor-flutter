@@ -27,49 +27,78 @@ class _CustomSliderButtonState extends State<CustomSliderButton> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(child: Text(widget.title)),
+        Expanded(
+          child: Text(
+            widget.title,
+            style: const TextStyle(
+              color: Color(0xFF282C3E),
+              fontSize: 16,
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        ),
         GestureDetector(
           onTap: _toggleSwitch,
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            height: 35.0,
-            width: 70.0,
+          child: Container(
+            width: 94,
+            height: 33,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.0),
-              color: isOn ? Colors.blue : Colors.grey[300],
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: const Color(0xFF282C3E)),
             ),
             child: Stack(
-              alignment: Alignment.center,
               children: [
-                Align(
-                  alignment:
-                      isOn ? Alignment.centerRight : Alignment.centerLeft,
+            
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        color: Colors.white, 
+                      ),
+                    ),
+                 
+                  ],
+                ),
+                // Slider
+                AnimatedAlign(
+                  duration: const Duration(milliseconds: 300),
+                  alignment: isOn ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
-                    height: 35.0,
-                    width: 35.0,
+                    height: 33,
+                    width: 47,
                     decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
+                      color:  isOn ? Colors.blue : Colors.grey, 
+                      borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+            
+                const Align(
+                  alignment: Alignment.center,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        'NO',
-                        style: TextStyle(
-                          color: isOn ? Colors.white : Colors.grey,
-                          fontWeight: FontWeight.bold,
+                    children: [
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'NO',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
-                      Text(
-                        'YES',
-                        style: TextStyle(
-                          color: isOn ? Colors.grey : Colors.white,
-                          fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: Center(
+                          child: Text(
+                            'YES',
+                            style: TextStyle(
+                              color:  Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                       ),
                     ],

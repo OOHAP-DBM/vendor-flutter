@@ -1,31 +1,31 @@
 import 'package:oohapp/core/app_export.dart';
 
 class CustomTextFieldSelector extends StatelessWidget {
-  const CustomTextFieldSelector({
-    Key? key,
-    this.onPressed,
-    this.color,
-    this.text,
-    this.child,
-    this.height,
-    this.width,
-    this.margin,
-    this.alignment,
-    this.controller,
-    this.icon,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.maxLines,
-    this.hintText,
-    this.labelText,
-    this.maxLength,
-    this.keyboardType,
-    this.placeholder,
-    this.choices,
-    this.selectedChoice,
-    this.onDropdownChanged,
-    this.onChanged
-  }) : super(key: key);
+  const CustomTextFieldSelector(
+      {Key? key,
+      this.onPressed,
+      this.color,
+      this.text,
+      this.child,
+      this.height,
+      this.width,
+      this.margin,
+      this.alignment,
+      this.controller,
+      this.icon,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.maxLines,
+      this.hintText,
+      this.labelText,
+      this.maxLength,
+      this.keyboardType,
+      this.placeholder,
+      this.choices,
+      this.selectedChoice,
+      this.onDropdownChanged,
+      this.onChanged})
+      : super(key: key);
 
   final VoidCallback? onPressed;
   final Color? color;
@@ -47,13 +47,12 @@ class CustomTextFieldSelector extends StatelessWidget {
   final String? placeholder;
   final List<String>? choices;
   final String? selectedChoice;
-  final void Function(String?)? onDropdownChanged; 
-    final void Function(String)? onChanged; // New property for onChanged
+  final void Function(String?)? onDropdownChanged;
+  final void Function(String)? onChanged; // New property for onChanged
 // Fix here
 
   @override
   Widget build(BuildContext context) {
-    
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -64,44 +63,45 @@ class CustomTextFieldSelector extends StatelessWidget {
           ),
         SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          
           decoration: InputDecoration(
             border: OutlineInputBorder(),
-             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             isDense: true,
           ),
-          value: controller!.text.isEmpty ? null : controller!.text,
+          value: controller?.text.isEmpty ?? true ? null : controller?.text,
           isExpanded: true,
           iconSize: 30,
-          
           style: TextStyle(color: Colors.black, fontSize: 16),
-            hint: controller!.text.isEmpty
-              ? Text(
-                  hintText!,
-                  style: const TextStyle(
-                      color: CustomColors.grey,
-                      fontWeight: FontWeight.w300,
-                    ),
-                )
+          hint: controller?.text.isEmpty ?? true
+              ? hintText != null
+                  ? Text(
+                      hintText!,
+                      style: const TextStyle(
+                        color: CustomColors.grey,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    )
+                  : null
               : null,
-          items: choices!.map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: TextStyle(color:  Colors.black),
-              ),
-            );
-          }).toList(),
+          items: choices?.map((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                );
+              }).toList() ??
+              [],
           onChanged: (String? newValue) {
             if (newValue != null) {
-              controller!.text = newValue;
+              controller?.text = newValue;
               if (onDropdownChanged != null) {
                 onDropdownChanged!(newValue);
               }
             }
           },
-          dropdownColor:Colors.white,
+          dropdownColor: Colors.white,
         ),
       ],
     );

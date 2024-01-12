@@ -212,8 +212,7 @@ class _AddHoardingScreenState extends State<AddHoardingScreen> {
               CustomButton(
                 onTap: () {
                   if (formValidationCubit.isFormValid()) {
-                    NavigateUtils.pushNamedReplacement(
-                        context, Routes.secondhoardingScreen);
+                Navigator.pushNamed(context, Routes.secondhoardingScreen);
                   } else {
              
                   }

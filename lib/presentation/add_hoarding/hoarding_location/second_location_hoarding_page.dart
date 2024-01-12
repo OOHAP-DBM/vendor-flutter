@@ -2,16 +2,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../../core/app_export.dart';
 
-class SecondLocationHoardingPage extends StatefulWidget {
+class SecondLocationHoardingPage extends StatelessWidget {
   const SecondLocationHoardingPage({super.key});
-
-  @override
-  State<SecondLocationHoardingPage> createState() =>
-      _SecondLocationHoardingPageState();
-}
-
-class _SecondLocationHoardingPageState
-    extends State<SecondLocationHoardingPage> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +36,7 @@ class _SecondLocationHoardingPageState
               top: MediaQuery.of(context).padding.top + 20,
               child: SizedBox(
                 width: 343,
-                height: 54,
+                height: 70,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -55,7 +48,7 @@ class _SecondLocationHoardingPageState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 244,
+                          width: 270,
                           child: Text(
                             'B 25, Second Floor, Vibhuti Khand Rd, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010',
                             style: TextStyle(
@@ -66,7 +59,7 @@ class _SecondLocationHoardingPageState
                         ),
                       ],
                     ),
-                    const SizedBox(width: 42),
+                    const SizedBox(width: 10),
                     GestureDetector(
                       onTap: () {
                         NavigateUtils.pushNamedReplacement(
@@ -124,8 +117,8 @@ class _SecondLocationHoardingPageState
             right: 16,
             child: CustomButton(
               onTap: () {
-                // NavigateUtils.pushNamedReplacement(
-                //     context, Routes.gettingstartedfirstScreen);
+                NavigateUtils.pushNamedReplacement(
+                    context, Routes.fisthoardinglocationentryScreen);
               },
               text: 'Continue',
               backgroundColor: const Color(0xFF282C3E),
