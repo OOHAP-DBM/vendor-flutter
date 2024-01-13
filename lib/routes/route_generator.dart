@@ -11,6 +11,9 @@ import 'package:oohapp/presentation/add_hoarding/hoarding_location/second_locati
 
 import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/second_hoarding_page.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_logo_page.dart';
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/cubit/cubit.dart';
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/upload_hoarding_video_page.dart';
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/widgets/cubit/cubit.dart';
 
 import 'package:oohapp/presentation/d_authentication/login_screen/login_otp_screen/login_otp_screen.dart';
 import 'package:oohapp/presentation/d_authentication/login_screen/login_screen.dart';
@@ -97,10 +100,20 @@ class RoutesGenerator {
       case Routes.finalsecondaddhoardingScreeen:
         return MaterialPageRoute(
             builder: (_) => const FinalAddHoardingSecondPage());
-            case Routes.uploadimagehoardingpage:
-            return MaterialPageRoute(
-              builder: (_)=>const UploadHoardingLogoPage()
-            );
+           case Routes.uploadimagehoardingpage:
+      return MaterialPageRoute(
+        builder: (_) => BlocProvider(
+          create: (context) => ImageCubit(),
+          child: const UploadHoardingLogoPage(),
+        ),
+      );
+      case Routes.uploadhoardingvideopage:
+      return MaterialPageRoute(
+        builder:(_)=>BlocProvider(
+        create: (context)=>MediaCubit(),
+        child:const UploadHoardingVideoPage(),
+        )
+      );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

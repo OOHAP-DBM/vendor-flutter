@@ -214,7 +214,8 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
                   
                 ],
               )
-            ]);
+            ]
+            );
           },
         );
       },
