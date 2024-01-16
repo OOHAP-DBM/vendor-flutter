@@ -21,7 +21,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      surfaceTintColor: CustomColors.transparent,  // disable material3 color in appbar
+      surfaceTintColor: CustomColors.transparent, 
       leadingWidth: 85,
       title: title != null
           ? CustomText.secondaryTitle(text: title, color: Colors.black)

@@ -1,13 +1,20 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FormValidationCubit extends Cubit<Map<String, String?>> {
-  FormValidationCubit() : super({});
 
-  void validateField(String fieldName, String? value) {
-    emit(Map.from(state)..[fieldName] = value?.isEmpty == true ? "$fieldName cannot be empty" : null);
-  }
+import 'package:oohapp/core/app_export.dart';
 
-  bool isFormValid() {
-    return state.values.every((errorMessage) => errorMessage == null);
+import 'final_form_validation_cubit/final_form_validation_cubit_state.dart';
+
+class FormFieldCubit extends Cubit<TextFormFieldState> {
+  FormFieldCubit() : super(FormFieldInitial());
+
+  void validateField({required String value, required int? maxLength}) {
+    if (value.isEmpty) {
+      emit(const FormFieldValidationError("Please fill out this field"));
+    } else if (maxLength != null && value.length > maxLength) {
+      emit(FormFieldValidationError("Input exceeds maximum length of $maxLength characters"));
+    } else {
+      emit(FormFieldValidationSuccess());
+    }
   }
 }
+

@@ -20,7 +20,7 @@ class CustomBlocProvider extends StatelessWidget {
         BlocProvider<SplashCubit>(create: (context) => SplashCubit()),
         BlocProvider<OnboardingCubit>(create: (context) => OnboardingCubit()),
         BlocProvider<CharacterCountCubit>(create: (context) => CharacterCountCubit()),
-        BlocProvider<FormValidationCubit>(create: (context) => FormValidationCubit()),
+
         // Add other global Cubits here if needed
       ],
       child: child,

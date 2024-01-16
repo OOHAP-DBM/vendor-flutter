@@ -1,22 +1,11 @@
 import 'dart:io';
 
-class MediaFile {
-  final File file;
-  final String type; // 'image' or 'video'
-
-  MediaFile({required this.file, required this.type});
-}
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/cubit/cubit.dart';
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/widgets/cubit/cubit.dart';
 
 class MediaData {
-  final List<MediaFile> mediaFiles;
+  final List<File> videos;
   final MediaState state;
 
-  MediaData({required this.mediaFiles, required this.state});
-}
-
-enum MediaState {
-  initial,
-  loading,
-  loaded,
-  error,
+  MediaData({required this.videos, required this.state});
 }

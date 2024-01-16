@@ -20,4 +20,5 @@ class Routes {
   static const String finalsecondaddhoardingScreeen='finalsecondaddhoardingScreen';
   static const String uploadimagehoardingpage='uploadimagehoardingpage';
   static const String uploadhoardingvideopage='uploadhoardingvideopage';
+  static const String uploadhoardingcalendarpage='uploadhoardingcalendarpage';
 }

@@ -1,10 +1,12 @@
+
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/cubit/cubit.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/cubit/cubit_data_model.dart';
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/widget/video_dispaly_container.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/widgets/custom_image_uploader_form.dart';
+
 
 import '../../../../core/app_export.dart';
 
@@ -17,13 +19,13 @@ class UploadHoardingVideoPage extends StatefulWidget {
 }
 
 class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
-  List<File> _mediaFiles = [];
-
+  File? _video;
   Future<void> _pickVideo() async {
-    final ImagePicker _picker = ImagePicker();
+   
+    final ImagePicker _picker=ImagePicker();
     showModalBottomSheet(
         context: context,
-        builder: (BuildContext bottomSheetContext) {
+        builder: (BuildContext upperSheetContext) {
           return SafeArea(
             child: Wrap(
               children: <Widget>[
@@ -34,10 +36,10 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
                     final pickedFile =
                         await _picker.pickImage(source: ImageSource.gallery);
                     if (pickedFile != null) {
-                      Navigator.of(bottomSheetContext)
+                      Navigator.of(upperSheetContext)
                           .pop(); // Close the modal bottom sheet.
-                      _setVideo(File(pickedFile
-                          .path)); // Use _setImage which uses the correct context.
+                      _setvideo(File(pickedFile
+                          .path));
                     }
                   },
                 ),
@@ -46,10 +48,10 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
                   title: const Text('Camera'),
                   onTap: () async {
                     final pickedFile =
-                        await _picker.pickImage(source: ImageSource.camera);
+                        await _picker.pickVideo(source: ImageSource.camera);
                     if (pickedFile != null) {
-                      Navigator.of(bottomSheetContext).pop();
-                      _setVideo(File(pickedFile.path));
+                      Navigator.of(upperSheetContext).pop();
+                      _setvideo(File(pickedFile.path));
                     }
                   },
                 ),
@@ -59,159 +61,235 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
         });
   }
 
-  void _setVideo(File video) {
-    context.read<MediaCubit>().addMedia(video, 'video');
-    _showMediaSheet();
-  }
+void _setvideo(File video) {
+    if (!mounted) return;
+    BlocProvider.of<MediaCubit>(context).addvideo(video);
+}
 
-  void _removeMedia(int index) {
-    setState(() {
-      _mediaFiles.removeAt(index);
-    });
-  }
-
-  void _showMediaSheet() {
-    showModalBottomSheet(
-      context: context,
-      builder: (BuildContext bottomSheetcontext) {
-        return Builder(
-          builder: (contextWithMediaCubit) {
-            return BlocBuilder<MediaCubit, MediaData>(
-              builder: (context, state) {
-                return Container(
-                  height: MediaQuery.of(context).size.height * 0.75,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            crossAxisSpacing: 4,
-                            mainAxisSpacing: 4,
-                          ),
-                          itemCount: state.mediaFiles.length,
-                          itemBuilder: (context, index) {
-                            final mediaFile = state.mediaFiles[index];
-                            return Stack(
-                              alignment: Alignment.topRight,
-                              children: [
-                                mediaFile.type == 'video'
-                                    ? // Show video thumbnail or placeholder
-                                    Container(
-                                        decoration: BoxDecoration(
-                                          color: Colors.black, // Placeholder color
-                                        ),
-                                        child: Icon(Icons.play_circle_outline,
-                                            color:
-                                                Colors.white), // Play icon overlay
-                                      )
-                                    : Image.file(
-                                        mediaFile.file,
-                                        fit: BoxFit.cover,
-                                      ),
-                                IconButton(
-                                  icon: Icon(Icons.close),
-                                  onPressed: () => context
-                                      .read<MediaCubit>()
-                                      .removeMedia(mediaFile),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      // Add buttons for Image and Video at the bottom of the sheet
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton.icon(
-                            icon: Icon(Icons.image),
-                            label: Text('Image'),
-                            onPressed:
-                                _pickVideo, // Implement _pickImage similarly to _pickVideo
-                          ),
-                          ElevatedButton.icon(
-                            icon: Icon(Icons.video_call),
-                            label: Text('Video'),
-                            onPressed: _pickVideo,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                );
-              },
-            );
-          }
-        );
-      },
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MediaCubit(),
-      child: Builder(
-        builder:(context) {
-        return Scaffold(
-          appBar: CustomAppBar(
-            title: 'Add Hoarding',
-            centerTitle: true,
-            elevation: 1,
-            leading: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.clear),
+    return Scaffold(
+      appBar: CustomAppBar(
+        title: 'Add Hoarding',
+        centerTitle: true,
+        elevation: 1,
+        leading: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.clear),
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            const Text(
+              'Let’s add hoarding videos and video\nof your hoarding',
+              style: TextStyle(
+                color: Color(0xFF282C3E),
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+                height: 0,
               ),
             ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Let’s add hoarding images and video\nof your hoarding',
-                    style: TextStyle(
-                      color: Color(0xFF282C3E),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                      height: 0,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    'You can upload upto 10 Brand logos',
-                    style: TextStyle(
-                      color: Color(0xFF999999),
-                      fontSize: 12,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w400,
-                      height: 0,
-                    ),
-                  ),
-                  CustomImageUploaderContainer(
-                    text: 'Upload brand logo',
-                    onPressed: () => _showVideoSourceActionSheet(context),
-                  ),
-                  CustomButton(
-                    onTap: () {},
-                    text: 'Continue',
-                  )
-                ],
+            const SizedBox(
+              height: 12,
+            ),
+            const Text(
+              'You can upload upto 10 Brand logos',
+              style: TextStyle(
+                color: Color(0xFF999999),
+                fontSize: 12,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w400,
+                height: 0,
               ),
             ),
-          ),
-        );
-        }
+            const SizedBox(
+              height: 8,
+            ),
+            BlocBuilder<MediaCubit, MediaData>(
+              builder: (context, mediaData) {
+                List<File> videos = mediaData.videos;
+                MediaState state = mediaData.state;
+
+                if (state == MediaState.loading) {
+                  return Container(
+                    height: 54,
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFFECFFE9),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(3)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Visibility(
+                            // if visibility is true, the child
+                            // widget will show otherwise hide
+                            visible: true,
+                            child: Icon(
+                              Icons.verified_rounded,
+                              color: Colors.green,
+                              size: 16,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          Text(
+                            '${videos.length}media files are uploading',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Color(0xFF282C3E),
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 25,
+                          ),
+                          Container(
+                            width: 20,
+                            height: 20,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(),
+                            child: const Stack(
+                                children: [Icon(Icons.media_bluetooth_off)]),
+                          ),
+                          Text(
+                            '${videos.length}/10',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Color(0xFF282C3E),
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                } else if (state == MediaState.loaded) {
+                  return Container(
+                    height: 54,
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: ShapeDecoration(
+                      color: const Color(0xFFECFFE9),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(3)),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Visibility(
+                
+                            visible: true,
+                            child: Icon(
+                              Icons.verified_rounded,
+                              color: Colors.green,
+                              size: 16,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 2,
+                          ),
+                          const Text(
+                            'Uploaded Succesfully',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Color(0xFF282C3E),
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 25,
+                          ),
+                          Container(
+                            width: 20,
+                            height: 20,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(),
+                            child: const Stack(
+                                children: [Icon(Icons.media_bluetooth_off)]),
+                          ),
+                          Text(
+                            '${videos.length}/10',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Color(0xFF282C3E),
+                              fontSize: 12,
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return Container(); // Handle other states or show nothing
+                }
+              },
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            CustomImageUploaderContainer(
+              text: 'Upload Brand logo',
+              onPressed: () => _showVideoSourceActionSheet(context),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            ImageGridView(),
+            const SizedBox(
+              height: 32,
+            ),
+            BlocBuilder<MediaCubit, MediaData>(
+              builder: (context, MediaData) {
+                List<File> videos = MediaData.videos;
+
+                return CustomButton(
+                  onTap: () {
+                    Navigator.pushNamed(
+                        context, Routes.uploadhoardingcalendarpage);
+                  },
+                  text: 'Continue',
+                  backgroundColor: videos.isEmpty
+                      ? const Color(0xFFDDDDDD)
+                      : const Color(0xFF282C3E),
+                );
+              },
+            )
+          ]),
+        ),
       ),
     );
   }
@@ -242,7 +320,7 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
                     height: 16,
                   ),
                   const Text(
-                    'Upload Brand Images',
+                    'Upload Brand videos',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Color(0xFF282C3E),
@@ -270,7 +348,7 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
                     width: 375,
                     height: 72.75,
                     padding: const EdgeInsets.symmetric(vertical: 24),
-                    decoration: BoxDecoration(color: Colors.white),
+                    decoration: const BoxDecoration(color: Colors.white),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -294,7 +372,7 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Text(
+                              const Text(
                                 'Photo',
                                 style: TextStyle(
                                   color: Color(0xFF999999),
@@ -315,7 +393,7 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
                           child: Container(
                             width: 24.75,
                             height: double.infinity,
-                            decoration: ShapeDecoration(
+                            decoration: const ShapeDecoration(
                               shape: RoundedRectangleBorder(
                                 side: BorderSide(
                                   width: 1,
@@ -345,7 +423,7 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Text(
+                              const Text(
                                 'Video',
                                 style: TextStyle(
                                   color: Color(0xFF999999),

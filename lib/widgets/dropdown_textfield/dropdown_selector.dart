@@ -48,8 +48,7 @@ class CustomTextFieldSelector extends StatelessWidget {
   final List<String>? choices;
   final String? selectedChoice;
   final void Function(String?)? onDropdownChanged;
-  final void Function(String)? onChanged; // New property for onChanged
-// Fix here
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {

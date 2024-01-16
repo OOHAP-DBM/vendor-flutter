@@ -1,4 +1,5 @@
 import 'package:oohapp/core/constants/app_constant.dart';
+import 'package:oohapp/core/waste_work/cubit.dart';
 import 'package:oohapp/presentation/a_main_screen/main_screen.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/add_hoarding_final_page_first.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/add_hoarding_final_second_page/add_hoarding_second_final_page.dart';
@@ -10,6 +11,7 @@ import 'package:oohapp/presentation/add_hoarding/hoarding_location/hoarding_loca
 import 'package:oohapp/presentation/add_hoarding/hoarding_location/second_location_hoarding_page.dart';
 
 import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/second_hoarding_page.dart';
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/add_hoarding_calendar/add_hoarding_calendar_page.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_logo_page.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/cubit/cubit.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/upload_hoarding_video_page.dart';
@@ -42,10 +44,13 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (_) => OnBoardingScreen(),
         );
-      case Routes.loginScreen:
-        return MaterialPageRoute(
-          builder: (_) => const LoginScreen(),
-        );
+    case Routes.loginScreen:
+  return MaterialPageRoute(
+    builder: (_) => BlocProvider(
+      create: (context) => CustomFormCubit(),
+      child: const LoginScreen(),
+    ),
+  );
       case Routes.loginOtpScreen:
         return MaterialPageRoute(
           builder: (_) => const LoginOtpScreen(),
@@ -113,6 +118,10 @@ class RoutesGenerator {
         create: (context)=>MediaCubit(),
         child:const UploadHoardingVideoPage(),
         )
+      );
+      case Routes.uploadhoardingcalendarpage:
+      return MaterialPageRoute(
+        builder: (_)=>const AddHoardingCalendarPage(),
       );
       default:
         return MaterialPageRoute(

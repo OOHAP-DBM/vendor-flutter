@@ -1,4 +1,5 @@
 import 'package:oohapp/core/constants/global_cubit/form_validation_cubit.dart';
+import 'package:oohapp/core/constants/waste/cubit.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/widgets/custom_check_button.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/widgets/custom_dialog.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/widgets/custom_slider_button.dart';

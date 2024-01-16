@@ -1,4 +1,3 @@
-
 import 'package:oohapp/core/app_export.dart';
 
 import 'package:oohapp/core/constants/global_cubit/character_count_cubit.dart';
@@ -27,7 +26,8 @@ class CustomTextFormField extends StatelessWidget {
     this.placeholder,
     this.showCharacterCount = false, // New property for character count
     this.onChanged, 
-    this.newcolor// New property for onChanged
+    this.newcolor,
+    this.validator// New property for onChanged
   }) : super(key: key);
 
   final VoidCallback? onPressed;
@@ -52,6 +52,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? placeholder;
   final bool? showCharacterCount;
   final void Function(String)? onChanged;
+    final String? Function(String?)? validator;
    // New property for onChanged
 
   @override
@@ -83,10 +84,12 @@ class CustomTextFormField extends StatelessWidget {
             child: Stack(
               children: [
                 TextFormField(
+                  validator: validator,
                   onTapOutside: (event) {
                     FocusManager.instance.primaryFocus?.unfocus();
                   },
                   keyboardType: keyboardType,
+                  
                   maxLength: maxLength,
                   controller: controller,
                   obscureText: obscureText!,
@@ -157,4 +160,4 @@ class CustomTextFormField extends StatelessWidget {
       ),
     );
   }
-}
+} 
