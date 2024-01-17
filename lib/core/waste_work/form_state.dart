@@ -45,8 +45,8 @@ class CustomFormState {
     this.country = '',
     this.password = '',
     this.confirmPassword = '',
-    this.stateDropdown = '',
-    this.countryDropdown = '',
+    this.stateDropdown = 'UP',
+    this.countryDropdown = 'India',
     this.phonenumber='',
     // Initialization of validation flags
 

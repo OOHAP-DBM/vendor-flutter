@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:oohapp/core/app_export.dart'; // Replace with your actual import path
 import 'package:oohapp/core/constants/global_cubit/character_count_cubit.dart'; // Replace with your actual import path
 
@@ -28,6 +27,8 @@ class NewCustomTextFormField extends StatelessWidget {
     this.placeholder,
     this.showCharacterCount = false,
     this.onChanged,
+    this.validator,
+    this.requiredsign,
   }) : super(key: key);
 
   final VoidCallback? onPressed;
@@ -52,12 +53,14 @@ class NewCustomTextFormField extends StatelessWidget {
   final String? placeholder;
   final bool? showCharacterCount;
   final void Function(String)? onChanged;
+    final String? Function(String?)? validator;
+    final bool? requiredsign;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      height: height ?? ScaleSize.height(9.66),
+    
       width: width ?? ScaleSize.width(100),
       decoration: BoxDecoration(
         color: color,
@@ -65,20 +68,34 @@ class NewCustomTextFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (placeholder != null)
-            CustomText.calloutText(
-              text: placeholder!,
-              color: CustomColors.blackColor,
-            ),
+           if(requiredsign==true)
+     Row(
+      children: [
+             CustomText.calloutText(
+            text: placeholder,
+            color: CustomColors.blackColor,
+          ),
+          CustomText.calloutText(
+            text: '*',
+            color: Colors.red,
+          )
+      ],
+     )
+     else
+       CustomText.calloutText(
+            text: placeholder,
+            color: CustomColors.blackColor,
+          ),
           const SizedBox(height: 8.0),
           Container(
-            height: height ?? ScaleSize.height(5.66),
+            // height: height ?? ScaleSize.height(5.66),
             decoration: BoxDecoration(
               color: color,
             ),
             child: Stack(
               children: [
                 TextFormField(
+                  validator: validator,
                   onTapOutside: (event) {
                     FocusManager.instance.primaryFocus?.unfocus();
                   },

@@ -1,11 +1,12 @@
 import 'dart:io';
 
-
+import 'package:oohapp/all_cubit_folder/second_add_haording/cubit.dart';
+import 'package:oohapp/all_cubit_folder/second_add_haording/form.dart';
 import 'package:oohapp/core/constants/waste/cubit.dart';
+import 'package:oohapp/core/waste_work/validator_regex.dart';
 
 import 'package:oohapp/widgets/document_uploader/document_uploader_widget.dart';
 import 'package:oohapp/widgets/textfield_with_suffixtext/interactive_textfield.dart';
-
 
 import '../../../core/app_export.dart';
 import '../../../widgets/dropdown_textfield/dropdown_selector.dart';
@@ -40,8 +41,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(3),
-              boxShadow:const  [
-                 BoxShadow(
+              boxShadow: const [
+                BoxShadow(
                   color: Colors.black26,
                   blurRadius: 10.0,
                   offset: Offset(0.0, 10.0),
@@ -75,8 +76,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                 CustomTextFieldSelector(
-                       height: ScaleSize.height(8.5),
+                CustomTextFieldSelector(
+                  height: ScaleSize.height(8.5),
                   controller: stateController,
                   // onDropdownChanged: (val) {
                   //   BlocProvider.of<IFSCFinderBloc>(context).add(
@@ -92,8 +93,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                   CustomTextFieldSelector(
-                       height: ScaleSize.height(8.5),
+                CustomTextFieldSelector(
+                  height: ScaleSize.height(8.5),
                   controller: cityController,
                   // onDropdownChanged: (val) {
                   //   BlocProvider.of<IFSCFinderBloc>(context).add(
@@ -109,7 +110,7 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                 const SizedBox(
                   height: 15,
                 ),
-                  CustomTextFieldSelector(
+                CustomTextFieldSelector(
                   controller: branchController,
                   height: ScaleSize.height(8.5),
                   // onDropdownChanged: (val) {
@@ -153,7 +154,7 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                           width: 128,
                           height: 46,
                           onTap: () {
-                                 Navigator.pop(context);
+                            Navigator.pop(context);
                           },
                           text: 'Save',
                           backgroundColor: const Color(0xFF282C3E)
@@ -189,134 +190,153 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
 
   @override
   Widget build(BuildContext context) {
-    final formValidationCubit = BlocProvider.of<FormValidationCubit>(context);
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Business Details',
-        centerTitle: true,
-        elevation: 1,
-        leading: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: CircularButton(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            backgroundColor: CustomColors.grey,
-            borderColor: CustomColors.transparent,
-            icon: Icons.arrow_back,
-            iconColor: CustomColors.blackColor,
-          ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsetsDirectional.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText.secondaryTitle(
-                text: 'Bank Account Details ',
-                color: CustomColors.blackColor,
-              ),
-              const SizedBox(
-                height: 7,
-              ),
-              CustomText.calloutText(
-                text:
-                    'For a successful bank verification, account name must\nmatch with the registered GSTIN name',
-                color: CustomColors.blackColor,
-              ),
-              const SizedBox(height: 7),
-              CustomTextFieldSelector(
-                controller: banknameController,
-
-                placeholder: 'Bank Name*',
-                // maxLength: 15,
-                // keyboardType: TextInputType.number,
-                hintText: "choose bank name ",
-                choices: ['SBI', 'HDFC', 'RBI', 'KOTAK MAHINDAR'],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomTextFormField(
-                controller: accountholdernameController,
-                onChanged: (val) {
-                  formValidationCubit.validateField(
-                      'bank name ', banknameController.text);
-                },
-                placeholder: 'Account Holder Name*',
-                // maxLength: 15,
-                keyboardType: TextInputType.name,
-                hintText: "Enter account holder name",
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomTextFormField(
-                controller: accountController,
-                onChanged: (val) {
-                  formValidationCubit.validateField(
-                      'account holder', accountholdernameController.text);
-                },
-                placeholder: 'Account Number*',
-                // maxLength: 15,
-                keyboardType: TextInputType.phone,
-                hintText: "Enter Account Number",
-              ),
-              NewCustomTextFormField(
-                controller: ifsccodeController,
-                onChanged: (val) {
-                  formValidationCubit.validateField(
-                      'account number', accountController.text);
-                },
-                placeholder: 'IFSC Code*',
-                hintText: "Enter IFSC Code",
-                lasttext: 'Find IFSC code',
-                onPressed: () => showIFSCFinder(),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomText.secondaryTitle(
-                text: 'Lets’s add Business PAN ',
-                color: CustomColors.blackColor,
-              ),
-              const SizedBox(
-                height: 7,
-              ),
-              CustomText.calloutText(
-                text:
-                    "Business’s PAN card should clearly show Business’s detail on the front, and shouldn't be blurry.",
-                color: CustomColors.blackColor,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              EditableImageUpload(
-                title: 'upload PAN',
-                allowedExtensions: ['PNG', 'JPG', 'PDF'],
-                onFileSelected: handleFileSelection,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              CustomButton(
+  
+    return BlocBuilder<SecondHoardingScreenCubit, SecondHoardingFormState>(
+      builder: (context, state) {
+        final cubit = context.read<SecondHoardingScreenCubit>();
+        return Scaffold(
+          appBar: CustomAppBar(
+            title: 'Business Details',
+            centerTitle: true,
+            elevation: 1,
+            leading: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: CircularButton(
                 onTap: () {
-                  if (formValidationCubit.isFormValid()) {
-                    NavigateUtils.pushNamedReplacement(
-                        context, Routes.gettingstartedfirstScreen);
-                  } else {}
+                  Navigator.pop(context);
                 },
-                text: 'Save & Finish',
-                backgroundColor: formValidationCubit.isFormValid()
-                    ? const Color(0xFFDDDDDD)
-                    : const Color(0xFF282C3E),
-              )
-            ],
+                backgroundColor: CustomColors.grey,
+                borderColor: CustomColors.transparent,
+                icon: Icons.arrow_back,
+                iconColor: CustomColors.blackColor,
+              ),
+            ),
           ),
-        ),
-      ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsetsDirectional.all(16.0),
+              child: Form(
+                key: cubit.secondaddhoardingFormKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CustomText.secondaryTitle(
+                      text: 'Bank Account Details ',
+                      color: CustomColors.blackColor,
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    CustomText.calloutText(
+                      text:
+                          'For a successful bank verification, account name must match with the registered GSTIN name',
+                      color: CustomColors.blackColor,
+                      textAlign: TextAlign.left, 
+                    ),
+                    const SizedBox(height: 7),
+                    CustomTextFieldSelector(
+                      controller: banknameController,
+
+                      placeholder: 'Bank Name*',
+                      // maxLength: 15,
+                      // keyboardType: TextInputType.number,
+                      hintText: "choose bank name ",
+                      choices: ['SBI', 'HDFC', 'RBI', 'KOTAK MAHINDAR'],
+                      onChanged: (value) {
+                        cubit.onChangedbankname(value);
+                      },
+                      validator: (value) =>
+                          ValidatorRegex.dropdownValidator(value),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CustomTextFormField(
+                      controller: accountholdernameController,
+
+                      placeholder: 'Account Holder Name*',
+                      // maxLength: 15,
+                      keyboardType: TextInputType.name,
+                      hintText: "Enter account holder name",
+                      onChanged: (value) {
+                        cubit.onChangedaccountholdername(value);
+                      },
+                      validator: (value) =>
+                          ValidatorRegex.accountholdernameValidator(value),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CustomTextFormField(
+                      controller: accountController,
+
+                      placeholder: 'Account Number*',
+                      // maxLength: 15,
+                      keyboardType: TextInputType.phone,
+                      hintText: "Enter Account Number",
+                      onChanged: (value) {
+                        cubit.onChangedaccountnumber(value);
+                      },
+                      validator: (value) =>
+                          ValidatorRegex.accountnumberValidator(value),
+                    ),
+                    NewCustomTextFormField(
+                      controller: ifsccodeController,
+                      placeholder: 'IFSC Code*',
+                      hintText: "Enter IFSC Code",
+                      lasttext: 'Find IFSC code',
+                      onPressed: () => showIFSCFinder(),
+                      onChanged: (value) {
+                        cubit.onChangedifsc(value);
+                      },
+                      validator: (value) => ValidatorRegex.ifscValidator(value),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    CustomText.secondaryTitle(
+                      text: 'Lets’s add Business PAN ',
+                      color: CustomColors.blackColor,
+                    ),
+                    const SizedBox(
+                      height: 7,
+                    ),
+                    CustomText.calloutText(
+                      text:
+                          "Business’s PAN card should clearly show Business’s detail on the front, and shouldn't be blurry.",
+                      color: CustomColors.blackColor,
+                       textAlign: TextAlign.left, 
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    EditableImageUpload(
+                      title: 'upload PAN',
+                      allowedExtensions: ['PNG', 'JPG', 'PDF'],
+                      onFileSelected: handleFileSelection,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    
+                    CustomButton(
+                      onTap: () {
+                        if (state.issecondvalid&&selectedFile!=null) {
+                          NavigateUtils.pushNamedReplacement(
+                              context, Routes.gettingstartedfirstScreen);
+                        } else {}
+                      },
+                      text: 'Save & Finish',
+                      backgroundColor:(selectedFile!=null&&state.issecondvalid)
+                          ? const Color(0xFF282C3E):const Color(0xFFDDDDDD),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

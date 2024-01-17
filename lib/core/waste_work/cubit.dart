@@ -91,6 +91,10 @@ class CustomFormCubit extends Cubit<CustomFormState> {
     });
   }
 
+
+
+
+
   void togglePasswordVisibility() {
     emit(state.copyWith(isPasswordVisible: !state.isPasswordVisible));
   }
@@ -104,6 +108,8 @@ class CustomFormCubit extends Cubit<CustomFormState> {
       validateCurrentState(false);
     }
   }
+
+
 
   void validateForm() {
     if (signupFormKey.currentState?.validate() ?? false) {

@@ -24,7 +24,37 @@ class ValidatorRegex {
       return null;
     }
   }
-
+   static String? businessnameValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'Business Name is required';
+    } else if (value.length < 3) {
+      return 'Business Name must be at least 3 characters long';
+    }  else if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+      return 'Please enter a valid business name';
+    } else {
+      return null;
+    }
+  }
+     static String? accountholdernameValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'accountholdername  is required';
+    } else if (value.length < 3) {
+      return 'accountholdername must be at least 3 characters long';
+    }  else if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+      return 'Please enter a validaccountholdername';
+    } else {
+      return null;
+    }
+  }
+   static String? ifscValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'ifsc code  is required';
+    } else if (value.length < 10) {
+      return 'ifsc code  must be at least 10 characters long';
+    }   else {
+      return null;
+    }
+  }
   static String? addressValidator(String? value) {
     if (value!.isEmpty) {
       return 'Address is required';
@@ -40,6 +70,24 @@ class ValidatorRegex {
       return 'ⓘ Apt/unit is required';
     } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
       return 'ⓘ Apt/unit should contain only numbers';
+    } else {
+      return null;
+    }
+  }
+    static String? pincodeValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'ⓘ pincode is required';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return 'ⓘ pincode should contain only numbers';
+    } else {
+      return null;
+    }
+  }
+   static String? accountnumberValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'ⓘ accountnumber is required';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return 'ⓘ accountnumber should contain only numbers';
     } else {
       return null;
     }
@@ -60,6 +108,16 @@ class ValidatorRegex {
       return 'Zip code is required';
     } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
       return 'Zip code should contain only numbers';
+    } else {
+      return null;
+    }
+  }
+  
+  static String? gstinnoValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'gstinno is required';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return 'gstinno should contain only numbers';
     } else {
       return null;
     }

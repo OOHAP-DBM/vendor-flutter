@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                 .withOpacity(0.5), // Set unselected item color
           ),*/
         ),
-         initialRoute: Routes.splashScreen,
+         initialRoute: Routes.secondhoardingScreen,
          onGenerateRoute: RoutesGenerator.generateRoutes,
         
          

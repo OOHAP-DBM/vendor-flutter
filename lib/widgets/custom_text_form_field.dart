@@ -27,7 +27,8 @@ class CustomTextFormField extends StatelessWidget {
     this.showCharacterCount = false, // New property for character count
     this.onChanged, 
     this.newcolor,
-    this.validator// New property for onChanged
+    this.validator,
+    this.requiredsign// New property for onChanged
   }) : super(key: key);
 
   final VoidCallback? onPressed;
@@ -53,6 +54,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool? showCharacterCount;
   final void Function(String)? onChanged;
     final String? Function(String?)? validator;
+    final bool? requiredsign;
    // New property for onChanged
 
   @override
@@ -60,7 +62,7 @@ class CustomTextFormField extends StatelessWidget {
     
     return Container(
       alignment: Alignment.center,
-      height: (showCharacterCount!)?ScaleSize.height(12.7):ScaleSize.height(9.66),
+      // height: (showCharacterCount!)?ScaleSize.height(12.7):ScaleSize.height(9.66),
       
       width: width ?? ScaleSize.width(100),
       decoration: BoxDecoration(
@@ -69,15 +71,30 @@ class CustomTextFormField extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText.calloutText(
+     if(requiredsign==true)
+     Row(
+      children: [
+             CustomText.calloutText(
             text: placeholder,
             color: CustomColors.blackColor,
           ),
+          CustomText.calloutText(
+            text: '*',
+            color: Colors.red,
+          )
+      ],
+     )
+     else
+       CustomText.calloutText(
+            text: placeholder,
+            color: CustomColors.blackColor,
+          ),
+     
           const SizedBox(
             height: 8.0,
           ),
           Container(
-            height: height ?? ScaleSize.height(5.66),
+            // height: height ?? ScaleSize.height(5.66),
             decoration: BoxDecoration(
               color: newcolor,
             ),

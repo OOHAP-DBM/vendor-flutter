@@ -1,3 +1,5 @@
+import 'package:oohapp/all_cubit_folder/first_add_hoarding/cubit.dart';
+import 'package:oohapp/all_cubit_folder/second_add_haording/cubit.dart';
 import 'package:oohapp/core/constants/app_constant.dart';
 import 'package:oohapp/core/waste_work/cubit.dart';
 import 'package:oohapp/presentation/a_main_screen/main_screen.dart';
@@ -84,13 +86,19 @@ class RoutesGenerator {
         return MaterialPageRoute(
             builder: (_) => const GettingStartedFirstPage());
       case Routes.addhoardingScreen:
-        return MaterialPageRoute(
-          builder: (_) => const AddHoardingScreen(),
-        );
+     return MaterialPageRoute(
+        builder:(_)=>BlocProvider(
+        create: (context)=>AddHoardingScreenCubit(),
+        child:const AddHoardingScreen(),
+        )
+      );
       case Routes.secondhoardingScreen:
-        return MaterialPageRoute(
-          builder: (_) => const SecondAddHoardingPage(),
-        );
+         return MaterialPageRoute(
+        builder:(_)=>BlocProvider(
+        create: (context)=>SecondHoardingScreenCubit(),
+        child:const SecondAddHoardingPage(),
+        )
+      );
       case Routes.firsthoardinglocationScreen:
         return MaterialPageRoute(
             builder: (_) =>  FirstHoardingLocationPage());

@@ -20,7 +20,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocBuilder<CustomFormCubit, CustomFormState>(
       builder:(context,state){
 
-      final cubit=context.read<CustomFormCubit>();
+      // final cubit=context.read<CustomFormCubit>();
       return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
@@ -82,7 +82,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: 'Enter mobile number',
                           prefixIcon: Icon(Icons.phone_android_rounded),
                           onChanged: (value){
-                            cubit.onChangedPhoneNumber(value);
+                            // cubit.onChangedPhoneNumber(value);
                           },
                           validator:(value)=>
                           ValidatorRegex.phoneNumberValidator(value),
@@ -125,7 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: 'abc@gmail.com',
                           prefixIcon: Icon(Icons.email_outlined),
                          onChanged: (value) {
-                        cubit.onChangedPassword(value);
+                        // cubit.onChangedPassword(value);
                       },
                       validator: (value) =>
                           ValidatorRegex.passwordValidator(value),

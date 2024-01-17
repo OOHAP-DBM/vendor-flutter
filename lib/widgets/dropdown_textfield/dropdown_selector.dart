@@ -23,7 +23,10 @@ class CustomTextFieldSelector extends StatelessWidget {
       this.placeholder,
       this.choices,
       this.selectedChoice,
-      this.onDropdownChanged,
+ 
+      this.validator,
+     
+
       this.onChanged})
       : super(key: key);
 
@@ -47,8 +50,12 @@ class CustomTextFieldSelector extends StatelessWidget {
   final String? placeholder;
   final List<String>? choices;
   final String? selectedChoice;
-  final void Function(String?)? onDropdownChanged;
+
+  
+ 
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +69,13 @@ class CustomTextFieldSelector extends StatelessWidget {
           ),
         SizedBox(height: 8),
         DropdownButtonFormField<String>(
+          validator: validator,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
             isDense: true,
           ),
-          value: controller?.text.isEmpty ?? true ? null : controller?.text,
+         
           isExpanded: true,
           iconSize: 30,
           style: TextStyle(color: Colors.black, fontSize: 16),
@@ -92,11 +100,11 @@ class CustomTextFieldSelector extends StatelessWidget {
                 );
               }).toList() ??
               [],
-          onChanged: (String? newValue) {
+            onChanged: (String? newValue) {
             if (newValue != null) {
               controller?.text = newValue;
-              if (onDropdownChanged != null) {
-                onDropdownChanged!(newValue);
+              if (onChanged != null) {
+                onChanged!(newValue);
               }
             }
           },
