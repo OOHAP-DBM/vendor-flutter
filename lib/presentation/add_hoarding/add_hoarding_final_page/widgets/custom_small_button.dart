@@ -1,7 +1,7 @@
 import 'package:oohapp/core/app_export.dart';
 
 class CustomSmallButton extends StatelessWidget {
-  const CustomSmallButton({
+   CustomSmallButton({
     super.key,
     required this.onTap,
     required this.text,
@@ -32,11 +32,11 @@ this.iconOnTap,
         child: Container(
           width:width?? 163.50,
           height: height??46,
-          padding: const EdgeInsets.all(8),
+          padding:  EdgeInsets.all(8),
           decoration: ShapeDecoration(
             color: backgroundColor,
             shape: RoundedRectangleBorder(
-              side: const BorderSide(width: 1, color: Color(0xFF282C3E)),
+              side:  BorderSide(width: 1, color: Color(0xFF282C3E)),
               borderRadius: BorderRadius.circular(3),
             ),
           ),
@@ -48,13 +48,21 @@ this.iconOnTap,
               CustomText.subHeadingText(
                 text: text,
               ),
-              const SizedBox(width: 4),
+               SizedBox(width: 4),
               Container(
                 width: 16,
                 height: 16,
                 clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(),
-                child: const Stack(children: [Icon(Icons.error)]),
+                decoration:  BoxDecoration(),
+                child:  Stack(children: [GestureDetector(
+                  onTap: iconOnTap,
+                  
+                  child: CustomImageView(
+                  fit: BoxFit.fill,
+                  imagePath: ImageConstant.warningicon,
+                ),
+                  )
+                  ]),
               ),
             ],
           ),

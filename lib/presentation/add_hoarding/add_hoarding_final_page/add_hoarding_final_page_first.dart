@@ -1,6 +1,9 @@
-import 'package:oohapp/core/constants/global_cubit/form_validation_cubit.dart';
-import 'package:oohapp/core/constants/waste/cubit.dart';
+import 'package:oohapp/all_cubit_folder/final_add_hoarding_first_page/cubit.dart';
+import 'package:oohapp/all_cubit_folder/final_add_hoarding_first_page/form.dart';
+
+import 'package:oohapp/core/waste_work/validator_regex.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/widgets/custom_check_button.dart';
+import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/widgets/custom_description_textfield.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/widgets/custom_dialog.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/widgets/custom_slider_button.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/widgets/custom_small_button.dart';
@@ -20,6 +23,7 @@ class FinalAddHoardingFirstPage extends StatefulWidget {
 class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
   String? selectedButton;
 
+
   TextEditingController categoryController = TextEditingController();
   TextEditingController hoardingtitleController = TextEditingController();
   TextEditingController hoardingdescriptionController = TextEditingController();
@@ -29,7 +33,6 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
   TextEditingController sizeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final formValidationCubit = BlocProvider.of<FormValidationCubit>(context);
     List<String> options = [
       'Metro view',
       'Bridge view',
@@ -37,301 +40,324 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
       'Right side road'
     ];
 
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: 'Add Hoarding',
-        centerTitle: true,
-        elevation: 1,
-        leading: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.clear),
+    return BlocBuilder<FinalFirstAddHoardingScreenCubit, FinalFirstAddHoardingFirstFormState>(
+      builder: (context, state) {
+        final cubit=context.read<FinalFirstAddHoardingScreenCubit>();
+        return Scaffold(
+          appBar:  CustomAppBar(
+            title: 'Add Hoarding',
+            centerTitle: true,
+            elevation: 1,
+            leading: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: CircularButton(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                backgroundColor: CustomColors.grey,
+                borderColor: CustomColors.transparent,
+                icon: Icons.arrow_back,
+                iconColor: CustomColors.blackColor,
+              ),
+            ),
           ),
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CustomText.headlineText(text: 'Hoarding Details'),
-              const SizedBox(
-                height: 12,
-              ),
-              CustomText.calloutText(
-                text: 'Select Hoarding Type*',
-                color: CustomColors.blackColor,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CustomSmallButton(
-                      onTap: () {
-                        setState(() {
-                          selectedButton = 'OOH Hoarding';
-                        });
-                      },
-                      iconOnTap: () {
-                        showCustomDialog(
-                          context,
-                          'What is OOH Hoarding',
-                          'OOH Hoardings is a type of Non-digital Hoardings.',
-                          ImageConstant.hoarding,
-                        );
-                      },
-                      text: 'OOH Hoarding',
-                      backgroundColor: selectedButton == 'OOH Hoarding'
-                          ? Colors.green
-                          : Colors.white,
-                      textColor: Colors.black,
-                    ),
-                    CustomSmallButton(
-                      onTap: () {
-                        setState(() {
-                          selectedButton = 'OOH Hoarding';
-                        });
-                      },
-                      iconOnTap: () {
-                        showCustomDialog(
-                          context,
-                          'What is DOOH Hoarding',
-                          'DOOH Hoarding is a type of Digital Hoardings.',
-                          ImageConstant.hoarding,
-                        );
-                      },
-                      text: 'DOOH Hoarding',
-                      backgroundColor: selectedButton == 'DOOH Hoarding'
-                          ? Colors.green
-                          : Colors.white,
-                      textColor: Colors.black,
-                    ),
-                  ]),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomTextFieldSelector(
-                placeholder: 'Categories*',
-                text: 'choose category',
-                choices: const [
-                  'Unipole',
-                  'Billboard',
-                  'Wall wrap',
-                  'Pole kiosk',
-                  'Digital screen',
-                  'LED',
-                  'Public utility',
-                  'Metro bridge panel',
-                  'Door branding',
-                  'Flag sign',
-                  'Foot over bridge',
-                  'ACP board'
-                ],
-                controller: categoryController,
-                onChanged: (val) {
-                  formValidationCubit.validateField(
-                      'category ', categoryController.text);
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomTextFormField(
-                placeholder: 'Hoarding Title*',
-                text: 'Enter title',
-                maxLength: 34,
-                
-                controller: hoardingtitleController,
-                onChanged: (val) {
-                  formValidationCubit.validateField(
-                      'bank name ', hoardingtitleController.text);
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomTextFormField(
-                placeholder: 'Hoarding description*',
-               
-                text: 'write description',
-                maxLength: 34,
-                showCharacterCount: true,
-                controller: hoardingdescriptionController,
-                onChanged: (val) {
-                  formValidationCubit.validateField('hoarding description',
-                      hoardingdescriptionController.text);
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomTextFormField(
-                placeholder: 'Measurement ln*',
-                text: 'Sq.ft',
-                controller: measurementController,
-                onChanged: (val) {
-                  formValidationCubit.validateField(
-                      'measurement', measurementController.text);
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomTextFormField(
-                    placeholder: 'Hoarding Width*',
-                    hintText: 'Enter width',
-                    width: 178,
-                    keyboardType: TextInputType.number,
-                    controller: hoardingwidthController,
-                    onChanged: (val) {
-                      formValidationCubit.validateField(
-                          'hoarding width', hoardingwidthController.text);
-                    },
-                  ),
-                  CustomTextFormField(
-                    placeholder: 'Hoarding Height*',
-                    hintText: 'Enter height',
-                    width: 178,
-                    keyboardType: TextInputType.number,
-                    controller: hoardingheightController,
-                    onChanged: (val) {
-                      formValidationCubit.validateField(
-                          'bank name ', hoardingheightController.text);
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              CustomTextFormField(
-                placeholder: 'Size Preview',
-                hintText: 'e.g. 10×20sq.ft',
-               
-                controller: sizeController,
-                newcolor: Colors.grey,
-                
-              ),
-              SizedBox(height: 15,),
-                  Container(
-                width: double.infinity,
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      width: 1,
-                      strokeAlign: BorderSide.strokeAlignCenter,
-                      color: Color(0xFFE0E0E0),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 15),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 16,bottom: 16),
+              child: Form(
+                key: cubit.finalfirstaddhoardingFormKey,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomSliderButton(title: 'Approved from nagar nigam'),
-                    SizedBox(height: 20),
-                    CustomSliderButton(title: 'Backlighting'),
-                    SizedBox(height: 20),
-                    CustomSliderButton(title: 'Printing & Mounting service'),
+                    CustomText.headlineText(text: 'Hoarding Details'),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    CustomText.calloutText(
+                      text: 'Select Hoarding Type*',
+                      color: CustomColors.blackColor,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CustomSmallButton(
+                            width: ScaleSize.width(45),
+                            onTap: () {
+                              setState(() {
+                                selectedButton = 'OOH Hoarding';
+                              });
+                            },
+                            iconOnTap: () {
+                              showCustomDialog(
+                                context,
+                                'What is OOH Hoarding',
+                                'OOH Hoardings is a type of Non-digital Hoardings.',
+                                ImageConstant.hoarding,
+                              );
+                            },
+                            text: 'OOH Hoarding',
+                            backgroundColor: selectedButton == 'OOH Hoarding'
+                                ? Colors.green
+                                : Colors.white,
+                            textColor: Colors.black,
+                          ),
+                          CustomSmallButton(
+                             width: ScaleSize.width(45),
+                            onTap: () {
+                              setState(() {
+                                selectedButton = 'DOOH Hoarding';
+                              });
+                            },
+                            iconOnTap: () {
+                              showCustomDialog(
+                                context,
+                                'What is DOOH Hoarding',
+                                'DOOH Hoarding is a type of Digital Hoardings.',
+                                ImageConstant.hoarding,
+                              );
+                            },
+                            text: 'DOOH Hoarding',
+                            backgroundColor: selectedButton == 'DOOH Hoarding'
+                                ? Colors.green
+                                : Colors.white,
+                            textColor: Colors.black,
+                          ),
+                        ]),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CustomTextFieldSelector(
+                      onChanged: (value){
+                        cubit.onChangedcategories(value);
+                      },
+                      validator: (value)=>ValidatorRegex.dropdownValidator(value),
+                      placeholder: 'Categories*',
+                      hintText: 'choose category',
+                      choices: const [
+                        'Unipole',
+                        'Billboard',
+                        'Wall wrap',
+                        'Pole kiosk',
+                        'Digital screen',
+                        'LED',
+                        'Public utility',
+                        'Metro bridge panel',
+                        'Door branding',
+                        'Flag sign',
+                        'Foot over bridge',
+                        'ACP board'
+                      ],
+                      controller: categoryController,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CustomTextFormField(
+                      placeholder: 'Hoarding Title',
+                      requiredsign: true,
+                      hintText: 'Enter title',
+                      maxLength: 34,
+                      onChanged: (value){
+                        cubit.onChangedhaordingtitle(value);
+                      },
+                      validator: (value)=>ValidatorRegex.hoardingtitleValidator(value),
+                      controller: hoardingtitleController,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CustomDescriptionTextFormField(
+                      height: ScaleSize.height(40),
+                     requiredsign: true,
+                     onChanged: (value){
+                      cubit.onChangedhaordingdescription(value);
+                     },
+                     validator: (value)=>ValidatorRegex.hoardingdescriptionValidator(value),
+                      placeholder: 'Hoarding description',
+                      hintText: 'write description',
+                      maxLength: 34,
+                      showCharacterCount: true,
+                      controller: hoardingdescriptionController,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomTextFormField(
+                      requiredsign: true,
+                      onChanged: (value){
+                        cubit.onChangedmeasurementlength(value);
+                      },
+                      validator: (value)=>ValidatorRegex.measurementlengthValidator(value),
+                      placeholder: 'Measurement ln',
+                      hintText: 'Sq.ft',
+                      controller: measurementController,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        CustomTextFormField(
+                          requiredsign: true,
+                          onChanged: (value){
+                            cubit.onChangedhoardingwidth(value);
+                          },
+                          validator: (value)=>ValidatorRegex.hoardingwidthValidator(value),
+
+                          placeholder: 'Hoarding Width',
+                          hintText: 'Enter width',
+                          width: 178,
+                          keyboardType: TextInputType.number,
+                          controller: hoardingwidthController,
+                        ),
+                        CustomTextFormField(
+                          placeholder: 'Hoarding Height',
+                          requiredsign: true,
+                          onChanged: (value){
+                            cubit.onChangedhoardingheight(value);
+                          },
+                          validator: (value)=>ValidatorRegex.hoardingheightValidator(value),
+                          hintText: 'Enter height',
+                          width: 178,
+                          keyboardType: TextInputType.number,
+                          controller: hoardingheightController,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CustomTextFormField(
+                      placeholder: 'Size Preview',
+                      hintText: 'e.g. 10×20sq.ft',
+                      controller: sizeController,
+                      newcolor: Colors.grey,
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: const ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            width: 1,
+                            strokeAlign: BorderSide.strokeAlignCenter,
+                            color: Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomSliderButton(title: 'Approved from nagar nigam'),
+                          SizedBox(height: 20),
+                          CustomSliderButton(title: 'Backlighting'),
+                          SizedBox(height: 20),
+                          CustomSliderButton(
+                              title: 'Printing & Mounting service'),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const CustomTextFormField(
+                      placeholder: 'People Football',
+                      hintText: 'Enter in Number',
+                      keyboardType: TextInputType.number,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: const ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            width: 1,
+                            strokeAlign: BorderSide.strokeAlignCenter,
+                            color: Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    const TagsInputField(
+                      labelText: 'Target Audience',
+                      initialTags: [
+                        'Students',
+                        'Foodies',
+                        'Public',
+                        'average class'
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: const ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                            width: 1,
+                            strokeAlign: BorderSide.strokeAlignCenter,
+                            color: Color(0xFFE0E0E0),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    CustomText.secondaryTitle(
+                        text: 'Hoarding Visibility', color: Colors.black),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Column(
+                      children: options.map((title) {
+                        return CustomCheckboxTile(
+                          title: title,
+                          onChanged: (bool value) {
+                            print('$title is now: $value');
+                          },
+                        );
+                      }).toList(),
+                    ),
+                    const SizedBox(height: 16),
+                    CustomButton(
+                      onTap: () {
+                      if(state.isfirstfinalhoardingvalid&&selectedButton!=null){
+                          NavigateUtils.pushNamedReplacement(
+                            context, Routes.finalsecondaddhoardingScreeen);
+                      }else{
+
+                      }
+                      },
+                      text: 'Save & Finish',
+                      backgroundColor: (state.isfirstfinalhoardingvalid&&selectedButton!=null)
+                          ? const Color(0xFF282C3E):const Color(0xFFDDDDDD),
+                    )
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              const CustomTextFormField(
-                placeholder: 'People Football',
-                hintText: 'Enter in Number',
-                keyboardType: TextInputType.number,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Container(
-                width: double.infinity,
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      width: 1,
-                      strokeAlign: BorderSide.strokeAlignCenter,
-                      color: Color(0xFFE0E0E0),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              const TagsInputField(
-                labelText: 'Target Audience',
-                initialTags: ['Students', 'Foodies', 'Public', 'average class'],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Container(
-                width: double.infinity,
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(
-                      width: 1,
-                      strokeAlign: BorderSide.strokeAlignCenter,
-                      color: Color(0xFFE0E0E0),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomText.secondaryTitle(
-                  text: 'Hoarding Visibility', color: Colors.black),
-              const SizedBox(
-                height: 12,
-              ),
-              Column(
-                children: options.map((title) {
-                  return CustomCheckboxTile(
-                    title: title,
-                    onChanged: (bool value) {
-                      print('$title is now: $value');
-                    },
-                  );
-                }).toList(),
-              ),
-              const SizedBox(height: 16),
-              CustomButton(
-                onTap: () {
-                    NavigateUtils.pushNamedReplacement(
-                        context, Routes.finalsecondaddhoardingScreeen);
-                  // if (formValidationCubit.isFormValid()) {
-                  //   NavigateUtils.pushNamedReplacement(
-                  //       context, Routes.finalsecondaddhoardingScreeen);
-                  // } else {}
-                },
-                text: 'Save & Finish',
-                backgroundColor: formValidationCubit.isFormValid()
-                    ? const Color(0xFFDDDDDD)
-                    : const Color(0xFF282C3E),
-              )
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

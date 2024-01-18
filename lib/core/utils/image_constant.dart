@@ -1,5 +1,6 @@
 class ImageConstant {
   static String imagePath = 'assets/images';
+  
   static String logoOne = '$imagePath/1.svg';
   static String logoTwo = '$imagePath/2.svg';
   static String logoThree = '$imagePath/3.svg';
@@ -26,6 +27,8 @@ class ImageConstant {
   static String google = '$imagePath/google.png';
   // arrow logo
   static String arrowback='$imagePath/arrow_back.png';
+  //icon
+  static String warningicon='$imagePath/warning_icon.png';
 
 
 }

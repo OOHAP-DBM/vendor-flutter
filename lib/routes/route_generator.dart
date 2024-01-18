@@ -1,4 +1,9 @@
+import 'package:oohapp/all_cubit_folder/final_add_hoarding_first_page/cubit.dart';
+import 'package:oohapp/all_cubit_folder/final_add_hoarding_second_page/cubit.dart';
 import 'package:oohapp/all_cubit_folder/first_add_hoarding/cubit.dart';
+import 'package:oohapp/all_cubit_folder/first_location_entry_page/cubit.dart';
+import 'package:oohapp/all_cubit_folder/log_in_screen/cubit.dart';
+import 'package:oohapp/all_cubit_folder/log_in_screen/form.dart';
 import 'package:oohapp/all_cubit_folder/second_add_haording/cubit.dart';
 import 'package:oohapp/core/constants/app_constant.dart';
 import 'package:oohapp/core/waste_work/cubit.dart';
@@ -49,7 +54,7 @@ class RoutesGenerator {
     case Routes.loginScreen:
   return MaterialPageRoute(
     builder: (_) => BlocProvider(
-      create: (context) => CustomFormCubit(),
+      create: (context) => LogInScreenCubit(),
       child: const LoginScreen(),
     ),
   );
@@ -106,13 +111,26 @@ class RoutesGenerator {
         return MaterialPageRoute(
             builder: (_) => const SecondLocationHoardingPage());
       case Routes.fisthoardinglocationentryScreen:
-        return MaterialPageRoute(
-            builder: (_) => FirstHoardingLocationEntryPage());
+           return MaterialPageRoute(
+        builder:(_)=>BlocProvider(
+        create: (context)=>LocationEntryScreenCubit(),
+        child: FirstHoardingLocationEntryPage(),
+        )
+      );
       case Routes.finalfirstaddhoardingScreen:
-        return MaterialPageRoute(builder: (_) => FinalAddHoardingFirstPage());
+       return MaterialPageRoute(
+        builder:(_)=>BlocProvider(
+        create: (context)=>FinalFirstAddHoardingScreenCubit(),
+        child: const FinalAddHoardingFirstPage(),
+        )
+      );
       case Routes.finalsecondaddhoardingScreeen:
-        return MaterialPageRoute(
-            builder: (_) => const FinalAddHoardingSecondPage());
+      return MaterialPageRoute(
+        builder:(_)=>BlocProvider(
+        create: (context)=>FinalSecondAddHoardingScreenCubit(),
+        child: const FinalAddHoardingSecondPage(),
+        )
+      );
            case Routes.uploadimagehoardingpage:
       return MaterialPageRoute(
         builder: (_) => BlocProvider(

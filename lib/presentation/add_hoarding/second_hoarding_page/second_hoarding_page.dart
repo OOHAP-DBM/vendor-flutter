@@ -236,8 +236,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                     const SizedBox(height: 7),
                     CustomTextFieldSelector(
                       controller: banknameController,
-
-                      placeholder: 'Bank Name*',
+requiredsign: true,
+                      placeholder: 'Bank Name',
                       // maxLength: 15,
                       // keyboardType: TextInputType.number,
                       hintText: "choose bank name ",
@@ -253,8 +253,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                     ),
                     CustomTextFormField(
                       controller: accountholdernameController,
-
-                      placeholder: 'Account Holder Name*',
+requiredsign: true,
+                      placeholder: 'Account Holder Name',
                       // maxLength: 15,
                       keyboardType: TextInputType.name,
                       hintText: "Enter account holder name",
@@ -269,8 +269,8 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                     ),
                     CustomTextFormField(
                       controller: accountController,
-
-                      placeholder: 'Account Number*',
+requiredsign: true,
+                      placeholder: 'Account Number',
                       // maxLength: 15,
                       keyboardType: TextInputType.phone,
                       hintText: "Enter Account Number",
@@ -281,8 +281,9 @@ class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
                           ValidatorRegex.accountnumberValidator(value),
                     ),
                     NewCustomTextFormField(
+                      requiredsign: true,
                       controller: ifsccodeController,
-                      placeholder: 'IFSC Code*',
+                      placeholder: 'IFSC Code',
                       hintText: "Enter IFSC Code",
                       lasttext: 'Find IFSC code',
                       onPressed: () => showIFSCFinder(),

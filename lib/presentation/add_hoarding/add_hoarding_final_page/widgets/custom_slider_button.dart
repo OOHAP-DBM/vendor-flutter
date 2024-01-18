@@ -45,7 +45,7 @@ class _CustomSliderButtonState extends State<CustomSliderButton> {
             height: 33,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: const Color(0xFF282C3E)),
+              border: Border.all(color: Colors.black),
             ),
             child: Stack(
               children: [

@@ -25,6 +25,7 @@ class CustomTextFieldSelector extends StatelessWidget {
       this.selectedChoice,
  
       this.validator,
+      this.requiredsign,
      
 
       this.onChanged})
@@ -50,6 +51,7 @@ class CustomTextFieldSelector extends StatelessWidget {
   final String? placeholder;
   final List<String>? choices;
   final String? selectedChoice;
+  final bool? requiredsign;
 
   
  
@@ -62,8 +64,21 @@ class CustomTextFieldSelector extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (placeholder != null)
+    if(requiredsign==true)
+     Row(
+      children: [
+             CustomText.calloutText(
+            text: placeholder,
+            color: CustomColors.blackColor,
+          ),
           CustomText.calloutText(
+            text: '*',
+            color: Colors.red,
+          )
+      ],
+     )
+     else
+       CustomText.calloutText(
             text: placeholder,
             color: CustomColors.blackColor,
           ),

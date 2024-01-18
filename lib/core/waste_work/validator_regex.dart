@@ -35,6 +35,27 @@ class ValidatorRegex {
       return null;
     }
   }
+     static String? hoardingtitleValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'Hoarding Title is required';
+    } else if (value.length < 6) {
+      return 'Hoarding Title must be at least 6 characters long';
+    }  else if (!RegExp(r'^[a-zA-Z]+$').hasMatch(value)) {
+      return 'Please give a valid hoarding title';
+    } else {
+      return null;
+    }
+  }
+
+     static String? hoardingdescriptionValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'Hoarding Description is required';
+    } else if (value.length < 6) {
+      return 'Hoarding Description must be at least 6 characters long';
+    }  else {
+      return null;
+    }
+  }
      static String? accountholdernameValidator(String? value) {
     if (value!.isEmpty) {
       return 'accountholdername  is required';
@@ -64,6 +85,24 @@ class ValidatorRegex {
       return null;
     }
   }
+    static String? hoardingaddressValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'Hoarding Address is required';
+    } else if (RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(value)) {
+      return 'Hoarding Address should not contain special characters';
+    } else {
+      return null;
+    }
+  }
+     static String? landmarkValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'landmark is required';
+    } else if (RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(value)) {
+      return 'landmark should not contain special characters';
+    } else {
+      return null;
+    }
+  }
 
   static String? aptUnitValidator(String? value) {
     if (value!.isEmpty) {
@@ -79,6 +118,93 @@ class ValidatorRegex {
       return 'ⓘ pincode is required';
     } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
       return 'ⓘ pincode should contain only numbers';
+    } else {
+      return null;
+    }
+  }
+
+     static String? measurementlengthValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'measurement data is required';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return 'measurement data should contain only numbers';
+    } else {
+      return null;
+    }
+  }
+
+       static String? hoardingheightValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'hoarding height is required';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return 'hoarding height should contain only numbers';
+    } else {
+      return null;
+    }
+  }
+
+        static String? hoardingwidthValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'hoarding width is required';
+    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+      return 'hoarding width should contain only numbers';
+    } else {
+      return null;
+    }
+  }
+      static String? latitudevalidator(String? value) {
+    if (value!.isEmpty) {
+      return ' latitude is required';
+    } else if (!RegExp("^(\\+|-)?((\\d((\\.)|\\.\\d{1,6})?)|(0*?[0-8]\\d((\\.)|\\.\\d{1,6})?)|(0*?90((\\.)|\\.0{1,6})?))").hasMatch(value)) {
+      return ' enter a valid latitude ';
+    } else {
+      return null;
+    }
+  }
+
+        static String? basepricevalidator(String? value) {
+    if (value!.isEmpty) {
+      return ' baseprice is required';
+    } else if (!RegExp("^(\\+|-)?((\\d((\\.)|\\.\\d{1,6})?)|(0*?[0-8]\\d((\\.)|\\.\\d{1,6})?)|(0*?90((\\.)|\\.0{1,6})?))").hasMatch(value)) {
+      return ' enter a valid amount';
+    } else {
+      return null;
+    }
+  }
+
+          static String? pricingchargevalidator(String? value) {
+    if (value!.isEmpty) {
+      return ' printing charge is required';
+    } else if (!RegExp("^(\\+|-)?((\\d((\\.)|\\.\\d{1,6})?)|(0*?[0-8]\\d((\\.)|\\.\\d{1,6})?)|(0*?90((\\.)|\\.0{1,6})?))").hasMatch(value)) {
+      return ' enter a valid amount';
+    } else {
+      return null;
+    }
+  }
+            static String? mountingchargevalidator(String? value) {
+    if (value!.isEmpty) {
+      return ' mounting charge is required';
+    } else if (!RegExp("^(\\+|-)?((\\d((\\.)|\\.\\d{1,6})?)|(0*?[0-8]\\d((\\.)|\\.\\d{1,6})?)|(0*?90((\\.)|\\.0{1,6})?))").hasMatch(value)) {
+      return ' enter a valid amount';
+    } else {
+      return null;
+    }
+  }
+
+              static String? designingchargevalidator(String? value) {
+    if (value!.isEmpty) {
+      return ' designing charge is required';
+    } else if (!RegExp("^(\\+|-)?((\\d((\\.)|\\.\\d{1,6})?)|(0*?[0-8]\\d((\\.)|\\.\\d{1,6})?)|(0*?90((\\.)|\\.0{1,6})?))").hasMatch(value)) {
+      return ' enter a valid amount';
+    } else {
+      return null;
+    }
+  }
+        static String? longitudevalidator(String? value) {
+    if (value!.isEmpty) {
+      return ' longitude is required';
+    } else if (!RegExp("^(\\+|-)?((\\d((\\.)|\\.\\d{1,6})?)|(0*?\\d\\d((\\.)|\\.\\d{1,6})?)|(0*?1[0-7]\\d((\\.)|\\.\\d{1,6})?)|(0*?180((\\.)|\\.0{1,6})?))").hasMatch(value)) {
+      return ' enter a valid longitude ';
     } else {
       return null;
     }

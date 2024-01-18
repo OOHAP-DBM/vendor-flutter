@@ -22,22 +22,30 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       surfaceTintColor: CustomColors.transparent, 
-      leadingWidth: 85,
+      leadingWidth: 85,  
       title: title != null
           ? CustomText.secondaryTitle(text: title, color: Colors.black)
           : null,
       centerTitle: centerTitle,
       elevation: elevation ?? 1,
       actions: actions,
-       // backgroundColor: backgroundColor ?? CustomColors.whiteColor,
+   
       leading: Padding(
         padding: const EdgeInsets.only(left: 14.0),
-        child: leading,
+        child: leading != null
+            ? SizedBox(
+                width: 40, 
+                height: 40, 
+                child: Align(
+                  alignment: Alignment.center,
+                  child: leading,
+                ),
+              )
+            : null,
       ),
     );
   }
 
-  // padding: const EdgeInsets.symmetric(horizontal: 14.0),
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
