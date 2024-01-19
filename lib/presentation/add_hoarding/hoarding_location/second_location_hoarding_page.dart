@@ -25,60 +25,68 @@ class SecondLocationHoardingPage extends StatelessWidget {
       body: Stack(
         alignment: Alignment.center,
         children: [
-          const GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: LatLng(26.8467, 80.9462),
-              zoom: 16,
+            Positioned.fill(
+            child: Image.asset(
+              ImageConstant.map, // Replace with your local asset path
+              fit: BoxFit.cover,
             ),
-            myLocationButtonEnabled: false,
           ),
+          // const GoogleMap(
+          //   initialCameraPosition: CameraPosition(
+          //     target: LatLng(26.8467, 80.9462),
+          //     zoom: 16,
+          //   ),
+          //   myLocationButtonEnabled: false,
+          // ),
           Positioned(
-              top: MediaQuery.of(context).padding.top + 20,
-              child: SizedBox(
-                width: 343,
-                height: 70,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Column(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 270,
-                          child: Text(
-                            'B 25, Second Floor, Vibhuti Khand Rd, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010',
-                            style: TextStyle(
-                              color: CustomColors.grey,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
-                        ),
-                      ],
+            top: 0 ,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Colors.white, // A background color that contrasts well with the text.
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 8,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'B 25, Second Floor, Vibhuti Khand Rd, Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010',
+                      style: TextStyle(
+                        color: Colors.black, // Use a darker color for better readability
+                        fontWeight: FontWeight.bold, // Make font bold to improve visibility
+                      ),
+                      overflow: TextOverflow.ellipsis, // Use ellipsis to handle longer texts
+                      maxLines: 3, // Increase the number of lines if necessary
                     ),
-                    const SizedBox(width: 10),
-                    GestureDetector(
-                      onTap: () {
-                        NavigateUtils.pushNamedReplacement(
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                   NavigateUtils.pushNamedReplacement(
                             context, Routes.firsthoardinglocationScreen);
-                      },
-                      child: const Text(
-                        'Change',
-                        style: TextStyle(
-                          color: Color(0xFF009A5C),
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                          height: 0,
-                        ),
+                    },
+                    child: const Text(
+                      'Change',
+                      style: TextStyle(
+                        color: Color(0xFF009A5C),
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ],
-                ),
-              )),
+                  ),
+                ],
+              ),
+            ),
+          ),
           DraggableScrollableSheet(
             initialChildSize: 0.1,
             minChildSize: 0.1,

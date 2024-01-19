@@ -66,17 +66,20 @@ class _UploadHoardingLogoPageState extends State<UploadHoardingLogoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar:  CustomAppBar(
         title: 'Add Hoarding',
         centerTitle: true,
         elevation: 1,
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: IconButton(
-            onPressed: () {
+          child: CircularButton(
+            onTap: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.clear),
+            backgroundColor: CustomColors.grey,
+            borderColor: CustomColors.transparent,
+            icon: Icons.arrow_back,
+            iconColor: CustomColors.blackColor,
           ),
         ),
       ),

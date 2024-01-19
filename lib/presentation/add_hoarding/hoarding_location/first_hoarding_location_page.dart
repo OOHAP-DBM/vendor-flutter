@@ -14,7 +14,7 @@ class _FirstHoardingLocationPageState extends State<FirstHoardingLocationPage> {
  final TextEditingController _searchController = TextEditingController();
    Widget _buildSearchField() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding:  EdgeInsets.symmetric(horizontal: 16),
       child: TextField(
         controller: _searchController,
         decoration: InputDecoration(
@@ -107,7 +107,7 @@ class _FirstHoardingLocationPageState extends State<FirstHoardingLocationPage> {
         centerTitle: true,
         elevation: 1,
         leading: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding:  EdgeInsets.symmetric(horizontal: 8.0),
           child: CircularButton(
             onTap: () {
               Navigator.pop(context);
@@ -121,12 +121,19 @@ class _FirstHoardingLocationPageState extends State<FirstHoardingLocationPage> {
       ),
       body: Stack(
         children: [
-          const GoogleMap(
-            initialCameraPosition: CameraPosition(
-              target: LatLng(26.8467, 80.9462),
-              zoom: 14.0,
+
+           Positioned.fill(
+            child: Image.asset(
+              ImageConstant.map, // Replace with your local asset path
+              fit: BoxFit.cover,
             ),
           ),
+          //  GoogleMap(
+          //   initialCameraPosition: CameraPosition(
+          //     target: LatLng(26.8467, 80.9462),
+          //     zoom: 14.0,
+          //   ),
+          // ),
           Positioned(
             top: MediaQuery.of(context).padding.top,
             left: 0,
@@ -149,37 +156,27 @@ class _FirstHoardingLocationPageState extends State<FirstHoardingLocationPage> {
     return GestureDetector(
       onTap: () => _settingModalBottomSheet(context),
       child: Container(
-        width: 343,
-        height: 46,
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 11),
-        decoration: ShapeDecoration(
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(46),
-          ),
-          shadows: const [
-            BoxShadow(
-              color: Color(0x3F000000),
-              blurRadius: 8,
-              offset: Offset(2, 2),
-              spreadRadius: 0,
-            )
-          ],
-        ),
+      margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 10),
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+        
         child: AbsorbPointer(
           child: TextFormField(
             controller: _searchController,
-            decoration: const InputDecoration(
-              hintText: 'Where is your hoarding located?',
-              hintStyle: TextStyle(
-                color: CustomColors.blackColor,
-                fontWeight: FontWeight.w300,
-              ),
-              prefixIcon: Icon(Icons.search, color: Colors.black),
-              suffixIcon:
-                Icon(Icons.mic,color: Colors.black,), 
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.zero,
+            decoration:  InputDecoration(
+          hintText: 'Where is your hoarding located?',
+          hintStyle:  TextStyle(
+            fontSize: 16, // Your desired font size
+            color: Color(0xFF282C3E), // Your desired text color
+          ),
+         contentPadding:  EdgeInsets.symmetric(vertical: 10),
+          prefixIcon:  Icon(Icons.location_on, color: Colors.black),
+    
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(20), // Rounded corners
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: Colors.white.withAlpha(235),
             ),
           ),
         ),
@@ -197,8 +194,8 @@ class _FirstHoardingLocationPageState extends State<FirstHoardingLocationPage> {
             expand: false,
             builder: (_, scrollController) {
               return Container(
-                padding: const EdgeInsets.only(top: 10),
-                decoration: const BoxDecoration(
+                padding:  EdgeInsets.only(top: 10),
+                decoration:  BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(10.0),
@@ -238,7 +235,7 @@ class _FirstHoardingLocationPageState extends State<FirstHoardingLocationPage> {
     return Container(
       color: Colors.white,
       child: ListView(
-        children: const [
+        children:  [
           ListTile(title: Text('Gomti Nagar, Lucknow, Uttar Pradesh, India')),
         ],
       ),
@@ -251,7 +248,7 @@ class _FirstHoardingLocationPageState extends State<FirstHoardingLocationPage> {
         Navigator.pushNamed(context, Routes.secondhoardinglocationScreen);
       },
       text: 'Confirm Location',
-      backgroundColor: const Color(0xFF282C3E),
+      backgroundColor:  Color(0xFF282C3E),
     );
   }
 

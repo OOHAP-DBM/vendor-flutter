@@ -27,10 +27,11 @@ class _TagsInputFieldState extends State<TagsInputField> {
     _tags = List.from(widget.initialTags);
   }
 
-  void _addTag(String tag) {
-    if (tag.isNotEmpty && !_tags.contains(tag)) {
+ void _addTag(String tag) {
+    final trimmedTag = tag.trim();
+    if (trimmedTag.isNotEmpty && !_tags.contains(trimmedTag)) {
       setState(() {
-        _tags.add(tag);
+        _tags.add(trimmedTag);
       });
       _textController.clear();
     }
@@ -82,10 +83,7 @@ class _TagsInputFieldState extends State<TagsInputField> {
                 borderSide: const BorderSide(color: CustomColors.blackColor),
                 borderRadius: BorderRadius.circular(4.0),
               ),
-              suffixIcon: IconButton(
-                icon: const Icon(Icons.add),
-                onPressed: () => _addTag(_textController.text),
-              ),
+            
             ),
             onSubmitted: _addTag,
           ),

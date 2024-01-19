@@ -26,6 +26,7 @@ class CustomTextFieldSelector extends StatelessWidget {
  
       this.validator,
       this.requiredsign,
+      this.choiceImages,
      
 
       this.onChanged})
@@ -52,6 +53,7 @@ class CustomTextFieldSelector extends StatelessWidget {
   final List<String>? choices;
   final String? selectedChoice;
   final bool? requiredsign;
+    final Map<String, String>? choiceImages; 
 
   
  
@@ -106,15 +108,26 @@ class CustomTextFieldSelector extends StatelessWidget {
                   : null
               : null,
           items: choices?.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
+                   return DropdownMenuItem<String>(
+              value: value,
+              child: Row(
+                children: [
+                  if (choiceImages != null && choiceImages!.containsKey(value))
+                    Image.asset(
+                      choiceImages![value]!, // Load the image from assets
+                      width: 20, // Fixed width for the image
+                      height: 20, // Fixed height for the image
+                      fit: BoxFit.contain,
+                    ),
+                  SizedBox(width: 8), // Spacing between image and text
+                  Text(
                     value,
                     style: TextStyle(color: Colors.black),
                   ),
-                );
-              }).toList() ??
-              [],
+                ],
+              ),
+            );
+          }).toList() ?? [],
             onChanged: (String? newValue) {
             if (newValue != null) {
               controller?.text = newValue;

@@ -1,12 +1,13 @@
+import 'package:oohapp/all_cubit_folder/additional_ui_second_hoarding/cubit.dart';
 import 'package:oohapp/all_cubit_folder/final_add_hoarding_first_page/cubit.dart';
 import 'package:oohapp/all_cubit_folder/final_add_hoarding_second_page/cubit.dart';
 import 'package:oohapp/all_cubit_folder/first_add_hoarding/cubit.dart';
 import 'package:oohapp/all_cubit_folder/first_location_entry_page/cubit.dart';
 import 'package:oohapp/all_cubit_folder/log_in_screen/cubit.dart';
-import 'package:oohapp/all_cubit_folder/log_in_screen/form.dart';
+
 import 'package:oohapp/all_cubit_folder/second_add_haording/cubit.dart';
 import 'package:oohapp/core/constants/app_constant.dart';
-import 'package:oohapp/core/waste_work/cubit.dart';
+
 import 'package:oohapp/presentation/a_main_screen/main_screen.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/add_hoarding_final_page_first.dart';
 import 'package:oohapp/presentation/add_hoarding/add_hoarding_final_page/add_hoarding_final_second_page/add_hoarding_second_final_page.dart';
@@ -31,6 +32,9 @@ import 'package:oohapp/presentation/d_authentication/sign_up_screen/create_passw
 import 'package:oohapp/presentation/d_authentication/sign_up_screen/create_profile_screen/create_profile_screen.dart';
 import 'package:oohapp/presentation/d_authentication/sign_up_screen/signup_otp_screen/signup_otp_screen.dart';
 import 'package:oohapp/presentation/d_authentication/sign_up_screen/signup_screen.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/empty_hoarding_page.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/hoarding_list_page.dart';
+import 'package:oohapp/presentation/e_home_page/home_page.dart';
 import '../core/app_export.dart';
 import '../presentation/b_splash_screen/splash_screen.dart';
 import '../presentation/c_onboarding_screen/onboarding_screen.dart';
@@ -51,13 +55,13 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (_) => OnBoardingScreen(),
         );
-    case Routes.loginScreen:
-  return MaterialPageRoute(
-    builder: (_) => BlocProvider(
-      create: (context) => LogInScreenCubit(),
-      child: const LoginScreen(),
-    ),
-  );
+      case Routes.loginScreen:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => LogInScreenCubit(),
+            child: const LoginScreen(),
+          ),
+        );
       case Routes.loginOtpScreen:
         return MaterialPageRoute(
           builder: (_) => const LoginOtpScreen(),
@@ -82,6 +86,10 @@ class RoutesGenerator {
         return MaterialPageRoute(
           builder: (_) => const CreateProfileScreen(),
         );
+      case Routes.homepagescreen:
+        return MaterialPageRoute(
+          builder: (_) => const HomePage(),
+        );
       case Routes.dashboardScreen:
         return MaterialPageRoute(
           builder: (_) => const DashboardScreen(),
@@ -90,65 +98,72 @@ class RoutesGenerator {
       case Routes.gettingstartedfirstScreen:
         return MaterialPageRoute(
             builder: (_) => const GettingStartedFirstPage());
+
+      case Routes.emptyhoardingpage:
+        return MaterialPageRoute(builder: (_) => const EmptyHoardingPage());
+      case Routes.hoardinglistscreen:
+        return MaterialPageRoute(builder: (_) => const MyHordingListPage());
       case Routes.addhoardingScreen:
-     return MaterialPageRoute(
-        builder:(_)=>BlocProvider(
-        create: (context)=>AddHoardingScreenCubit(),
-        child:const AddHoardingScreen(),
-        )
-      );
-      case Routes.secondhoardingScreen:
-         return MaterialPageRoute(
-        builder:(_)=>BlocProvider(
-        create: (context)=>SecondHoardingScreenCubit(),
-        child:const SecondAddHoardingPage(),
-        )
-      );
-      case Routes.firsthoardinglocationScreen:
         return MaterialPageRoute(
-            builder: (_) =>  FirstHoardingLocationPage());
+            builder: (_) => BlocProvider(
+                  create: (context) => AddHoardingScreenCubit(),
+                  child: const AddHoardingScreen(),
+                ));
+      case Routes.secondhoardingScreen:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => SecondHoardingScreenCubit(),
+                  child: const SecondAddHoardingPage(),
+                ));
+      case Routes.firsthoardinglocationScreen:
+        return MaterialPageRoute(builder: (_) => FirstHoardingLocationPage());
       case Routes.secondhoardinglocationScreen:
         return MaterialPageRoute(
             builder: (_) => const SecondLocationHoardingPage());
       case Routes.fisthoardinglocationentryScreen:
-           return MaterialPageRoute(
-        builder:(_)=>BlocProvider(
-        create: (context)=>LocationEntryScreenCubit(),
-        child: FirstHoardingLocationEntryPage(),
-        )
-      );
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => LocationEntryScreenCubit(),
+                  child: FirstHoardingLocationEntryPage(),
+                ));
       case Routes.finalfirstaddhoardingScreen:
-       return MaterialPageRoute(
-        builder:(_)=>BlocProvider(
-        create: (context)=>FinalFirstAddHoardingScreenCubit(),
-        child: const FinalAddHoardingFirstPage(),
-        )
-      );
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => FinalFirstAddHoardingScreenCubit(),
+                  child: const FinalAddHoardingFirstPage(),
+                ));
       case Routes.finalsecondaddhoardingScreeen:
-      return MaterialPageRoute(
-        builder:(_)=>BlocProvider(
-        create: (context)=>FinalSecondAddHoardingScreenCubit(),
-        child: const FinalAddHoardingSecondPage(),
-        )
-      );
-           case Routes.uploadimagehoardingpage:
-      return MaterialPageRoute(
-        builder: (_) => BlocProvider(
-          create: (context) => ImageCubit(),
-          child: const UploadHoardingLogoPage(),
-        ),
-      );
+        return MaterialPageRoute(
+          builder: (_) => MultiBlocProvider(
+            providers: [
+              BlocProvider<FinalSecondAddHoardingScreenCubit>(
+                create: (context) => FinalSecondAddHoardingScreenCubit(),
+              ),
+              BlocProvider<FinalAddHoardingAdditionalScreenCubit>(
+                create: (context) => FinalAddHoardingAdditionalScreenCubit(),
+              ),
+            ],
+            child: FinalAddHoardingSecondPage(),
+          ),
+        );
+
+      case Routes.uploadimagehoardingpage:
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (context) => ImageCubit(),
+            child: const UploadHoardingLogoPage(),
+          ),
+        );
       case Routes.uploadhoardingvideopage:
-      return MaterialPageRoute(
-        builder:(_)=>BlocProvider(
-        create: (context)=>MediaCubit(),
-        child:const UploadHoardingVideoPage(),
-        )
-      );
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (context) => MediaCubit(),
+                  child: const UploadHoardingVideoPage(),
+                ));
       case Routes.uploadhoardingcalendarpage:
-      return MaterialPageRoute(
-        builder: (_)=>const AddHoardingCalendarPage(),
-      );
+        return MaterialPageRoute(
+          builder: (_) => const AddHoardingCalendarPage(),
+        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

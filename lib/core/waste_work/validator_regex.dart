@@ -94,6 +94,16 @@ class ValidatorRegex {
       return null;
     }
   }
+
+      static String? discounttypeValidator(String? value) {
+    if (value!.isEmpty) {
+      return 'discount type is required';
+    } else if (RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(value)) {
+      return 'discount type should not contain special characters';
+    } else {
+      return null;
+    }
+  }
      static String? landmarkValidator(String? value) {
     if (value!.isEmpty) {
       return 'landmark is required';
@@ -119,6 +129,63 @@ class ValidatorRegex {
     } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
       return 'ⓘ pincode should contain only numbers';
     } else {
+      return null;
+    }
+  }
+
+      static String? gstValidator(String? value) {
+    if (value!.isEmpty) {
+      return ' gst percentage is required';
+    } else if (!RegExp(r'^[[0-9]{0,8}(\.[0-9]{1,4})?$|^[[0-9]{0,9}(\.[0-9]{1,3})?$|^[[0-9]{0,10}(\.[0-9]{1,2})?$|^[[0-9]{0,11}(\.[0-9]{1})?$|^[0-9]{0,12}').hasMatch(value)) {
+      return 'enter valid percentage';
+    } 
+    else if (value.length>3) {
+      return 'percentage cannot be of more than 3 digits';
+    }else {
+      return null;
+    }
+  }
+
+        static String? igstValidator(String? value) {
+    if (value!.isEmpty) {
+      return ' igst percentage is required';
+    } else if (!RegExp(r'^[[0-9]{0,8}(\.[0-9]{1,4})?$|^[[0-9]{0,9}(\.[0-9]{1,3})?$|^[[0-9]{0,10}(\.[0-9]{1,2})?$|^[[0-9]{0,11}(\.[0-9]{1})?$|^[0-9]{0,12}').hasMatch(value)) {
+      return 'enter valid percentage';
+    } 
+    else if (value.length>3) {
+      return 'percentage cannot be of more than 3 digits';
+    }else {
+      return null;
+    }
+  }
+
+          static String? totalpricewithtaxValidator(String? value) {
+    if (value!.isEmpty) {
+      return '  total price with tax is required is required';
+    } else if (!RegExp(r'^[[0-9]{0,8}(\.[0-9]{1,4})?$|^[[0-9]{0,9}(\.[0-9]{1,3})?$|^[[0-9]{0,10}(\.[0-9]{1,2})?$|^[[0-9]{0,11}(\.[0-9]{1})?$|^[0-9]{0,12}').hasMatch(value)) {
+      return 'enter valid amount';
+    } 
+   else {
+      return null;
+    }
+  }
+         static String? discountpercentageamountValidator(String? value) {
+    if (value!.isEmpty) {
+      return ' discount/percenntage amount is required ';
+    } else if (!RegExp(r'^[[0-9]{0,8}(\.[0-9]{1,4})?$|^[[0-9]{0,9}(\.[0-9]{1,3})?$|^[[0-9]{0,10}(\.[0-9]{1,2})?$|^[[0-9]{0,11}(\.[0-9]{1})?$|^[0-9]{0,12}').hasMatch(value)) {
+      return 'enter valid amount';
+    } 
+   else {
+      return null;
+    }
+  }
+           static String? discountedpriceValidator(String? value) {
+    if (value!.isEmpty) {
+      return ' discounted price is required';
+    } else if (!RegExp(r'^[[0-9]{0,8}(\.[0-9]{1,4})?$|^[[0-9]{0,9}(\.[0-9]{1,3})?$|^[[0-9]{0,10}(\.[0-9]{1,2})?$|^[[0-9]{0,11}(\.[0-9]{1})?$|^[0-9]{0,12}').hasMatch(value)) {
+      return 'enter valid amount';
+    } 
+   else {
       return null;
     }
   }

@@ -1,4 +1,5 @@
 import 'package:oohapp/core/app_export.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/empty_hoarding_page.dart';
 import 'package:oohapp/presentation/e_home_page/dashboard_screen/dashboard_screen.dart';
 import 'package:oohapp/presentation/e_home_page/profile_screen/profile_screen.dart';
 import 'package:oohapp/presentation/e_home_page/widgets/bottom_navbar.dart';
@@ -13,13 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final List _pages = [
     const DashboardScreen(),
-    Center(
-      child: Container(
-        height: 200,
-        width: 200,
-        color: Colors.red,
-      ),
-    ),
+   const EmptyHoardingPage(),
     Center(
       child: Container(
         height: 200,

@@ -44,6 +44,8 @@ class _GettingStartedFirstPageState extends State<GettingStartedFirstPage> {
             CustomText.calloutText(
               text:
                   "It’ll take time to setup your listing. We’ll help you wherever you need it.",
+                   textAlign: TextAlign.left, 
+                  
               color: CustomColors.blackColor,
             ),
             SizedBox(

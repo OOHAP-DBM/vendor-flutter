@@ -151,6 +151,20 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
                         'Foot over bridge',
                         'ACP board'
                       ],
+                      choiceImages: {
+                          'Unipole':ImageConstant.displayicon,
+                        'Billboard':ImageConstant.displayicon,
+                        'Wall wrap':ImageConstant.displayicon,
+                        'Pole kiosk':ImageConstant.displayicon,
+                        'Digital screen':ImageConstant.displayicon,
+                        'LED':ImageConstant.displayicon,
+                        'Public utility':ImageConstant.displayicon,
+                        'Metro bridge panel':ImageConstant.displayicon,
+                        'Door branding':ImageConstant.displayicon,
+                        'Flag sign':ImageConstant.displayicon,
+                        'Foot over bridge':ImageConstant.displayicon,
+                        'ACP board':ImageConstant.displayicon,
+                      },
                       controller: categoryController,
                     ),
                     const SizedBox(

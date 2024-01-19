@@ -21,6 +21,7 @@ class ImageConstant {
   static String test = '$imagePath/test.png';
   static String baby = '$imagePath/baby.jpg';
   static String hoarding = '$imagePath/hoarding.png';
+  static String map='$imagePath/map.png';
 
   // google logo
 
@@ -29,6 +30,7 @@ class ImageConstant {
   static String arrowback='$imagePath/arrow_back.png';
   //icon
   static String warningicon='$imagePath/warning_icon.png';
+  static String displayicon='$imagePath/display.png';
 
 
 }

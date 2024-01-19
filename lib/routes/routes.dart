@@ -21,4 +21,7 @@ class Routes {
   static const String uploadimagehoardingpage='uploadimagehoardingpage';
   static const String uploadhoardingvideopage='uploadhoardingvideopage';
   static const String uploadhoardingcalendarpage='uploadhoardingcalendarpage';
+  static const String homepagescreen='homepagescreen';
+  static const String emptyhoardingpage='emptyhoardingpage';
+  static const String hoardinglistscreen='hoardinglistscreen';
 }

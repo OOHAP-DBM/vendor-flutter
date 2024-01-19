@@ -76,11 +76,14 @@ void _setvideo(File video) {
         elevation: 1,
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: IconButton(
-            onPressed: () {
+          child: CircularButton(
+            onTap: () {
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.clear),
+            backgroundColor: CustomColors.grey,
+            borderColor: CustomColors.transparent,
+            icon: Icons.arrow_back,
+            iconColor: CustomColors.blackColor,
           ),
         ),
       ),
