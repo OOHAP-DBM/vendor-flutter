@@ -33,6 +33,7 @@ import 'package:oohapp/presentation/d_authentication/sign_up_screen/create_profi
 import 'package:oohapp/presentation/d_authentication/sign_up_screen/signup_otp_screen/signup_otp_screen.dart';
 import 'package:oohapp/presentation/d_authentication/sign_up_screen/signup_screen.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/empty_hoarding_page.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/hoarding_detail_page.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/hoarding_list_page.dart';
 import 'package:oohapp/presentation/e_home_page/home_page.dart';
 import '../core/app_export.dart';
@@ -102,7 +103,8 @@ class RoutesGenerator {
       case Routes.emptyhoardingpage:
         return MaterialPageRoute(builder: (_) => const EmptyHoardingPage());
       case Routes.hoardinglistscreen:
-        return MaterialPageRoute(builder: (_) => const MyHordingListPage());
+        return MaterialPageRoute(builder: (_) => MyHordingListPage());
+
       case Routes.addhoardingScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(

@@ -22,6 +22,7 @@ class ImageConstant {
   static String baby = '$imagePath/baby.jpg';
   static String hoarding = '$imagePath/hoarding.png';
   static String map='$imagePath/map.png';
+  static String hoardingsamplepic='$imagePath/hoarding_sample.png';
 
   // google logo
 
@@ -31,6 +32,7 @@ class ImageConstant {
   //icon
   static String warningicon='$imagePath/warning_icon.png';
   static String displayicon='$imagePath/display.png';
+  static String sideicon='$imagePath/icon.png';
 
 
 }

@@ -7,8 +7,216 @@ final List<Hoarding> hoardings = [
       location: 'Gomti Nagar, Lucknow',
       category: 'OOH Hoarding',
       size: '10x12 Sq.ft.',
-      status: 'Published',
-      imagePath: ImageConstant.baby, // replace with your image path
+      isAvailable: true,
+
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+          ImageConstant.hoardingsamplepic,
+            ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+        Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+        imagePaths: [
+          ImageConstant.hoardingsamplepic,
+          ImageConstant.baby,
+          ImageConstant.hoardingsamplepic,
+
+        ]
+    ),
+           Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+        Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+     daysAvailable: 56,
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ],
+      isAvailable: false,
+    ),
+            Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+     daysAvailable: 56,
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ],
+      isAvailable: false,
+    ),
+            Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+     daysAvailable: 56,
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ],
+      isAvailable: false,
+    ),
+              Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+              Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+              Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+              Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+              Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+              Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+              Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+      
+      isAvailable: true,
+
+  
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ]
+    ),
+            Hoarding(
+      title: 'Hazratganj Chauraha',
+      location: 'Gomti Nagar, Lucknow',
+      category: 'OOH Hoarding',
+      size: '10x12 Sq.ft.',
+     daysAvailable: 56,
+      imagePaths: [
+        ImageConstant.hoardingsamplepic,
+        ImageConstant.baby,
+        ImageConstant.hoardingsamplepic,
+
+      ],
+      isAvailable: false,
     ),
   
   ];
