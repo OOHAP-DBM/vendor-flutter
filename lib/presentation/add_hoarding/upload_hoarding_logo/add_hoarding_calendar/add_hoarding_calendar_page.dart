@@ -214,7 +214,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
                                   _focusedDay =
                                       DateTime(_selectedYear, _selectedMonth);
                                   _datePickerController.displayDate =
-                                      _focusedDay; // Update calendar view
+                                      _focusedDay; 
                                 });
                               }
                             },

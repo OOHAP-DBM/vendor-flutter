@@ -31,7 +31,9 @@ class EmptyHoardingPage extends StatelessWidget {
               ),
               CustomButton(
                   width: ScaleSize.width(45),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, Routes.hoardinglistscreen);
+                  },
                   text: '+ Add Hoarding',
                   backgroundColor: Color(0xFF282C3E),)
             ],

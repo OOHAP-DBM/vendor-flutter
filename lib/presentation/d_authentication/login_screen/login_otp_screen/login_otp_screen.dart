@@ -139,17 +139,17 @@
                     text: 'Resend OTP',
                     alignment: Alignment.topLeft,
                   ),
-                  // Until timer otp timer resend will be not-clickable
+             
                   const Spacer(),
                   CustomButton(
                     onTap: () {
-                      NavigateUtils.pushNamedReplacement(context, Routes.dashboardScreen);
+                      NavigateUtils.pushNamedReplacement(context, Routes.homepagescreen);
                     },
                     text: 'Verify',
                     backgroundColor:
                         isVerify ? CustomColors.grey : CustomColors.buttonColor,
                   ),
-                  // Button will not clickable until fill the box
+          
                 ],
               ),
             ),

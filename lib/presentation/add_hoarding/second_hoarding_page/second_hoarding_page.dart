@@ -19,41 +19,41 @@ class SecondAddHoardingPage extends StatefulWidget {
 }
 
 class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
-  void showIFSCFinder() {
-    TextEditingController bankController = TextEditingController();
-    TextEditingController stateController = TextEditingController();
-    TextEditingController cityController = TextEditingController();
-    TextEditingController branchController = TextEditingController();
+void showIFSCFinder(BuildContext context) {
+  TextEditingController bankController = TextEditingController();
+  TextEditingController stateController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController branchController = TextEditingController();
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
+  showDialog(
+    context: context,
+    builder: (BuildContext dialogContext) {
+      return Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(3),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        child: Container(
+          width: double.infinity,
+          height: 500,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(3),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black26,
+                blurRadius: 10.0,
+                offset: Offset(0.0, 10.0),
+              ),
+            ],
           ),
-          elevation: 0,
-          backgroundColor: Colors.transparent,
-          child: Container(
-            width: double.infinity,
-            height: 500,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(3),
-              boxShadow: const [
-                BoxShadow(
-                  color: Colors.black26,
-                  blurRadius: 10.0,
-                  offset: Offset(0.0, 10.0),
-                ),
-              ],
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
                 CustomText.secondaryTitle(
                     text: 'Find IFSC Code', color: Colors.black),
                 const SizedBox(
@@ -286,7 +286,7 @@ requiredsign: true,
                       placeholder: 'IFSC Code',
                       hintText: "Enter IFSC Code",
                       lasttext: 'Find IFSC code',
-                      onPressed: () => showIFSCFinder(),
+                      onPressed: () => showIFSCFinder(context),
                       onChanged: (value) {
                         cubit.onChangedifsc(value);
                       },

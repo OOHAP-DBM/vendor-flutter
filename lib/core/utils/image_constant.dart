@@ -1,3 +1,5 @@
+import 'package:oohapp/core/app_export.dart';
+
 class ImageConstant {
   static String imagePath = 'assets/images';
   
@@ -23,6 +25,8 @@ class ImageConstant {
   static String hoarding = '$imagePath/hoarding.png';
   static String map='$imagePath/map.png';
   static String hoardingsamplepic='$imagePath/hoarding_sample.png';
+  static String audilogo='$imagePath/audi_icon.png';
+  static String cocacolaimage='$imagePath/coca_cola.png';
 
   // google logo
 
@@ -33,6 +37,10 @@ class ImageConstant {
   static String warningicon='$imagePath/warning_icon.png';
   static String displayicon='$imagePath/display.png';
   static String sideicon='$imagePath/icon.png';
+  static String hoardingicon='$imagePath/hoarding_icon.png';
+  static String measurementicon='$imagePath/measurement_icon.png';
+  static String mapicon='$imagePath/map_icon.png';
+  static String rightarrowicon='$imagePath/right_arrow_icon.png';
 
 
 }

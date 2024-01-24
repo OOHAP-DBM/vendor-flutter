@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
+
 import 'package:oohapp/all_cubit_folder/first_location_entry_page/cubit.dart';
 import 'package:oohapp/all_cubit_folder/first_location_entry_page/form.dart';
-import 'package:oohapp/core/constants/global_cubit/form_validation_cubit.dart';
-import 'package:oohapp/core/constants/waste/cubit.dart';
+
 import 'package:oohapp/core/waste_work/validator_regex.dart';
 
 import 'package:oohapp/widgets/dropdown_textfield/dropdown_selector.dart';
@@ -10,7 +9,7 @@ import 'package:oohapp/widgets/dropdown_textfield/dropdown_selector.dart';
 import '../../../../../core/app_export.dart';
 
 class FirstHoardingLocationEntryPage extends StatefulWidget {
-  FirstHoardingLocationEntryPage({super.key});
+  const FirstHoardingLocationEntryPage({super.key});
 
   @override
   State<FirstHoardingLocationEntryPage> createState() =>
@@ -19,9 +18,7 @@ class FirstHoardingLocationEntryPage extends StatefulWidget {
 
 class _FirstHoardingLocationEntryPageState
     extends State<FirstHoardingLocationEntryPage> {
-  @override
-  Widget build(BuildContext context) {
-    TextEditingController hoardingaddressController = TextEditingController();
+         TextEditingController hoardingaddressController = TextEditingController();
     TextEditingController pincodeController = TextEditingController();
     TextEditingController cityController = TextEditingController();
     TextEditingController stateController = TextEditingController();
@@ -29,6 +26,9 @@ class _FirstHoardingLocationEntryPageState
     TextEditingController landmarkController = TextEditingController();
     TextEditingController latitudeController = TextEditingController();
     TextEditingController longitudeController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+ 
 
     return BlocBuilder<LocationEntryScreenCubit, FirstLocationEntryFormState>(
       builder: (context, state) {
