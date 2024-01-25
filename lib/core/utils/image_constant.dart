@@ -41,6 +41,9 @@ class ImageConstant {
   static String measurementicon='$imagePath/measurement_icon.png';
   static String mapicon='$imagePath/map_icon.png';
   static String rightarrowicon='$imagePath/right_arrow_icon.png';
+  static String messageicon='$imagePath/message_icon.png';
+  static String deleteicon='$imagePath/delete_icon.png';
+  static String textshowicon='$imagePath/text_show_icon.png';
 
 
 }
