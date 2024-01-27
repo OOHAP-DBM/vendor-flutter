@@ -214,7 +214,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
                                   _focusedDay =
                                       DateTime(_selectedYear, _selectedMonth);
                                   _datePickerController.displayDate =
-                                      _focusedDay; 
+                                      _focusedDay;
                                 });
                               }
                             },
@@ -311,7 +311,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
                       CustomButton(
                         onTap: () {},
                         text: 'Block',
-                        width: 195,
+                        width: ScaleSize.width(45),
                         backgroundColor: const Color(0xFF282C3E),
                       ),
                       CustomButton(
@@ -319,7 +319,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
                           Navigator.pop(context);
                         },
                         text: 'Cancel',
-                        width: 195,
+                        width: ScaleSize.width(45),
                         backgroundColor: const Color(0xFFDDDDDD),
                       ),
                     ],
@@ -335,59 +335,58 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
     });
   }
 
-Widget _buildChipsRow() {
-  double screenWidth = MediaQuery.of(context).size.width;
-  double chipPadding = 8; // Padding on the sides
-  double spaceBetweenChips = 4; // Reduced horizontal space between chips
-  double spaceBetweenRows = 4; // Reduced vertical space between rows of chips
-  double chipWidth = (screenWidth - (2 * chipPadding) - spaceBetweenChips) / 2;
+  Widget _buildChipsRow() {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double chipPadding = 8; // Padding on the sides
+    double spaceBetweenChips = 4; // Reduced horizontal space between chips
+    double spaceBetweenRows = 4; // Reduced vertical space between rows of chips
+    double chipWidth =
+        (screenWidth - (2 * chipPadding) - spaceBetweenChips) / 2;
 
-  return Wrap(
-    spacing: spaceBetweenChips, // Reduced horizontal space between chips
-    runSpacing: spaceBetweenRows, // Reduced vertical space between rows
-    children: _buildDateChips(chipWidth),
-  );
-}
+    return Wrap(
+      spacing: spaceBetweenChips, // Reduced horizontal space between chips
+      runSpacing: spaceBetweenRows, // Reduced vertical space between rows
+      children: _buildDateChips(chipWidth),
+    );
+  }
 
-
-List<Widget> _buildDateChips(double width) {
-  List<Widget> chips = [];
-  for (DateTime date in selectedDates.keys) {
-    chips.add(
-      Container(
-        margin: EdgeInsets.only(bottom: 12), // Add margin for spacing between chip rows if needed
-        child: SizedBox(
-          height: 70,
-          width:200,
-          child: Chip(
-            backgroundColor: Color(0xFFEBEAEA),
-            labelPadding: EdgeInsets.symmetric(horizontal: 12),
-            label: Text(
-              DateFormat('MMM dd, yyyy').format(date),
-              style: TextStyle(
-                color: Color(0xFF1E1B18),
-                fontSize: 14,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+  List<Widget> _buildDateChips(double width) {
+    List<Widget> chips = [];
+    for (DateTime date in selectedDates.keys) {
+      chips.add(
+        Container(
+          margin: EdgeInsets.only(
+              bottom: 12), // Add margin for spacing between chip rows if needed
+          child: SizedBox(
+            height: 70,
+            width: ScaleSize.width(40),
+            child: Chip(
+              backgroundColor: Color(0xFFEBEAEA),
+              labelPadding: EdgeInsets.symmetric(horizontal: 12),
+              label: Text(
+                DateFormat('MMM dd, yyyy').format(date),
+                style: TextStyle(
+                  color: Color(0xFF1E1B18),
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w400,
+                ),
               ),
-            ),
-            deleteIconColor: Colors.black,
-            onDeleted: () {
-              setState(() {
-                selectedDates.remove(date);
-              });
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-              side: BorderSide(color: Colors.transparent),
+              deleteIconColor: Colors.black,
+              onDeleted: () {
+                setState(() {
+                  selectedDates.remove(date);
+                });
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+                side: BorderSide(color: Colors.transparent),
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    }
+    return chips;
   }
-  return chips;
-}
-
-
 }

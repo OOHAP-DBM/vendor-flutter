@@ -210,19 +210,21 @@ class _FinalAddHoardingSecondPageState
                       ),
                       CustomButton(
                           onTap: () {
-                            if (showByMonthlyUI ||
-                                showByWeeklyUI ||
-                                showByYearlyUI) {
-                              if (isValidForm()) {
-                                NavigateUtils.pushNamedReplacement(
-                                    context, Routes.uploadimagehoardingpage);
-                              } else {}
-                            } else if (state.issecondpricevalid) {
-                              NavigateUtils.pushNamedReplacement(
-                                  context, Routes.uploadimagehoardingpage);
-                            } else {
-                              SnackBar(content: Text('we have error'));
-                            }
+                            NavigateUtils.pushNamed(
+                                context, Routes.uploadimagehoardingpage);
+                            // if (showByMonthlyUI ||
+                            //     showByWeeklyUI ||
+                            //     showByYearlyUI) {
+                            //   if (isValidForm()) {
+                            //     NavigateUtils.pushNamed(
+                            //         context, Routes.uploadimagehoardingpage);
+                            //   } else {}
+                            // } else if (state.issecondpricevalid) {
+                            //   NavigateUtils.pushNamedReplacement(
+                            //       context, Routes.uploadimagehoardingpage);
+                            // } else {
+                            //   SnackBar(content: Text('we have error'));
+                            // }
                           },
                           text: 'Continue',
                           backgroundColor: (showByMonthlyUI ||

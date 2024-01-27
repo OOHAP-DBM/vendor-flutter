@@ -5,12 +5,12 @@ void showCustomDialog(
     BuildContext context, String title, String content, String imagePath) {
   showModalBottomSheet(
     context: context,
-    backgroundColor: Colors.transparent, // This makes the modal background transparent
+    backgroundColor:
+        Colors.transparent, // This makes the modal background transparent
     builder: (BuildContext context) {
-
       return LayoutBuilder(builder: (context, constraints) {
         return Container(
-          width: constraints.maxWidth, 
+          width: constraints.maxWidth,
           decoration: const BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.only(
@@ -26,9 +26,9 @@ void showCustomDialog(
               Text(
                 content,
                 style: const TextStyle(
-                      color: CustomColors.grey, // Replace with your color constant
-                      fontWeight: FontWeight.w300,
-                    ),
+                  color: Color(0xFF999999), // Replace with your color constant
+                  fontWeight: FontWeight.w300,
+                ),
               ),
               const SizedBox(height: 24.0),
               Container(
@@ -36,7 +36,8 @@ void showCustomDialog(
                 width: 30, // Adjust the size as needed
                 child: CustomImageView(
                   fit: BoxFit.fill,
-                  imagePath: ImageConstant.hoarding, // Replace with your image constant
+                  imagePath: ImageConstant
+                      .hoarding, // Replace with your image constant
                 ),
               ),
             ],

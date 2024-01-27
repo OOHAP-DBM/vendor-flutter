@@ -226,7 +226,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
 
                           placeholder: 'Hoarding Width',
                           hintText: 'Enter width',
-                          width: 178,
+                               width: ScaleSize.width(45),
                           keyboardType: TextInputType.number,
                           controller: hoardingwidthController,
                         ),
@@ -238,7 +238,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
                           },
                           validator: (value)=>ValidatorRegex.hoardingheightValidator(value),
                           hintText: 'Enter height',
-                          width: 178,
+                              width: ScaleSize.width(45),
                           keyboardType: TextInputType.number,
                           controller: hoardingheightController,
                         ),
@@ -355,7 +355,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
                     CustomButton(
                       onTap: () {
                       if(state.isfirstfinalhoardingvalid&&selectedButton!=null){
-                          NavigateUtils.pushNamedReplacement(
+                          NavigateUtils.pushNamed(
                             context, Routes.finalsecondaddhoardingScreeen);
                       }else{
 

@@ -1,4 +1,5 @@
 import 'package:oohapp/core/app_export.dart';
+import 'package:oohapp/presentation/e_home_page/home_page.dart';
 import 'package:oohapp/widgets/custom_appbar/custom_appbar.dart';
 import 'package:oohapp/widgets/custom_buttons/custom_button.dart';
 import 'package:oohapp/widgets/custom_buttons/custom_text_btn.dart';
@@ -15,6 +16,8 @@ class _OtpScreenState extends State<SignupOtpScreen> {
   int runningTimer = 5;
   bool isVerify = false;
   late Timer? timer;
+  String otpValue = ''; // Add this line
+  String errorMessage = '';
 
   @override
   void initState() {
@@ -39,6 +42,23 @@ class _OtpScreenState extends State<SignupOtpScreen> {
   void dispose() {
     timer?.cancel();
     super.dispose();
+  }
+
+  void _verifyOtp() {
+    if (otpValue.length == 4) {
+  
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(), // Replace with actual next page
+        ),
+      );
+    } else {
+      // Set error message if OTP is not complete.
+      setState(() {
+        errorMessage = 'Please fill all the fields with the OTP';
+      });
+    }
   }
 
   @override
@@ -104,7 +124,17 @@ class _OtpScreenState extends State<SignupOtpScreen> {
                     appContext: context,
                     length: 4,
                     onChanged: (value) {
-                      // Handle value change
+                      setState(() {
+                        otpValue =
+                            value; 
+                        if (value.length == 4) {
+                          isVerify = true; 
+                        } else {
+                          isVerify = false; 
+                        }
+                        errorMessage =
+                            ''; 
+                      });
                     },
                     onCompleted: (value) {
                       // Handle complete pin input
@@ -127,7 +157,7 @@ class _OtpScreenState extends State<SignupOtpScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                // timer for the resend otp
+       
                 CustomText.bodyText(
                   //text: '2:00',
                   text: '$runningTimer s',
@@ -136,18 +166,33 @@ class _OtpScreenState extends State<SignupOtpScreen> {
                 const SizedBox(
                   height: 15,
                 ),
+                if (errorMessage.isNotEmpty)
+                  SizedBox(
+                    height: 20,
+                    child: Text(
+                      errorMessage,
+                      style: TextStyle(color: CustomColors.errorColor),
+                    ),
+                  ),
+                const SizedBox(
+                  height: 15,
+                ),
+
                 CustomTextBtn(
                   onTap: () {},
                   text: 'Resend OTP',
                   alignment: Alignment.topLeft,
                 ),
-                // Until timer otp timer resend will be not-clickable
+           
                 const Spacer(),
                 CustomButton(
-                  onTap: () {},
+                  onTap: () {
+                _verifyOtp();
+                  },
                   text: 'Verify',
-                  backgroundColor:
-                  isVerify ? CustomColors.grey : CustomColors.buttonColor,
+                  backgroundColor: isVerify && otpValue.length == 4
+                      ? CustomColors.buttonColor
+                      : CustomColors.grey,
                 ),
                 // Button will not clickable until fill the box
               ],

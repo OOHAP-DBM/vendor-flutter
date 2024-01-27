@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:oohapp/all_cubit_folder/second_add_haording/cubit.dart';
 import 'package:oohapp/all_cubit_folder/second_add_haording/form.dart';
-import 'package:oohapp/core/constants/waste/cubit.dart';
+
 import 'package:oohapp/core/waste_work/validator_regex.dart';
+import 'package:oohapp/presentation/add_hoarding/second_hoarding_page/widget/text_field_selector.dart';
 
 import 'package:oohapp/widgets/document_uploader/document_uploader_widget.dart';
 import 'package:oohapp/widgets/textfield_with_suffixtext/interactive_textfield.dart';
@@ -19,108 +20,78 @@ class SecondAddHoardingPage extends StatefulWidget {
 }
 
 class _SecondAddHoardingPageState extends State<SecondAddHoardingPage> {
-void showIFSCFinder(BuildContext context) {
-  TextEditingController bankController = TextEditingController();
-  TextEditingController stateController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
-  TextEditingController branchController = TextEditingController();
+  void showIFSCFinder(BuildContext context) {
+    // TextEditingController bankController = TextEditingController();
+    // TextEditingController stateController = TextEditingController();
+    // TextEditingController cityController = TextEditingController();
+    // TextEditingController branchController = TextEditingController();
 
-  showDialog(
-    context: context,
-    builder: (BuildContext dialogContext) {
-      return Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(3),
-        ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        child: Container(
-          width: double.infinity,
-          height: 500,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          decoration: BoxDecoration(
-            color: Colors.white,
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(3),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black26,
-                blurRadius: 10.0,
-                offset: Offset(0.0, 10.0),
-              ),
-            ],
           ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          child: Container(
+            width: double.infinity,
+            height: 400,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(3),
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black26,
+                  blurRadius: 10.0,
+                  offset: Offset(0.0, 10.0),
+                ),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
                 CustomText.secondaryTitle(
                     text: 'Find IFSC Code', color: Colors.black),
                 const SizedBox(
                   height: 20,
                 ),
-                CustomTextFieldSelector(
-                  // onDropdownChanged: (val) {
-                  //   BlocProvider.of<IFSCFinderBloc>(context).add(
-                  //       DropdownSelectionChanged(
-                  //           bankController.text,
-                  //           cityController.text,
-                  //           stateController.text,
-                  //           branchController.text));
-                  // },
-                  height: ScaleSize.height(8.5),
-                  controller: bankController,
+                CustomTextFieldIFSCSelector(
+                  requiredsign: true,
+               
+                  // controller: bankController,
                   hintText: 'choose bank',
                   choices: ['HDFC', 'SBI', 'CANARA BANK'],
+
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                CustomTextFieldSelector(
-                  height: ScaleSize.height(8.5),
-                  controller: stateController,
-                  // onDropdownChanged: (val) {
-                  //   BlocProvider.of<IFSCFinderBloc>(context).add(
-                  //       DropdownSelectionChanged(
-                  //           bankController.text,
-                  //           cityController.text,
-                  //           stateController.text,
-                  //           branchController.text));
-                  // },
+                CustomTextFieldIFSCSelector(
+                  requiredsign: true,
+                  // controller: stateController,
                   hintText: 'choose state',
                   choices: ['UP', 'Rajasthan', 'MP'],
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                CustomTextFieldSelector(
-                  height: ScaleSize.height(8.5),
-                  controller: cityController,
-                  // onDropdownChanged: (val) {
-                  //   BlocProvider.of<IFSCFinderBloc>(context).add(
-                  //       DropdownSelectionChanged(
-                  //           bankController.text,
-                  //           cityController.text,
-                  //           stateController.text,
-                  //           branchController.text));
-                  // },
+                CustomTextFieldIFSCSelector(
+                  requiredsign: true,
+                  // controller: cityController,
                   hintText: 'choose city',
                   choices: ['Lucknow', 'Kanpur', 'Delhi'],
                 ),
                 const SizedBox(
                   height: 15,
                 ),
-                CustomTextFieldSelector(
-                  controller: branchController,
-                  height: ScaleSize.height(8.5),
-                  // onDropdownChanged: (val) {
-                  //   BlocProvider.of<IFSCFinderBloc>(context).add(
-                  //       DropdownSelectionChanged(
-                  //           bankController.text,
-                  //           cityController.text,
-                  //           stateController.text,
-                  //           branchController.text));
-                  // },
+                CustomTextFieldIFSCSelector(
+                  // controller: branchController,
+                  requiredsign: true,
                   hintText: 'choose branch',
                   choices: ['gomtinagar', 'pahadganj', 'raniganj'],
                 ),
@@ -157,11 +128,7 @@ void showIFSCFinder(BuildContext context) {
                             Navigator.pop(context);
                           },
                           text: 'Save',
-                          backgroundColor: const Color(0xFF282C3E)
-                          //  (state is IFSCFinderValidState)
-                          //     ? Color(0xFFDDDDDD)
-                          //     : Color(0xFF282C3E),
-                          ),
+                          backgroundColor: const Color(0xFF282C3E)),
                     ],
                   ),
                 )
@@ -190,7 +157,6 @@ void showIFSCFinder(BuildContext context) {
 
   @override
   Widget build(BuildContext context) {
-  
     return BlocBuilder<SecondHoardingScreenCubit, SecondHoardingFormState>(
       builder: (context, state) {
         final cubit = context.read<SecondHoardingScreenCubit>();
@@ -231,12 +197,12 @@ void showIFSCFinder(BuildContext context) {
                       text:
                           'For a successful bank verification, account name must match with the registered GSTIN name',
                       color: CustomColors.blackColor,
-                      textAlign: TextAlign.left, 
+                      textAlign: TextAlign.left,
                     ),
                     const SizedBox(height: 7),
                     CustomTextFieldSelector(
                       controller: banknameController,
-requiredsign: true,
+                      requiredsign: true,
                       placeholder: 'Bank Name',
                       // maxLength: 15,
                       // keyboardType: TextInputType.number,
@@ -253,7 +219,7 @@ requiredsign: true,
                     ),
                     CustomTextFormField(
                       controller: accountholdernameController,
-requiredsign: true,
+                      requiredsign: true,
                       placeholder: 'Account Holder Name',
                       // maxLength: 15,
                       keyboardType: TextInputType.name,
@@ -269,7 +235,7 @@ requiredsign: true,
                     ),
                     CustomTextFormField(
                       controller: accountController,
-requiredsign: true,
+                      requiredsign: true,
                       placeholder: 'Account Number',
                       // maxLength: 15,
                       keyboardType: TextInputType.phone,
@@ -306,7 +272,7 @@ requiredsign: true,
                       text:
                           "Business’s PAN card should clearly show Business’s detail on the front, and shouldn't be blurry.",
                       color: CustomColors.blackColor,
-                       textAlign: TextAlign.left, 
+                      textAlign: TextAlign.left,
                     ),
                     const SizedBox(
                       height: 15,
@@ -319,17 +285,18 @@ requiredsign: true,
                     const SizedBox(
                       height: 20,
                     ),
-                    
                     CustomButton(
                       onTap: () {
-                        if (state.issecondvalid&&selectedFile!=null) {
+                        if (state.issecondvalid && selectedFile != null) {
                           NavigateUtils.pushNamedReplacement(
                               context, Routes.gettingstartedfirstScreen);
                         } else {}
                       },
                       text: 'Save & Finish',
-                      backgroundColor:(selectedFile!=null&&state.issecondvalid)
-                          ? const Color(0xFF282C3E):const Color(0xFFDDDDDD),
+                      backgroundColor:
+                          (selectedFile != null && state.issecondvalid)
+                              ? const Color(0xFF282C3E)
+                              : const Color(0xFFDDDDDD),
                     )
                   ],
                 ),

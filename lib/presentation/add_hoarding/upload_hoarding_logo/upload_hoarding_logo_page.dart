@@ -66,7 +66,7 @@ class _UploadHoardingLogoPageState extends State<UploadHoardingLogoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomAppBar(
+      appBar: CustomAppBar(
         title: 'Add Hoarding',
         centerTitle: true,
         elevation: 1,
@@ -207,8 +207,6 @@ class _UploadHoardingLogoPageState extends State<UploadHoardingLogoPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Visibility(
-                            // if visibility is true, the child
-                            // widget will show otherwise hide
                             visible: true,
                             child: Icon(
                               Icons.verified_rounded,
@@ -257,7 +255,7 @@ class _UploadHoardingLogoPageState extends State<UploadHoardingLogoPage> {
                     ),
                   );
                 } else {
-                  return Container(); // Handle other states or show nothing
+                  return Container();
                 }
               },
             ),
@@ -280,13 +278,16 @@ class _UploadHoardingLogoPageState extends State<UploadHoardingLogoPage> {
                       physics: const NeverScrollableScrollPhysics(),
                       itemCount: imageData.images.length,
                       itemBuilder: (context, index) {
-                        return ImageDisplayContainer(
-                          key: ValueKey(imageData.images[index].path),
-                          image: imageData.images[index],
-                          onClose: () {
-                            BlocProvider.of<ImageCubit>(context)
-                                .removeImage(imageData.images[index]);
-                          },
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 10),
+                          child: ImageDisplayContainer(
+                            key: ValueKey(imageData.images[index].path),
+                            image: imageData.images[index],
+                            onClose: () {
+                              BlocProvider.of<ImageCubit>(context)
+                                  .removeImage(imageData.images[index]);
+                            },
+                          ),
                         );
                       },
                     );
@@ -303,7 +304,8 @@ class _UploadHoardingLogoPageState extends State<UploadHoardingLogoPage> {
 
                 return CustomButton(
                   onTap: () {
-                Navigator.pushNamed(context, Routes.uploadhoardingvideopage);
+                    Navigator.pushNamed(
+                        context, Routes.uploadhoardingvideopage);
                   },
                   text: 'Continue',
                   backgroundColor: images.isEmpty
@@ -322,90 +324,101 @@ class _UploadHoardingLogoPageState extends State<UploadHoardingLogoPage> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return SizedBox(
-            height: 180,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 75,
-                    height: 7,
-                    decoration: ShapeDecoration(
-                      color: const Color(0xFFE4E4E4),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Upload Brand Images',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF282C3E),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 0,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Container(
-                    width: 343,
-                    decoration: const ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          width: 1,
-                          strokeAlign: BorderSide.strokeAlignCenter,
-                          color: Color(0xFFE0E0E0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Container(
-                    width: 375,
-                    height: 72.75,
-                    padding: const EdgeInsets.symmetric(vertical: 24),
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: _pickImage,
-                          child: Container(
-                            width: 33,
-                            height: 21,
-                            child: const Icon(
-                              Icons.camera_alt_outlined,
-                              size: 31.5,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        const Text(
-                          'Photo',
-                          style: TextStyle(
-                            color: Color(0xFF999999),
-                            fontSize: 14,
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+        return Container(
+          height: 180,
+          width: double.infinity,
+          decoration: const ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
               ),
-            ));
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 75,
+                  height: 7,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFE4E4E4),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text(
+                  'Upload Brand Images',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF282C3E),
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  width: 343,
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: 1,
+                        strokeAlign: BorderSide.strokeAlignCenter,
+                        color: Color(0xFFE0E0E0),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  width: 375,
+                  height: 72.75,
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  decoration: const BoxDecoration(color: Colors.white),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: _pickImage,
+                        child: Container(
+                          width: 33,
+                          height: 21,
+                          child: const Icon(
+                            Icons.camera_alt_outlined,
+                            size: 31.5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Photo',
+                        style: TextStyle(
+                          color: Color(0xFF999999),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                          height: 0,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
       },
     );
   }

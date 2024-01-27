@@ -1,12 +1,11 @@
-
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/cubit/cubit.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/cubit/cubit_data_model.dart';
+import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/widget/image_tile.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/upload_hoarding_video/widget/video_dispaly_container.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/widgets/custom_image_uploader_form.dart';
-
 
 import '../../../../core/app_export.dart';
 
@@ -21,8 +20,7 @@ class UploadHoardingVideoPage extends StatefulWidget {
 class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
   File? _video;
   Future<void> _pickVideo() async {
-   
-    final ImagePicker _picker=ImagePicker();
+    final ImagePicker _picker = ImagePicker();
     showModalBottomSheet(
         context: context,
         builder: (BuildContext upperSheetContext) {
@@ -38,8 +36,7 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
                     if (pickedFile != null) {
                       Navigator.of(upperSheetContext)
                           .pop(); // Close the modal bottom sheet.
-                      _setvideo(File(pickedFile
-                          .path));
+                      _setvideo(File(pickedFile.path));
                     }
                   },
                 ),
@@ -61,11 +58,11 @@ class _UploadHoardingVideoPageState extends State<UploadHoardingVideoPage> {
         });
   }
 
-void _setvideo(File video) {
+  void _setvideo(File video) {
     if (!mounted) return;
     BlocProvider.of<MediaCubit>(context).addvideo(video);
-}
-
+// _showImageListBottomSheet();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -208,7 +205,6 @@ void _setvideo(File video) {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           const Visibility(
-                
                             visible: true,
                             child: Icon(
                               Icons.verified_rounded,
@@ -296,155 +292,230 @@ void _setvideo(File video) {
       ),
     );
   }
+  void _showImageListBottomSheet() {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return BlocBuilder<MediaCubit, MediaData>(
+        builder: (context, mediaData) {
+          return GestureDetector(
+            onTap: (){
+              Navigator.of(context).pop();
+            },
+            child: Container(
+              
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    child: Column(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                         
+                          },
+                          child: mediaData.videos.isNotEmpty
+                              ? ImageTile(
+                                height: 167,
+                                width: double.infinity,
+                                
+                                  imageFile: mediaData.videos.first,
+                                  onTap: () {},
+                                  onClose: () {
+                                    BlocProvider.of<MediaCubit>(context).removeVideo(mediaData.videos.first);
+                                  },
+                                )
+                              : Container(), 
+                                    ),
+                                    SizedBox(height: 12,),
+                        GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 4,
+                            mainAxisSpacing: 4,
+                          ),
+                          itemCount: mediaData.videos.length - (mediaData.videos.isNotEmpty ? 1 : 0), // Adjust for empty list
+                          itemBuilder: (context, index) {
+                
+                            int gridIndex = index + (mediaData.videos.isNotEmpty ? 1 : 0);
+                            return ImageTile(
+                              width:76,
+                              height: 69,
+                              imageFile: mediaData.videos[gridIndex],
+                              onTap: () {
+                             
+                                BlocProvider.of<MediaCubit>(context).swapvideos(gridIndex);
+                              },
+                              onClose: () {
+                                BlocProvider.of<MediaCubit>(context).removeVideo(mediaData.videos[gridIndex]);
+                              },
+                            );
+                          },
+                        ),
+                        
+                      ],
+                    ),
+                  ),
+          );
+        },
+      );
+    },
+  );
+}
 
   void _showVideoSourceActionSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return SizedBox(
-            height: 180,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 75,
-                    height: 7,
-                    decoration: ShapeDecoration(
-                      color: const Color(0xFFE4E4E4),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100),
+        return Container(
+          height: 180,
+          width: double.infinity,
+          decoration: const ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 75,
+                  height: 7,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFE4E4E4),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text(
+                  'Upload Brand videos',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF282C3E),
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  width: 343,
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: 1,
+                        strokeAlign: BorderSide.strokeAlignCenter,
+                        color: Color(0xFFE0E0E0),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const Text(
-                    'Upload Brand videos',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFF282C3E),
-                      fontSize: 16,
-                      fontFamily: 'Poppins',
-                      fontWeight: FontWeight.w500,
-                      height: 0,
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Container(
-                    width: 343,
-                    decoration: const ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(
-                          width: 1,
-                          strokeAlign: BorderSide.strokeAlignCenter,
-                          color: Color(0xFFE0E0E0),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  Container(
-                    width: 375,
-                    height: 72.75,
-                    padding: const EdgeInsets.symmetric(vertical: 24),
-                    decoration: const BoxDecoration(color: Colors.white),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: _pickVideo,
-                                child: Container(
-                                  width: 33,
-                                  height: 21,
-                                  child: const Icon(
-                                    Icons.camera_alt_outlined,
-                                    size: 31.5,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              const Text(
-                                'Photo',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(width: 40),
-                        Transform(
-                          transform: Matrix4.identity()
-                            ..translate(0.0, 0.0)
-                            ..rotateZ(1.57),
-                          child: Container(
-                            width: 24.75,
-                            height: double.infinity,
-                            decoration: const ShapeDecoration(
-                              shape: RoundedRectangleBorder(
-                                side: BorderSide(
-                                  width: 1,
-                                  strokeAlign: BorderSide.strokeAlignCenter,
-                                  color: Color(0xFF282C3E),
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  width: 375,
+                  height: 72.75,
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  decoration: const BoxDecoration(color: Colors.white),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: _pickVideo,
+                              child: Container(
+                                width: 33,
+                                height: 21,
+                                child: const Icon(
+                                  Icons.camera_alt_outlined,
+                                  size: 31.5,
                                 ),
                               ),
                             ),
+                            const SizedBox(width: 8),
+                            const Text(
+                              'Photo',
+                              style: TextStyle(
+                                color: Color(0xFF999999),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 40),
+                      Container(
+                        width: 1,
+                        height: 25,
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              width: 1,
+                              strokeAlign: BorderSide.strokeAlignCenter,
+                              color: Color(0xFF282C3E),
+                            ),
                           ),
                         ),
-                        const SizedBox(width: 40),
-                        Container(
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              GestureDetector(
-                                onTap: _pickVideo,
-                                child: Container(
-                                  width: 33,
-                                  height: 21,
-                                  child: const Icon(
-                                    Icons.video_call,
-                                    size: 31.5,
-                                  ),
+                      ),
+                      const SizedBox(width: 40),
+                      Container(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            GestureDetector(
+                              onTap: _pickVideo,
+                              child: Container(
+                                width: 33,
+                                height: 21,
+                                child: const Icon(
+                                  Icons.video_call,
+                                  size: 31.5,
                                 ),
                               ),
-                              const SizedBox(width: 8),
-                              const Text(
-                                'Video',
-                                style: TextStyle(
-                                  color: Color(0xFF999999),
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w400,
-                                  height: 0,
-                                ),
+                            ),
+                            const SizedBox(width: 8),
+                            const Text(
+                              'Video',
+                              style: TextStyle(
+                                color: Color(0xFF999999),
+                                fontSize: 14,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                                height: 0,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ));
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
       },
     );
   }

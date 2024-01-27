@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:oohapp/core/app_export.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/widgets/cubit/cubit.dart';
 import 'package:oohapp/presentation/add_hoarding/upload_hoarding_logo/widgets/custom_logo_entry_text_formfield.dart';
@@ -20,6 +21,52 @@ class ImageDisplayContainer extends StatefulWidget {
 }
 
 class _ImageDisplayContainerState extends State<ImageDisplayContainer> {
+   File? _image;
+  Future<void> _pickImage() async {
+    final ImagePicker _picker = ImagePicker();
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bottomSheetContext) {
+          return SafeArea(
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text('Gallery'),
+                  onTap: () async {
+                    final pickedFile =
+                        await _picker.pickImage(source: ImageSource.gallery);
+                    if (pickedFile != null) {
+                      Navigator.of(bottomSheetContext)
+                          .pop(); // Close the modal bottom sheet.
+                      _setImage(File(pickedFile
+                          .path)); // Use _setImage which uses the correct context.
+                    }
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.photo_camera),
+                  title: const Text('Camera'),
+                  onTap: () async {
+                    final pickedFile =
+                        await _picker.pickImage(source: ImageSource.camera);
+                    if (pickedFile != null) {
+                      Navigator.of(bottomSheetContext).pop();
+                      _setImage(File(pickedFile.path));
+                    }
+                  },
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  void _setImage(File image) {
+    if (!mounted) return;
+    BlocProvider.of<ImageCubit>(context).addImage(image);
+  }
+
   bool loading = true;
 
   @override
@@ -84,8 +131,111 @@ class _ImageDisplayContainerState extends State<ImageDisplayContainer> {
         ),
         CustomLogoEntryTextFormField(
           text: 'Enter logo name',
+             onPressed: () => _showImageSourceActionSheet(context),
         ),
       ],
+    );
+  }
+    void _showImageSourceActionSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: 180,
+          width: double.infinity,
+          decoration: const ShapeDecoration(
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(40),
+                topRight: Radius.circular(40),
+              ),
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 12),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  width: 75,
+                  height: 7,
+                  decoration: ShapeDecoration(
+                    color: Color(0xFFE4E4E4),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const Text(
+                  'Upload Brand Images',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF282C3E),
+                    fontSize: 16,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w500,
+                    height: 0,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Container(
+                  width: 343,
+                  decoration: const ShapeDecoration(
+                    shape: RoundedRectangleBorder(
+                      side: BorderSide(
+                        width: 1,
+                        strokeAlign: BorderSide.strokeAlignCenter,
+                        color: Color(0xFFE0E0E0),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  width: 375,
+                  height: 72.75,
+                  padding: const EdgeInsets.symmetric(vertical: 24),
+                  decoration: const BoxDecoration(color: Colors.white),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      GestureDetector(
+                        onTap: _pickImage,
+                        child: Container(
+                          width: 33,
+                          height: 21,
+                          child: const Icon(
+                            Icons.camera_alt_outlined,
+                            size: 31.5,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Photo',
+                        style: TextStyle(
+                          color: Color(0xFF999999),
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w400,
+                          height: 0,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -33,6 +33,7 @@ import 'package:oohapp/presentation/d_authentication/sign_up_screen/create_profi
 import 'package:oohapp/presentation/d_authentication/sign_up_screen/signup_otp_screen/signup_otp_screen.dart';
 import 'package:oohapp/presentation/d_authentication/sign_up_screen/signup_screen.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/empty_hoarding_page.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/final_rating_and%20_reviews/final_rating_and_review_page.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/hoarding_detail_page.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/hoarding_list_page.dart';
 import 'package:oohapp/presentation/e_home_page/home_page.dart';
@@ -119,6 +120,7 @@ class RoutesGenerator {
                 ));
       case Routes.firsthoardinglocationScreen:
         return MaterialPageRoute(builder: (_) => FirstHoardingLocationPage());
+ 
       case Routes.secondhoardinglocationScreen:
         return MaterialPageRoute(
             builder: (_) => const SecondLocationHoardingPage());

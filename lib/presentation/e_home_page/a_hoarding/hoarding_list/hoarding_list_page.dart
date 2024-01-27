@@ -338,13 +338,27 @@ class _MyHordingListPageState extends State<MyHordingListPage> {
                                                 text: hoarding.statusText,
                                                 color: hoarding.textColor,
                                               ),
-                                              Switch(
-                                                value: hoarding.isPublished,
-                                                onChanged: (bool value) {
-                                                  setState(() {
-                                                    hoarding.togglePublished();
-                                                  });
-                                                },
+                                              Transform.scale(
+                                                scale:
+                                                    0.9, // You can adjust the scale to fit your design
+                                                child: Switch(
+                                                  value: hoarding.isPublished,
+                                                  onChanged: (bool value) {
+                                                    setState(() {
+                                                      hoarding
+                                                          .togglePublished();
+                                                    });
+                                                  },
+                                                  activeTrackColor: Colors.green[
+                                                      100], 
+                                                  activeColor: Colors.green[
+                                                      300], 
+                                                  inactiveTrackColor: Colors
+                                                          .grey[
+                                                      300], 
+                                                  inactiveThumbColor: Colors
+                                                      .grey, 
+                                                ),
                                               ),
                                             ],
                                           ),

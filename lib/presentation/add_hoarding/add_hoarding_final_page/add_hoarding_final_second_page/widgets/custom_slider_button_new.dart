@@ -69,7 +69,7 @@ class _NewCustomSliderButtonState extends State<NewCustomSliderButton> {
           onTap: _toggleSwitch,
           child: Container(
             width: 94,
-            height: 33,
+           
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: const Color(0xFF282C3E)),
@@ -88,20 +88,23 @@ class _NewCustomSliderButtonState extends State<NewCustomSliderButton> {
                   ],
                 ),
                 // Slider
-                AnimatedAlign(
-                  duration: const Duration(milliseconds: 300),
-                  alignment: isOn ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    height: 33,
-                    width: 47,
-                    decoration: BoxDecoration(
-                      color:  isOn ? Colors.blue : Colors.grey, 
-                      borderRadius: BorderRadius.circular(8),
+                Padding(
+                       padding: const EdgeInsets.only(left: 4,right: 4,bottom: 2,top:2),
+                  child: AnimatedAlign(
+                    duration: const Duration(milliseconds: 300),
+                    alignment: isOn ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                        height: 27,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color:  isOn ? Colors.blue : Colors.grey, 
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                   ),
                 ),
             
-                const Align(
+                 Align(
                   alignment: Alignment.center,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -122,7 +125,7 @@ class _NewCustomSliderButtonState extends State<NewCustomSliderButton> {
                           child: Text(
                             'YES',
                             style: TextStyle(
-                              color:  Colors.black,
+                              color: isOn?Colors.white:Colors.black ,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

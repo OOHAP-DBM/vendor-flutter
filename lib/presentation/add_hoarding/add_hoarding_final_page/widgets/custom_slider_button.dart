@@ -42,7 +42,7 @@ class _CustomSliderButtonState extends State<CustomSliderButton> {
           onTap: _toggleSwitch,
           child: Container(
             width: 94,
-            height: 33,
+            
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: Colors.black),
@@ -61,47 +61,53 @@ class _CustomSliderButtonState extends State<CustomSliderButton> {
                   ],
                 ),
                 // Slider
-                AnimatedAlign(
-                  duration: const Duration(milliseconds: 300),
-                  alignment: isOn ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    height: 33,
-                    width: 47,
-                    decoration: BoxDecoration(
-                      color:  isOn ? Colors.blue : Colors.grey, 
-                      borderRadius: BorderRadius.circular(8),
+                Padding(
+                  padding: const EdgeInsets.only(left: 4,right: 4,bottom: 2,top:2),
+                  child: AnimatedAlign(
+                    duration: const Duration(milliseconds: 300),
+                    alignment: isOn ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                      height: 27,
+                      width: 50,
+                      decoration: BoxDecoration(
+                        color:  isOn ? Colors.blue : Colors.grey, 
+                        borderRadius: BorderRadius.circular(8),
+                      ),
                     ),
                   ),
                 ),
             
-                const Align(
+                 Align(
                   alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            'NO',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
+                  child: Padding(
+                   padding: const EdgeInsets.only(left: 4,right: 4,bottom: 2,top:2),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Expanded(
+                          child: Center(
+                            child: Text(
+                              'NO',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Center(
-                          child: Text(
-                            'YES',
-                            style: TextStyle(
-                              color:  Colors.black,
-                              fontWeight: FontWeight.bold,
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              'YES',
+                              style: TextStyle(
+                                color: isOn?Colors.white:Colors.black ,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],

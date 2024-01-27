@@ -21,7 +21,8 @@ class ImageGridView extends StatelessWidget {
               child: mediaData.videos.isNotEmpty
                   ? ImageTile(
                     height: 167,
-                    width: 376,
+                    width: double.infinity,
+                    
                       imageFile: mediaData.videos.first,
                       onTap: () {},
                       onClose: () {

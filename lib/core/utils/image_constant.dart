@@ -44,6 +44,7 @@ class ImageConstant {
   static String messageicon='$imagePath/message_icon.png';
   static String deleteicon='$imagePath/delete_icon.png';
   static String textshowicon='$imagePath/text_show_icon.png';
+  static String arrowdropdownicon='$imagePath/arrow_dropdown.png';
 
 
 }

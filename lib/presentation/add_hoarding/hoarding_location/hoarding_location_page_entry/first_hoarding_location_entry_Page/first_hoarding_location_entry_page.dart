@@ -189,7 +189,7 @@ class _FirstHoardingLocationEntryPageState
                     CustomButton(
                       onTap: () {
                         if (state.islocationvalid) {
-                          NavigateUtils.pushNamedReplacement(
+                          NavigateUtils.pushNamed(
                               context, Routes.finalfirstaddhoardingScreen);
                         } else {}
                       },

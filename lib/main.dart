@@ -3,6 +3,7 @@ import 'package:oohapp/core/app_export.dart';
 
 
 
+
 import 'package:oohapp/widgets/custom_bloc_provider.dart';
 
 void main() {
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         ),
          initialRoute: Routes.hoardinglistscreen,
          onGenerateRoute: RoutesGenerator.generateRoutes,
+        // home: OnBoardingScreen(),
         
          
        
