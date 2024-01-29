@@ -12,7 +12,6 @@ class ScaleSize {
   static height(double heightInPercentage) {
     return MediaQuery.of(context).size.height * (heightInPercentage / 100);
   }
-
   static width(double widthInPercentage) {
     return MediaQuery.of(context).size.width * (widthInPercentage / 100);
   }

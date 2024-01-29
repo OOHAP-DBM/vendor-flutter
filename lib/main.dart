@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
                 .withOpacity(0.5), // Set unselected item color
           ),*/
         ),
-         initialRoute: Routes.hoardinglistscreen,
+         initialRoute: Routes.homepagescreen,
          onGenerateRoute: RoutesGenerator.generateRoutes,
         // home: OnBoardingScreen(),
         

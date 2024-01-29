@@ -342,6 +342,7 @@ class _MyHordingListPageState extends State<MyHordingListPage> {
                                                 scale:
                                                     0.9, // You can adjust the scale to fit your design
                                                 child: Switch(
+                                                  
                                                   value: hoarding.isPublished,
                                                   onChanged: (bool value) {
                                                     setState(() {
@@ -358,6 +359,7 @@ class _MyHordingListPageState extends State<MyHordingListPage> {
                                                       300], 
                                                   inactiveThumbColor: Colors
                                                       .grey, 
+                                                      
                                                 ),
                                               ),
                                             ],

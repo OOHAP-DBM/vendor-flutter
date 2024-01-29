@@ -1,12 +1,13 @@
 import 'package:dotted_border/dotted_border.dart';
-import 'package:flutter/material.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/data_model/hoarding_list_data_mode.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/final_rating_and%20_reviews/widgets/conclusion_rating_box.dart';
+import 'package:oohapp/widgets/custom_spacer_widget/long_seprated_line.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/final_rating_and%20_reviews/widgets/rating_contaiber.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/final_rating_and%20_reviews/widgets/show_bottom_sheet_sort_option.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/final_rating_and%20_reviews/widgets/show_review_delete_option.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/custom_rating_display_box.dart';
-
 import '../../../../../core/app_export.dart';
-
 enum SortOption { latestFirst, positiveFirst, negativeFirst }
-
 class FinalRatingAndReviewPage extends StatefulWidget {
   final Hoarding hoarding;
   const FinalRatingAndReviewPage({super.key, required this.hoarding});
@@ -15,7 +16,6 @@ class FinalRatingAndReviewPage extends StatefulWidget {
   State<FinalRatingAndReviewPage> createState() =>
       _FinalRatingAndReviewPageState();
 }
-
 class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
   late List<bool> _textFieldVisibilityStates;
 
@@ -26,155 +26,29 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
     _textFieldVisibilityStates =
         List<bool>.filled(widget.hoarding.reviews.length, false);
   }
-
   bool _isTextFieldVisible = false;
   bool _isTyping = false;
   TextEditingController _controller = TextEditingController();
   bool isDescriptionExpanded = false;
-
-  SortOption _selectedSortOption = SortOption.latestFirst; // Default value
-
-  void _showreviewdeleteoptionsheet(BuildContext context) {
+  void showReviewDeleteOptionSheet(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return Container(
-            width: double.infinity,
-            height: 200,
-            clipBehavior: Clip.antiAlias,
-            decoration: ShapeDecoration(
-              color: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(19),
-                  topRight: Radius.circular(19),
-                ),
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 10,left: 39,right: 39,bottom: 24),
-
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CustomText.subHeadingText(
-                   text: 'Are you sure you want to delete \nreviews?',
-                   color:   Color(0xFF282C3E)
-                  ),
-                  SizedBox(height: 12,),
-                  CustomButton(onTap: (){
-                    Navigator.pop(context);
-                  }, text: 'Cancel',
-                  backgroundColor: Color(0xFF282C3E),
-                  width: double.infinity,),
-                  SizedBox(height: 12,),
-                   CustomButton(onTap: (){
-                    Navigator.pop(context);
-                  }, text: 'Yes',
-                  width: double.infinity,),
-                ],
-              ),
-            ),
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return ReviewDeleteOptionSheet();
+      },
+    );
   }
 
   void _showSortingBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setModalState) {
-            return Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Sort By',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.close),
-                        onPressed: () => Navigator.pop(context),
-                      ),
-                    ],
-                  ),
-                  ListTile(
-                    title: const Text('Latest First'),
-                    leading: Radio<SortOption>(
-                      value: SortOption.latestFirst,
-                      groupValue: _selectedSortOption,
-                      onChanged: (SortOption? value) {
-                        setModalState(() {
-                          _selectedSortOption = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const Divider(),
-                  ListTile(
-                    title: const Text('Positive First'),
-                    leading: Radio<SortOption>(
-                      value: SortOption.positiveFirst,
-                      groupValue: _selectedSortOption,
-                      onChanged: (SortOption? value) {
-                        setModalState(() {
-                          _selectedSortOption = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const Divider(),
-                  ListTile(
-                    title: const Text('Negative First'),
-                    leading: Radio<SortOption>(
-                      value: SortOption.negativeFirst,
-                      groupValue: _selectedSortOption,
-                      onChanged: (SortOption? value) {
-                        setModalState(() {
-                          _selectedSortOption = value!;
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: CustomButton(
-                      width: 170,
-                      onTap: () {
-                        // Apply the filter for Published or Unpublished
-
-                        Navigator.pop(context); // Dismiss the bottom sheet
-                      },
-                      backgroundColor: Color(0xFF282C3E),
-                      text: 'Apply',
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        );
+        return ShowSortBottomOption();
       },
     );
   }
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Business Details',
@@ -200,78 +74,7 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                height: 160,
-                width: double.infinity,
-                decoration: const BoxDecoration(color: Colors.white),
-                child: Card(
-                  elevation: 2.0,
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 18, top: 12, bottom: 12, right: 18),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 112,
-                          height: 146,
-                          decoration: const ShapeDecoration(
-                            color: Color(0xFF0089E1),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(6),
-                                bottomLeft: Radius.circular(6),
-                              ),
-                            ),
-                          ),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment
-                                .center, // Aligns children to the center
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                '4.0/5',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 32,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                              Text(
-                                'Excellent',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Expanded(
-                          child: ListView(
-                            children: [
-                              _buildRatingRow('Excellent', 0.59, Colors.blue),
-                              _buildRatingRow('Very Good', 0.23, Colors.blue),
-                              _buildRatingRow('Average', 0.08, Colors.blue),
-                              _buildRatingRow('Poor', 0.04, Colors.blue),
-                              _buildRatingRow('Bad', 0.06, Colors.blue),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              RatingContainerWidget(),
               SizedBox(
                 height: 16,
               ),
@@ -336,125 +139,7 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FinalRatingAndReviewPage(
-                              hoarding: widget.hoarding),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: double.infinity,
-                      height: 48,
-                      decoration: ShapeDecoration(
-                        color: const Color(0xFFF5F5F6),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6)),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 12, right: 12),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Center(
-                                child: RatingBadge(
-                                    ratingText: '4.0',
-                                    textColor: Colors.white,
-                                    iconColor: Colors.white,
-                                    backgroundColor: Colors.blue)),
-                            const SizedBox(
-                              width: 6,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Text(
-                                      'Excellent',
-                                      style: TextStyle(
-                                        color: Color(0xFF0089E1),
-                                        fontSize: 14,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                        height: 0,
-                                        letterSpacing: 0.50,
-                                      ),
-                                    ),
-                                    CustomText.subHeadingText(
-                                      text: '(2423 Ratings)',
-                                      color: const Color(0xFF282C3E),
-                                    )
-                                  ],
-                                ),
-                                const Row(
-                                  children: [
-                                    Text.rich(
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: '1526',
-                                            style: TextStyle(
-                                              color: Color(0xFF282C3E),
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w500,
-                                              height: 0,
-                                              letterSpacing: 0.50,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: ' ',
-                                            style: TextStyle(
-                                              color: Color(0xFF282C3E),
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w300,
-                                              height: 0,
-                                              letterSpacing: 0.50,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text:
-                                                'User Reviews and 3256 Ratings',
-                                            style: TextStyle(
-                                              color: Color(0xFF282C3E),
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.w400,
-                                              height: 0,
-                                              letterSpacing: 0.50,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                            const Spacer(), // This will push the following widgets to the end of the row
-                            IconButton(
-                              onPressed: () {
-                                // Navigator.pushNamed(context,
-                                //     Routes.firsthoardinglocationScreen);
-                              },
-                              icon: Image.asset(
-                                ImageConstant.rightarrowicon,
-                                width:
-                                    26, // You can set the width of the image if necessary
-                                height: 26,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                  ConclusionRatingContainer(),
                   const SizedBox(
                     height: 16,
                   ),
@@ -471,7 +156,7 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Container(
+                  SizedBox(
                     height: 70,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -503,9 +188,9 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
                   ListView.builder(
                     shrinkWrap: true,
                     physics:
-                        const NeverScrollableScrollPhysics(), // to disable ListView's scrolling
+                        const NeverScrollableScrollPhysics(), 
                     itemCount: widget.hoarding.reviews
-                        .length, // Only show the first two reviews
+                        .length,
                     itemBuilder: (context, index) {
                       var review = widget.hoarding.reviews[index];
                       return Padding(
@@ -600,8 +285,9 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
                                                 ),
                                                 const Spacer(),
                                                 GestureDetector(
-                                                  onTap: (){
-                                                    _showreviewdeleteoptionsheet(context);
+                                                  onTap: () {
+                                                    showReviewDeleteOptionSheet(
+                                                        context);
                                                   },
                                                   child: Container(
                                                       width: 25,
@@ -611,8 +297,9 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
                                                       decoration:
                                                           const BoxDecoration(),
                                                       child: CustomImageView(
-                                                          imagePath: ImageConstant
-                                                              .deleteicon,
+                                                          imagePath:
+                                                              ImageConstant
+                                                                  .deleteicon,
                                                           fit: BoxFit.cover)),
                                                 )
                                               ],
@@ -671,7 +358,7 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
                                                         if (review.vendorreply!
                                                                 .split('\n')
                                                                 .length >
-                                                            3) // Check if the text exceeds three lines
+                                                            3) 
                                                           GestureDetector(
                                                             onTap: () {
                                                               setState(() {
@@ -850,18 +537,7 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
                             SizedBox(
                               height: 8,
                             ),
-                            Container(
-                              width: double.infinity,
-                              decoration: const ShapeDecoration(
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                    width: 1,
-                                    strokeAlign: BorderSide.strokeAlignCenter,
-                                    color: Color(0xFFECECEC),
-                                  ),
-                                ),
-                              ),
-                            )
+                            LongSepratedLine(),
                           ],
                         ),
                       );
@@ -873,61 +549,6 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildRatingRow(String label, double value, Color color) {
-    return Row(
-      crossAxisAlignment:
-          CrossAxisAlignment.center, // Aligns children vertically center
-      children: [
-        SizedBox(
-          width:
-              70, // Set a fixed width for the label to align the start of the progress bars
-          child: Text(
-            label,
-            style: const TextStyle(
-              color: Color(0xFF282C3E),
-              fontSize: 12,
-              fontFamily: 'Poppins',
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-        ),
-        Expanded(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Stack(
-              children: <Widget>[
-                Container(
-                  width:
-                      115, // Ensures the background takes up all available space
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                ),
-                Container(
-                  width:
-                      115 * value, // Adjusts the width according to the value
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Text('${(value * 100).toInt()}%',
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-              fontFamily: 'Poppins',
-            )),
-      ],
     );
   }
 }

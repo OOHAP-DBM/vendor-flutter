@@ -4,9 +4,8 @@ import 'package:oohapp/core/app_export.dart';
 import 'package:oohapp/core/utils/image_constant.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/data_model/hoarding_list_data_mode.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/final_rating_and%20_reviews/final_rating_and_review_page.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/final_rating_and%20_reviews/widgets/conclusion_rating_box.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/custom_rating_display_box.dart';
-
-import '../../../../../widgets/custom_text.dart';
 
 class ReviewPortionPage extends StatefulWidget {
   final Hoarding hoarding;
@@ -17,14 +16,16 @@ class ReviewPortionPage extends StatefulWidget {
 }
 
 class _ReviewPortionPageState extends State<ReviewPortionPage> {
-    late List<bool> _textFieldVisibilityStates;
+  late List<bool> _textFieldVisibilityStates;
 
   @override
   void initState() {
     super.initState();
 
-    _textFieldVisibilityStates = List<bool>.filled(widget.hoarding.reviews.length, false);
+    _textFieldVisibilityStates =
+        List<bool>.filled(widget.hoarding.reviews.length, false);
   }
+
   bool _isTextFieldVisible = false;
   bool _isTyping = false;
   TextEditingController _controller = TextEditingController();
@@ -61,124 +62,7 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
             const SizedBox(
               height: 16,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        FinalRatingAndReviewPage(hoarding: widget.hoarding),
-                  ),
-                );
-              },
-              child: Container(
-                width: double.infinity,
-                height: 48,
-                decoration: ShapeDecoration(
-                  color: const Color(0xFFF5F5F6),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(6)),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 12, right: 12),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Center(
-                          child: RatingBadge(
-                              ratingText: '4.0',
-                              textColor: Colors.white,
-                              iconColor: Colors.white,
-                              backgroundColor: Colors.blue)),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: [
-                              const Text(
-                                'Excellent',
-                                style: TextStyle(
-                                  color: Color(0xFF0089E1),
-                                  fontSize: 14,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                  letterSpacing: 0.50,
-                                ),
-                              ),
-                              CustomText.subHeadingText(
-                                text: '(2423 Ratings)',
-                                color: const Color(0xFF282C3E),
-                              )
-                            ],
-                          ),
-                          const Row(
-                            children: [
-                              Text.rich(
-                                TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: '1526',
-                                      style: TextStyle(
-                                        color: Color(0xFF282C3E),
-                                        fontSize: 12,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                        height: 0,
-                                        letterSpacing: 0.50,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: ' ',
-                                      style: TextStyle(
-                                        color: Color(0xFF282C3E),
-                                        fontSize: 12,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w300,
-                                        height: 0,
-                                        letterSpacing: 0.50,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: 'User Reviews and 3256 Ratings',
-                                      style: TextStyle(
-                                        color: Color(0xFF282C3E),
-                                        fontSize: 12,
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w400,
-                                        height: 0,
-                                        letterSpacing: 0.50,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      const Spacer(), // This will push the following widgets to the end of the row
-                      IconButton(
-                        onPressed: () {
-                          // Navigator.pushNamed(context,
-                          //     Routes.firsthoardinglocationScreen);
-                        },
-                        icon: Image.asset(
-                          ImageConstant.rightarrowicon,
-                          width:
-                              26, // You can set the width of the image if necessary
-                          height: 26,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+            ConclusionRatingContainer(),
             const SizedBox(
               height: 16,
             ),
@@ -440,12 +324,13 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
                                   mainAxisAlignment: MainAxisAlignment.end,
                                   children: [
                                     GestureDetector(
-                                   onTap: () {
-                setState(() {
-              
-                  _textFieldVisibilityStates[index] = !_textFieldVisibilityStates[index];
-                });
-              },
+                                      onTap: () {
+                                        setState(() {
+                                          _textFieldVisibilityStates[index] =
+                                              !_textFieldVisibilityStates[
+                                                  index];
+                                        });
+                                      },
                                       child: Container(
                                           alignment: Alignment.topRight,
                                           width: 25,
@@ -461,8 +346,8 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
                                 ),
                                 _textFieldVisibilityStates[index]
                                     ? Padding(
-                                      padding: const EdgeInsets.only(top: 12),
-                                      child: Stack(
+                                        padding: const EdgeInsets.only(top: 12),
+                                        child: Stack(
                                           alignment: Alignment.topRight,
                                           children: [
                                             DottedBorder(
@@ -474,7 +359,8 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
                                               strokeWidth: 2,
                                               child: Container(
                                                 width: double.infinity,
-                                                padding: const EdgeInsets.all(4),
+                                                padding:
+                                                    const EdgeInsets.all(4),
                                                 child: TextField(
                                                   controller: _controller,
                                                   maxLines: 3,
@@ -485,7 +371,8 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
                                                       color: Color(0xFF999999),
                                                       fontSize: 14,
                                                       fontFamily: 'Poppins',
-                                                      fontWeight: FontWeight.w300,
+                                                      fontWeight:
+                                                          FontWeight.w300,
                                                       height: 0,
                                                     ),
                                                     border: InputBorder
@@ -498,7 +385,8 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
                                                   ),
                                                   onChanged: (text) {
                                                     setState(() {
-                                                      _isTyping = text.isNotEmpty;
+                                                      _isTyping =
+                                                          text.isNotEmpty;
                                                     });
                                                   },
                                                 ),
@@ -519,7 +407,8 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
                                                   style: TextStyle(
                                                     color: _isTyping
                                                         ? Colors.black
-                                                        : const Color(0xFF999999),
+                                                        : const Color(
+                                                            0xFF999999),
                                                     fontSize: 14,
                                                     fontFamily: 'Poppins',
                                                     fontWeight: FontWeight.w500,
@@ -530,7 +419,7 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
                                             ),
                                           ],
                                         ),
-                                    )
+                                      )
                                     : Container()
                               ],
                             ),
@@ -556,7 +445,7 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
             ),
             GestureDetector(
               onTap: () {
-                   Navigator.push(
+                Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) =>

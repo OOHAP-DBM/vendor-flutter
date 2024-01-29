@@ -1,6 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/data_model/hoarding_list_data_mode.dart';
+import 'package:oohapp/widgets/custom_spacer_widget/long_seprated_line.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/chip_list.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/custom_view_on_map_container.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/image_slider_widget.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/info_row_widget.dart';
+import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/price_show_container_widget.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/recently_added_screen.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/widgets/review_portion.dart';
 
@@ -34,18 +40,8 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
     }
   }
 
-  String truncateWithEllipsis(String text, int wordLimit) {
-    var wordList = text.split(' ');
-    if (wordList.length > wordLimit) {
-      return wordList.take(wordLimit).join(' ') + '...';
-    } else {
-      return text;
-    }
-  }
-
   bool isDescriptionExpanded = false;
-  int _current = 0;
-  final CarouselController _carouselController = CarouselController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,40 +62,38 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
           ),
         ),
         actions: [
-          Padding(
-              padding: const EdgeInsets.only(right: 30.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 24,
-                    height: 24,
-                    clipBehavior: Clip.none,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.share,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    width: 24,
-                    height: 24,
-                    clipBehavior: Clip.none,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.more_vert,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                ],
-              )),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.share,
+              color: Colors.black,
+            ),
+          ),
+          PopupMenuButton<String>(
+            color: Colors.white,
+            onSelected: (String value) {},
+            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+              const PopupMenuItem<String>(
+                value: 'Contact Support',
+                textStyle: TextStyle(color: Colors.black),
+                child: Text('Contact Support'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'Give Feedback',
+                textStyle: TextStyle(color: Colors.black),
+                child: Text('Give Feedback'),
+              ),
+              const PopupMenuItem<String>(
+                value: 'Export as PDF',
+                textStyle: TextStyle(color: Colors.black),
+                child: Text('Export as PDF'),
+              ),
+            ],
+            child: const Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -109,113 +103,7 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CarouselSlider.builder(
-                carouselController: _carouselController,
-                itemCount: widget.hoarding.imagePaths.length,
-                options: CarouselOptions(
-                  viewportFraction: 1.0,
-                  autoPlay: false,
-                  enlargeCenterPage: false,
-                  height: 210,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
-                  },
-                ),
-                itemBuilder: (context, index, realIdx) {
-                  return Stack(
-                    clipBehavior: Clip.none,
-                    alignment: Alignment.center,
-                    children: <Widget>[
-                      Positioned.fill(
-                        // Use Positioned.fill to provide bounded constraints
-                        child: Image.asset(
-                          widget.hoarding.imagePaths[index],
-                          fit: BoxFit.cover,
-                          height: 210,
-                        ),
-                      ),
-                      Positioned(
-                        bottom:
-                            10, // Adjust this value to position the dots correctly
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: widget.hoarding.imagePaths
-                              .asMap()
-                              .entries
-                              .map((entry) {
-                            return GestureDetector(
-                              onTap: () =>
-                                  _carouselController.animateToPage(entry.key),
-                              child: Container(
-                                width: 12.0,
-                                height: 12.0,
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 8.0, horizontal: 4.0),
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: _current == entry.key
-                                      ? Colors.green
-                                      : Colors.white,
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      Positioned(
-                        top: 0,
-                        right: 0,
-                        child: Container(
-                          width: 89,
-                          height: 25,
-                          decoration: BoxDecoration(
-                            color: widget.hoarding.isPublished
-                                ? const Color(0xFF009A5C)
-                                : Colors.red, // Color based on published status
-                            borderRadius: BorderRadius.circular(12.5),
-                          ),
-                          child: Center(
-                            child: Text(
-                              widget.hoarding.statusText,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        right: 10,
-                        bottom: 30,
-                        child: Container(
-                          width: 43,
-                          height: 32,
-                          decoration: ShapeDecoration(
-                            color: Colors.black.withOpacity(0.699999988079071),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4)),
-                          ),
-                          child: Center(
-                            child: Text(
-                              '${index + 1}/${widget.hoarding.imagePaths.length}',
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 16.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              ),
+              ImageSliderWidget(hoarding: widget.hoarding),
               const SizedBox(
                 height: 12,
               ),
@@ -296,87 +184,11 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
                       const SizedBox(
                         height: 16,
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 50,
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFFDFF2FF),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(3)),
-                        ),
-                        child: Center(
-                            child: CustomText.headlineText(
-                          text: '₹${widget.hoarding.price}/mo',
-                          color: const Color(0xFF1E1B18),
-                        )),
-                      ),
+                      PriceShowContainer(hoarding: widget.hoarding),
                       const SizedBox(
                         height: 12,
                       ),
-                      Container(
-                        width: double.infinity,
-                        height: 44,
-                        decoration: ShapeDecoration(
-                          color: const Color(0xFFF5F5F6),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6)),
-                        ),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 16),
-                              child: CustomImageView(
-                                imagePath: ImageConstant.mapicon,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            const SizedBox(width: 18),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment
-                                  .center, // Align the column to center along the cross axis
-                              children: [
-                                Text(
-                                  truncateWithEllipsis(
-                                      widget.hoarding.exactloaction, 3),
-                                  style: const TextStyle(
-                                    color: Color(0xFF282C3E),
-                                    fontSize: 12,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w400,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                                const Text(
-                                  'View on Map',
-                                  style: TextStyle(
-                                    color: Color(0xFFFF8900),
-                                    fontSize: 12,
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                    letterSpacing: 0.50,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Spacer(), // This will push the following widgets to the end of the row
-                            IconButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context,
-                                    Routes.firsthoardinglocationScreen);
-                              },
-                              icon: Image.asset(
-                                ImageConstant.rightarrowicon,
-                                width:
-                                    26, // You can set the width of the image if necessary
-                                height:
-                                    26, 
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                      ViewOnMapContainerWidget(hoarding: widget.hoarding),
                       const SizedBox(
                         height: 16,
                       ),
@@ -418,27 +230,19 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
                       const SizedBox(
                         height: 16,
                       ),
-                      _buildInfoRow('Approved from Nagar Nigam',
-                          widget.hoarding.approvedfromnagarnigam),
-                      _buildInfoRow(
-                          'Backlighting', widget.hoarding.backlighting),
-                      _buildInfoRow('Printing & Mounting Service',
-                          widget.hoarding.printingandmountingservice),
+                      InfoRowWidget(
+                          title: 'Approved from Nagar Nigam',
+                          value: widget.hoarding.approvedfromnagarnigam),
+                      InfoRowWidget(
+                          title: 'Backlighting',
+                          value: widget.hoarding.backlighting),
+                      InfoRowWidget(
+                          title: 'Printing & Mounting Service',
+                          value: widget.hoarding.printingandmountingservice),
                       const SizedBox(
                         height: 12,
                       ),
-                      Container(
-                        width: double.infinity,
-                        decoration: const ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: 1,
-                              strokeAlign: BorderSide.strokeAlignCenter,
-                              color: Color(0xFFE0E0E0),
-                            ),
-                          ),
-                        ),
-                      ),
+                      LongSepratedLine(),
                       const SizedBox(
                         height: 12,
                       ),
@@ -447,55 +251,11 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
                       const SizedBox(
                         height: 12,
                       ),
-                      Wrap(
-                        spacing: 12.0, // horizontal gap between chips
-                        runSpacing: 12.0, // vertical gap between chips
-                        children:
-                            widget.hoarding.targetaudience.map((audience) {
-                          return Chip(
-                            backgroundColor: const Color(0xFFD9F2E6),
-                            label: Text(
-                              audience,
-                              style: const TextStyle(
-                                color: Color(0xFF1E1B18),
-                                fontSize: 14,
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            onDeleted: () {
-                              setState(() {
-                                widget.hoarding.targetaudience.remove(audience);
-                              });
-                            },
-                            deleteIcon: const Icon(
-                              Icons.close,
-                              size: 18,
-                              color: Color(0xFF1E1B18),
-                            ),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              side: const BorderSide(
-                                  color: Color(0xFFD9F2E6), width: 0),
-                            ),
-                          );
-                        }).toList(),
-                      ),
+                      ChipListWidget(hoarding: widget.hoarding),
                       const SizedBox(
                         height: 12,
                       ),
-                      Container(
-                        width: double.infinity,
-                        decoration: const ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: 1,
-                              strokeAlign: BorderSide.strokeAlignCenter,
-                              color: Color(0xFFE0E0E0),
-                            ),
-                          ),
-                        ),
-                      ),
+                      LongSepratedLine(),
                       const SizedBox(
                         height: 12,
                       ),
@@ -561,18 +321,7 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
                           );
                         }),
                       ),
-                      Container(
-                        width: double.infinity,
-                        decoration: const ShapeDecoration(
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              width: 1,
-                              strokeAlign: BorderSide.strokeAlignCenter,
-                              color: Color(0xFFE0E0E0),
-                            ),
-                          ),
-                        ),
-                      ),
+                      LongSepratedLine(),
                       const SizedBox(
                         height: 12,
                       ),
@@ -583,7 +332,7 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
                       const SizedBox(
                         height: 12,
                       ),
-                   RecentlyBookedSection(hoarding: widget.hoarding)
+                      RecentlyBookedSection(hoarding: widget.hoarding)
                     ],
                   ),
                 ),
@@ -595,27 +344,6 @@ class _MyHoardingDetailPageState extends State<MyHoardingDetailPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildInfoRow(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CustomText.subHeadingText(
-              text: title, color: const Color(0xFF282C3E)),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              color: value == 'YES' ? Colors.green : Colors.black,
-            ),
-          ),
-        ],
       ),
     );
   }
