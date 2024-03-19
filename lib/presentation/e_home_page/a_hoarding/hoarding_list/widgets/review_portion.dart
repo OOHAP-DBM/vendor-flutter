@@ -32,6 +32,9 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
   bool isDescriptionExpanded = false;
   @override
   Widget build(BuildContext context) {
+
+    Size size = MediaQuery.of(context).size;
+
     return Container(
       width: double.infinity,
       decoration: ShapeDecoration(
@@ -94,8 +97,8 @@ class _ReviewPortionPageState extends State<ReviewPortionPage> {
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.asset(
                             imagePath,
-                            width: ScaleSize.width(17),
-                            height: 58,
+                            width: size.width * 0.17,
+                            height: size.height * 0.058,
                             fit: BoxFit.cover,
                           ),
                         ),

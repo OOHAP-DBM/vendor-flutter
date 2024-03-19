@@ -236,4 +236,47 @@ class CustomText {
         softWrap: softWrap ?? true,
         overflow: overflow ?? TextOverflow.fade,
       );
+
+  /// Use only this text not other one  ******************************* ///
+
+
+  static Widget text({
+    required String text,
+    Color? color,
+    Color? underLineColor,
+    TextAlign? textAlign,
+    int? maxLines,
+    bool? softWrap,
+    TextOverflow? overflow,
+    FontWeight? fontWeight,
+    double? fontSize,
+    FontStyle? fontStyle,
+    TextDecoration? decoration,
+    double? letterSpacing,
+    double? wordSpacing,
+    double? lineHeight,
+
+  }) {
+    return Text(
+      text,
+      style: TextStyle(
+        fontFamily: GoogleFonts.poppins().fontFamily,
+        color: color,
+        fontSize: fontSize,
+        fontWeight: fontWeight,
+        fontStyle: fontStyle,
+        decoration: decoration,
+        letterSpacing: letterSpacing,
+        wordSpacing: wordSpacing,
+        height: lineHeight,
+        decorationColor: underLineColor,
+      ),
+      textAlign: textAlign,
+      maxLines: maxLines,
+      softWrap: softWrap ?? true,
+      overflow: overflow ?? TextOverflow.fade,
+    );
+  }
+
+
 }

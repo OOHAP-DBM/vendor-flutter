@@ -5,6 +5,7 @@ class LoginWithPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
@@ -14,7 +15,7 @@ class LoginWithPasswordScreen extends StatelessWidget {
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: CircularButton(
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
             backgroundColor: CustomColors.grey,
@@ -27,14 +28,14 @@ class LoginWithPasswordScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: SizedBox(
-          height: ScaleSize.height(100),
-          width: ScaleSize.width(100),
+          height: size.height,
+          width: size.width,
           child: SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
-                  height: ScaleSize.height(20),
-                  width: ScaleSize.width(50),
+                  height: size.height * 0.20,
+                  width: size.width * 0.50,
                   child: CustomSvgImageView(
                     svgPath: ImageConstant.vendorLogo,
                     fit: BoxFit.contain,
@@ -42,7 +43,7 @@ class LoginWithPasswordScreen extends StatelessWidget {
                 ),
                 Container(
                   //   height: ScaleSize.height(80),
-                  width: ScaleSize.width(100),
+                  width: size.width,
                   padding: const EdgeInsets.symmetric(
                       horizontal: 14.0, vertical: 14.0),
                   decoration: BoxDecoration(

@@ -33,10 +33,12 @@ class CustomImageUploaderContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return GestureDetector(
       onTap: onPressed,
       child: Container(
-        height: height ?? ScaleSize.height(5.66),
+        height: height ?? size.height * 0.056,
         decoration: ShapeDecoration(
           shape: RoundedRectangleBorder(
             side: BorderSide(width: 1, color: Color(0xFF282C3E)),

@@ -49,6 +49,7 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
   }
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Business Details',
@@ -57,7 +58,7 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: CircularButton(
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
             backgroundColor: CustomColors.grey,
@@ -171,7 +172,7 @@ class _FinalRatingAndReviewPageState extends State<FinalRatingAndReviewPage> {
                                 borderRadius: BorderRadius.circular(8.0),
                                 child: Image.asset(
                                   imagePath,
-                                  width: ScaleSize.width(17),
+                                  width: size.width * 0.17,
                                   height: 58,
                                   fit: BoxFit.cover,
                                 ),

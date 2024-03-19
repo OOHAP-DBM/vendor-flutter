@@ -6,6 +6,7 @@ class EmptyHoardingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: const CustomAppBar(
           title: 'Add Hoarding',
@@ -18,8 +19,9 @@ class EmptyHoardingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                height: ScaleSize.height(20),
-                width: ScaleSize.width(40),
+                height: size.height * 0.20,
+                width: size.width * 0.40,
+
                 child: CustomImageView(
                   fit: BoxFit.fill,
                   imagePath: ImageConstant.hoarding,
@@ -30,7 +32,7 @@ class EmptyHoardingPage extends StatelessWidget {
                 height: 16,
               ),
               CustomButton(
-                  width: ScaleSize.width(45),
+                width: size.width * 0.45,
                   onTap: () {
                     Navigator.pushNamed(context, Routes.hoardinglistscreen);
                   },

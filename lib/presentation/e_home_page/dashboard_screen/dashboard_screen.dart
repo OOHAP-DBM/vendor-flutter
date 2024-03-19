@@ -7,6 +7,7 @@ class DashboardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       //  backgroundColor: Colors.white,
       appBar: CustomAppBar(
@@ -16,7 +17,7 @@ class DashboardScreen extends StatelessWidget {
         ),
         actions: [
           CircularButton(
-            onTap: () {
+            onPressed: () {
               CustomSnackBar(
                       color: Colors.redAccent,
                       text: 'Notification clicked',
@@ -54,11 +55,9 @@ class DashboardScreen extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-              height: ScaleSize.height(22),
-              //  height: ScaleSize.height(100),
-              // height: MediaQuery.of(context).size.height,
-              // padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
-              width: ScaleSize.width(100),
+              height: size.height * 0.22,
+              width: size.width,
+
               color: CustomColors.liteGrey,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 14.0),
@@ -81,7 +80,7 @@ class DashboardScreen extends StatelessWidget {
                           height: 10.0,
                         ),
                         CustomButton(
-                            width: ScaleSize.width(40),
+                            width: size.width * 0.40,
                             backgroundColor: CustomColors.buttonColor,
                             onTap: () {
                    Navigator.pushNamed(context, Routes.addhoardingScreen);
@@ -97,8 +96,8 @@ class DashboardScreen extends StatelessWidget {
                       ],
                     ),
                     SizedBox(
-                      height: ScaleSize.height(15),
-                      width: ScaleSize.width(22),
+                      height: size.height * 0.15,
+                      width: size.width * 0.22,
                       child: CustomImageView(
                         fit: BoxFit.fill,
                         imagePath: ImageConstant.hoarding,
@@ -144,8 +143,8 @@ class DashboardScreen extends StatelessWidget {
                         child: InkWell(
                           onTap: () {},
                           child: Container(
-                            height: ScaleSize.height(7),
-                            width: ScaleSize.width(100),
+                            height: size.height * 0.07,
+                            width: size.width,
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 8.0),
                             //color: Colors.red,

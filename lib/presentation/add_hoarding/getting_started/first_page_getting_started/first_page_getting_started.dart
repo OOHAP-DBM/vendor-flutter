@@ -1,4 +1,4 @@
-import '../../../../core/app_export.dart';
+  import '../../../../core/app_export.dart';
 
 class GettingStartedFirstPage extends StatefulWidget {
   const GettingStartedFirstPage({super.key});
@@ -19,7 +19,7 @@ class _GettingStartedFirstPageState extends State<GettingStartedFirstPage> {
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: CircularButton(
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
             backgroundColor: CustomColors.grey,

@@ -59,12 +59,12 @@ class CustomDescriptionTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    Size size = MediaQuery.of(context).size;
     return Container(
       alignment: Alignment.center,
       // height: (showCharacterCount!)?ScaleSize.height(18):ScaleSize.height(15),
       
-      width: width ?? ScaleSize.width(100),
+      width: width ?? size.width,
       decoration: BoxDecoration(
         color: color,
       ),

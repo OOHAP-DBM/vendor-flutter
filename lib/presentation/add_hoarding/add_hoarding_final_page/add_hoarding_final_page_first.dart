@@ -33,6 +33,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
   TextEditingController sizeController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     List<String> options = [
       'Metro view',
       'Bridge view',
@@ -51,7 +52,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
             leading: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: CircularButton(
-                onTap: () {
+                onPressed: () {
                   Navigator.pop(context);
                 },
                 backgroundColor: CustomColors.grey,
@@ -85,7 +86,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomSmallButton(
-                            width: ScaleSize.width(45),
+                            width: size.width * 0.45,
                             onTap: () {
                               setState(() {
                                 selectedButton = 'OOH Hoarding';
@@ -106,7 +107,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
                             textColor: Colors.black,
                           ),
                           CustomSmallButton(
-                             width: ScaleSize.width(45),
+                            width: size.width * 0.45,
                             onTap: () {
                               setState(() {
                                 selectedButton = 'DOOH Hoarding';
@@ -185,7 +186,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
                       height: 15,
                     ),
                     CustomDescriptionTextFormField(
-                      height: ScaleSize.height(40),
+                      height: size.height * 0.40,
                      requiredsign: true,
                      onChanged: (value){
                       cubit.onChangedhaordingdescription(value);
@@ -226,7 +227,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
 
                           placeholder: 'Hoarding Width',
                           hintText: 'Enter width',
-                               width: ScaleSize.width(45),
+                          width: size.width * 0.45,
                           keyboardType: TextInputType.number,
                           controller: hoardingwidthController,
                         ),
@@ -238,7 +239,7 @@ class _FinalAddHoardingFirstPageState extends State<FinalAddHoardingFirstPage> {
                           },
                           validator: (value)=>ValidatorRegex.hoardingheightValidator(value),
                           hintText: 'Enter height',
-                              width: ScaleSize.width(45),
+                          width: size.width * 0.45,
                           keyboardType: TextInputType.number,
                           controller: hoardingheightController,
                         ),

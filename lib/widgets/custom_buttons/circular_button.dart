@@ -6,7 +6,7 @@ import '../scale_size.dart';
 class CircularButton extends StatelessWidget {
   const CircularButton({
     Key? key,
-    required this.onTap,
+    required this.onPressed,
     this.iconColor,
     this.backgroundColor,
     this.borderColor,
@@ -20,7 +20,7 @@ class CircularButton extends StatelessWidget {
     this.borderWidth,
   }) : super(key: key);
 
-  final VoidCallback onTap;
+  final VoidCallback onPressed;
   final Color? iconColor;
   final Color? backgroundColor;
   final Color? borderColor;
@@ -35,12 +35,13 @@ class CircularButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return InkWell(
-      onTap: onTap,
+      onTap: onPressed,
       borderRadius: BorderRadius.circular(100),
       child: Container(
-        height: ScaleSize.height(8.0),
-        width: ScaleSize.width(8.0),
+        height: size.height * 0.08,
+        width: size.width * 0.08,
         decoration: BoxDecoration(
             color: backgroundColor ?? Colors.transparent,
             shape: BoxShape.circle,
@@ -55,3 +56,5 @@ class CircularButton extends StatelessWidget {
     );
   }
 }
+
+

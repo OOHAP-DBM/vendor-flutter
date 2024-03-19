@@ -5,6 +5,7 @@ class CreateProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       //   extendBodyBehindAppBar: true,
@@ -21,11 +22,13 @@ class CreateProfileScreen extends StatelessWidget {
       body: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Container(
-          height: ScaleSize.height(88),
+          height: size.height * 0.88,
+          width: size.width,
+
           //  height: ScaleSize.height(100),
           // height: MediaQuery.of(context).size.height,
           padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
-          width: ScaleSize.width(100),
+
           child: IntrinsicHeight(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

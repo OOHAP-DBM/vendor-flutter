@@ -24,10 +24,10 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
-      width: double.infinity,
- 
-      height:ScaleSize.height(42),
+      height: size.height * 0.42,
+      width: size.width,
       clipBehavior: Clip.antiAlias,
       decoration: ShapeDecoration(
         color: Colors.white,
@@ -51,8 +51,8 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
             SizedBox(height: 24),
    
             SizedBox(
-              height: ScaleSize.width(15), // Adjust the height accordingly
-              width: ScaleSize.width(50), // Adjust the width accordingly
+              height: size.height * 0.15,
+              width: size.width,
               child: SvgPicture.asset(
                 'assets/images/vendor_logo.svg', // Replace with your asset path
                 fit: BoxFit.contain,

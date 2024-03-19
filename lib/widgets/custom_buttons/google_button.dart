@@ -30,13 +30,14 @@ class GoogleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return InkWell(
       onTap: onTap,
       child: Container(
           alignment: Alignment.center,
-          height: height ?? ScaleSize.height(5.66),
-          // This is actual height of button according to figma
-          width: width ?? ScaleSize.width(100),
+          height: size.height * 0.056,
+          width: width?? size.width,
+
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4.0),
             color: backgroundColor ?? CustomColors.tertiaryGreen,

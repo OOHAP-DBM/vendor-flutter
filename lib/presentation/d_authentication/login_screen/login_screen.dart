@@ -15,29 +15,31 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController mobileController=TextEditingController();
-  TextEditingController passwordController=TextEditingController();
+  TextEditingController mobileController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return BlocBuilder<LogInScreenCubit, LogInFormState>(
-      builder:(context,state){
-final cubit=context.read<LogInScreenCubit>();
+        builder: (context, state) {
+      final cubit = context.read<LogInScreenCubit>();
 
       return Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: SizedBox(
-            height: ScaleSize.height(100),
-            width: ScaleSize.width(100),
+            height: size.height,
+            width: size.width,
             child: SingleChildScrollView(
               child: Form(
                 key: cubit.loginscreenFormKey,
                 child: Column(
                   children: [
                     SizedBox(
-                      height: ScaleSize.height(20),
-                      width: ScaleSize.width(50),
+                      height: size.height * 0.20,
+                      width: size.width * 0.50,
                       child: CustomSvgImageView(
                         svgPath: ImageConstant.vendorLogo,
                         fit: BoxFit.contain,
@@ -45,7 +47,7 @@ final cubit=context.read<LogInScreenCubit>();
                     ),
                     Container(
                       //   height: ScaleSize.height(80),
-                      width: ScaleSize.width(100),
+                      width: size.width,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 14.0, vertical: 14.0),
                       decoration: BoxDecoration(
@@ -78,23 +80,23 @@ final cubit=context.read<LogInScreenCubit>();
                             hintText: '8524791231',
                             prefixIcon: Icon(Icons.phone_android_outlined),
                           ),*/
-                           CustomTextFormField(
+                          CustomTextFormField(
                             controller: mobileController,
                             placeholder: 'Mobile Number*',
                             maxLength: 10,
                             keyboardType: TextInputType.number,
                             hintText: 'Enter mobile number',
                             prefixIcon: Icon(Icons.phone_android_rounded),
-                            onChanged: (value){
-                             cubit.onChangedmobileno(value);
+                            onChanged: (value) {
+                              cubit.onChangedmobileno(value);
                             },
-                            validator:(value)=>
-                            ValidatorRegex.phoneNumberValidator(value),
+                            validator: (value) =>
+                                ValidatorRegex.phoneNumberValidator(value),
                           ),
                           const SizedBox(
                             height: 5.0,
                           ),
-                      
+
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -120,37 +122,36 @@ final cubit=context.read<LogInScreenCubit>();
                           const SizedBox(
                             height: 5.0,
                           ),
-                      
-                           CustomTextFormField(
+
+                          CustomTextFormField(
                             controller: passwordController,
                             placeholder: 'Email address*',
                             // maxLength: 10,
-                            keyboardType: TextInputType.emailAddress, 
+                            keyboardType: TextInputType.emailAddress,
                             hintText: 'abc@gmail.com',
                             prefixIcon: Icon(Icons.email_outlined),
-                           onChanged: (value) {
-                       cubit.onChangedemail(value);
-                        },
-                        validator: (value) =>
-                            ValidatorRegex.emailValidator(value),
+                            onChanged: (value) {
+                              cubit.onChangedemail(value);
+                            },
+                            validator: (value) =>
+                                ValidatorRegex.emailValidator(value),
                           ),
                           const SizedBox(
                             height: 15.0,
                           ),
                           CustomButton(
-                              backgroundColor:state.isuservalid? Color(0xFF282C3E):Color(0xFFDDDDDD) ,
+                              backgroundColor: state.isuservalid
+                                  ? Color(0xFF282C3E)
+                                  : Color(0xFFDDDDDD),
                               onTap: () {
-                              if(state.isuservalid){
+                                if (state.isuservalid) {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginOtpScreen(),
-                                    ));
-                              }
-                              else{
-                                
-                              }
-
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginOtpScreen(),
+                                      ));
+                                } else {}
                               },
                               text: 'Continue'),
                           const SizedBox(
@@ -184,8 +185,10 @@ final cubit=context.read<LogInScreenCubit>();
                           GoogleButton(
                               backgroundColor: CustomColors.tertiaryLite,
                               onTap: () {
-                            NavigateUtils.pushNamed(context, Routes.loginWithPasswordScreen);
-                          }, text: 'Continue with Google'),
+                                NavigateUtils.pushNamed(
+                                    context, Routes.loginWithPasswordScreen);
+                              },
+                              text: 'Continue with Google'),
                           const SizedBox(
                             height: 12.0,
                           ),
@@ -222,7 +225,7 @@ final cubit=context.read<LogInScreenCubit>();
                       height: 15.0,
                     ),
                     //Don’t Have an Account?
-                      
+
                     Wrap(
                       direction: Axis.horizontal,
                       //crossAxisAlignment: WrapCrossAlignment.start,
@@ -234,10 +237,11 @@ final cubit=context.read<LogInScreenCubit>();
                           color: CustomColors.blackColor,
                         ),
                         //Terms & Conditions
-                      
+
                         InkWell(
                           onTap: () {
-                            NavigateUtils.pushNamed(context, Routes.signupScreen);
+                            NavigateUtils.pushNamed(
+                                context, Routes.signupScreen);
                           },
                           child: CustomText.subHeadingText(
                             text: 'Sign up',
@@ -254,7 +258,6 @@ final cubit=context.read<LogInScreenCubit>();
           ),
         ),
       );
-      }
-    );
+    });
   }
 }

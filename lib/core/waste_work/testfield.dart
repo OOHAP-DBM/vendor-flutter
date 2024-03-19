@@ -1,3 +1,4 @@
+/*
 
 
 import 'package:oohapp/core/app_export.dart';
@@ -105,8 +106,8 @@ class CustomTextFormField extends StatelessWidget {
               style: const TextStyle(height: 1.1),
               decoration: InputDecoration(
                 fillColor: Colors.transparent,
-                focusColor: errorColor ?? CustomColors.inactiveColor,
-                labelStyle: const TextStyle(color: CustomColors.inactiveColor),
+                focusColor: errorColor ?? CustomColors.inactiveButton,
+                labelStyle: const TextStyle(color: CustomColors.inactiveButton),
                 contentPadding: contentPadding ??
 
                 EdgeInsets.all(8.5.r),
@@ -114,13 +115,13 @@ class CustomTextFormField extends StatelessWidget {
                 focusedBorder: OutlineInputBorder(
                   borderRadius: const BorderRadius.all(Radius.circular(0.0)),
                   borderSide: BorderSide(
-                    color: errorColor ?? CustomColors.inactiveColor,
+                    color: errorColor ?? CustomColors.inactiveButton,
                   ),
                 ),
                 counterText: '',
                 border: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: errorColor ?? CustomColors.inactiveColor),
+                      color: errorColor ?? CustomColors.inactiveButton),
                   borderRadius: const BorderRadius.all(Radius.circular(0.0)),
                 ),
                 errorStyle: const TextStyle(height: 0.0, fontSize: 10.0),
@@ -133,18 +134,19 @@ class CustomTextFormField extends StatelessWidget {
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
                       width: 1,
-                      color: errorColor ?? CustomColors.inactiveColor),
+                      color: errorColor ?? CustomColors.inactiveButton),
                   borderRadius: const BorderRadius.all(Radius.circular(0.0)),
                 ),
                 hintText: hintText,
                 hintStyle: TextStyle(
-                  color: errorColor ?? CustomColors.inactiveColor,
+                  color: errorColor ?? CustomColors.inactiveButton,
                   fontSize: 14,
                   fontWeight: FontWeight.w300,
                 ),
                 prefixIcon: prefixIcon,
                 suffixIcon: suffixIcon,
-                /*  Container(
+                */
+/*  Container(
                   padding: const EdgeInsets.all(2.0),
                   color: Colors.cyan,
                   constraints: const BoxConstraints(
@@ -152,9 +154,10 @@ class CustomTextFormField extends StatelessWidget {
                     maxWidth: 7.0,
                   ),
                   child: suffixIcon,
-                ),*/
-                suffixIconColor: errorColor ?? CustomColors.inactiveColor,
-                prefixIconColor: errorColor ?? CustomColors.inactiveColor,
+                ),*//*
+
+                suffixIconColor: errorColor ?? CustomColors.inactiveButton,
+                prefixIconColor: errorColor ?? CustomColors.inactiveButton,
               ),
               onChanged: onChanged,
               validator: validator,
@@ -164,4 +167,4 @@ class CustomTextFormField extends StatelessWidget {
       ),
     );
   }
-}
+}*/

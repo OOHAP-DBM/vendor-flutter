@@ -53,6 +53,7 @@ class CustomLogoEntryTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: onPressed,
       child: DottedBorder(
@@ -60,10 +61,10 @@ class CustomLogoEntryTextFormField extends StatelessWidget {
                 borderType: BorderType.RRect,
                 radius: const Radius.circular(12),
                 padding: EdgeInsets.zero,
-                dashPattern: [8, 4],
+                dashPattern: const [8, 4],
                 strokeWidth: 2,
         child: Container(
-          height: height ?? ScaleSize.height(5.66),
+          height: size.height * 0.056,
           decoration: BoxDecoration(
             color: color,
           ),

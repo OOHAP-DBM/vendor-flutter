@@ -58,10 +58,11 @@ class NewCustomTextFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Container(
       alignment: Alignment.center,
     
-      width: width ?? ScaleSize.width(100),
+      width: width ?? size.width,
       decoration: BoxDecoration(
         color: color,
       ),

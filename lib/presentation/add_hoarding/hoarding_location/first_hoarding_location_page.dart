@@ -109,7 +109,7 @@ class _FirstHoardingLocationPageState extends State<FirstHoardingLocationPage> {
         leading: Padding(
           padding:  EdgeInsets.symmetric(horizontal: 8.0),
           child: CircularButton(
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
             backgroundColor: CustomColors.grey,

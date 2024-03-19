@@ -1,10 +1,11 @@
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oohapp/core/app_export.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({
     super.key,
-    required this.onTap,
-    required this.text,
+    this.onTap,
+    this.text,
     this.child,
     this.height,
     this.width,
@@ -15,13 +16,16 @@ class CustomButton extends StatelessWidget {
     this.iconColor,
     this.backgroundColor,
     this.textColor,
+    this.borderRadius,
+    this.splashColor,
+    this.highlightColor, this.fontWeight,
   });
 
-  final VoidCallback onTap;
+  final void Function()? onTap;
   final Color? iconColor;
   final Color? backgroundColor;
   final Color? textColor;
-  final String text;
+  final String? text;
   final Widget? child;
   final double? height;
   final double? width;
@@ -29,11 +33,16 @@ class CustomButton extends StatelessWidget {
   final EdgeInsets? margin;
   final Alignment? alignment;
   final double? fontSize;
+  final BorderRadius? borderRadius;
+  final Color? splashColor;
+  final Color? highlightColor;
+  final FontWeight? fontWeight;
+
 
   @override
   Widget build(BuildContext context) {
-    //********** We major the height width of mediaQuery in percentage ******//
-
+    Size size = MediaQuery.of(context).size;
+/*
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -46,6 +55,37 @@ class CustomButton extends StatelessWidget {
             color: backgroundColor ?? CustomColors.buttonGreen,
           ),
           child: CustomText.buttonText(text: text)),
+    );*/
+
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        height: height ?? 42.h,
+        width: width ?? double.infinity,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          borderRadius: borderRadius ?? BorderRadius.circular(4.r),
+          color: backgroundColor ?? CustomColors.buttonGreen,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            splashColor: splashColor ?? Colors.white.withOpacity(0.4),
+            highlightColor: highlightColor ?? CustomColors.errorColor,
+            borderRadius: borderRadius ?? BorderRadius.circular(4.r),
+            onTap: onTap,
+            child: Center(
+              child: child ??
+                  CustomText.text(
+                      text: text!,
+                      fontWeight:fontWeight ?? FontWeight.w500,
+                      fontSize: fontSize ?? 16.sp,
+                      color: textColor ?? CustomColors.whiteColor),
+            ),
+          ),
+        ),
+      ),
     );
+
   }
 }

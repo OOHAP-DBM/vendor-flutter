@@ -3,37 +3,38 @@ import 'package:oohapp/core/app_export.dart';
 import 'package:oohapp/core/constants/global_cubit/character_count_cubit.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({
-    Key? key,
-    this.onPressed,
-    this.color,
-    this.text,
-    this.child,
-    this.height,
-    this.width,
-    this.obscureText = false,
-    this.margin,
-    this.alignment,
-    this.controller,
-    this.icon,
-    this.prefixIcon,
-    this.suffixIcon,
-    this.maxLines,
-    this.hintText,
-    this.labelText,
-    this.maxLength,
-    this.keyboardType,
-    this.placeholder,
-    this.showCharacterCount = false, // New property for character count
-    this.onChanged, 
-    this.newcolor,
-    this.validator,
-    this.requiredsign// New property for onChanged
-  }) : super(key: key);
+  const CustomTextFormField(
+      {Key? key,
+      this.onPressed,
+      this.color,
+      this.text,
+      this.child,
+      this.height,
+      this.width,
+      this.obscureText = false,
+      this.margin,
+      this.alignment,
+      this.controller,
+      this.icon,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.maxLines,
+      this.hintText,
+      this.labelText,
+      this.maxLength,
+      this.keyboardType,
+      this.placeholder,
+      this.showCharacterCount = false, // New property for character count
+      this.onChanged,
+      this.newcolor,
+      this.validator,
+      this.requiredsign // New property for onChanged
+      })
+      : super(key: key);
 
   final VoidCallback? onPressed;
   final Color? color;
-    final Color? newcolor;
+  final Color? newcolor;
   final String? text;
   final Widget? child;
   final double? height;
@@ -53,43 +54,42 @@ class CustomTextFormField extends StatelessWidget {
   final String? placeholder;
   final bool? showCharacterCount;
   final void Function(String)? onChanged;
-    final String? Function(String?)? validator;
-    final bool? requiredsign;
-   // New property for onChanged
+  final String? Function(String?)? validator;
+  final bool? requiredsign;
+
+  // New property for onChanged
 
   @override
   Widget build(BuildContext context) {
-    
     return Container(
       alignment: Alignment.center,
       // height: (showCharacterCount!)?ScaleSize.height(12.7):ScaleSize.height(9.66),
-      
-      width: width ?? ScaleSize.width(100),
+
+      width: width ?? MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: color,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-     if(requiredsign==true)
-     Row(
-      children: [
-             CustomText.calloutText(
-            text: placeholder,
-            color: CustomColors.blackColor,
-          ),
-          CustomText.calloutText(
-            text: '*',
-            color: Colors.red,
-          )
-      ],
-     )
-     else
-       CustomText.calloutText(
-            text: placeholder,
-            color: CustomColors.blackColor,
-          ),
-     
+          if (requiredsign == true)
+            Row(
+              children: [
+                CustomText.calloutText(
+                  text: placeholder,
+                  color: CustomColors.blackColor,
+                ),
+                CustomText.calloutText(
+                  text: '*',
+                  color: Colors.red,
+                )
+              ],
+            )
+          else
+            CustomText.calloutText(
+              text: placeholder,
+              color: CustomColors.blackColor,
+            ),
           const SizedBox(
             height: 8.0,
           ),
@@ -106,7 +106,6 @@ class CustomTextFormField extends StatelessWidget {
                     FocusManager.instance.primaryFocus?.unfocus();
                   },
                   keyboardType: keyboardType,
-                  
                   maxLength: maxLength,
                   controller: controller,
                   obscureText: obscureText!,
@@ -116,12 +115,15 @@ class CustomTextFormField extends StatelessWidget {
                       onChanged!(text);
                     }
                     if (showCharacterCount == true) {
-                      context.read<CharacterCountCubit>().updateCharacterCount(text.length);
+                      context
+                          .read<CharacterCountCubit>()
+                          .updateCharacterCount(text.length);
                     }
                   },
                   decoration: InputDecoration(
                     focusColor: CustomColors.inactiveButton,
-                    labelStyle: const TextStyle(color: CustomColors.inactiveButton),
+                    labelStyle:
+                        const TextStyle(color: CustomColors.inactiveButton),
                     contentPadding: const EdgeInsets.symmetric(
                       vertical: 2.0,
                       horizontal: 8.0,
@@ -133,7 +135,8 @@ class CustomTextFormField extends StatelessWidget {
                     ),
                     counterText: '',
                     border: OutlineInputBorder(
-                      borderSide: const BorderSide(color: CustomColors.blackColor),
+                      borderSide:
+                          const BorderSide(color: CustomColors.blackColor),
                       borderRadius: BorderRadius.circular(4.0),
                     ),
                     icon: icon,
@@ -148,33 +151,32 @@ class CustomTextFormField extends StatelessWidget {
                     suffixIcon: suffixIcon,
                   ),
                 ),
-                
               ],
             ),
-            
           ),
-          SizedBox(height: 2,),
+          SizedBox(
+            height: 2,
+          ),
           if (showCharacterCount == true)
-              BlocBuilder<CharacterCountCubit, int>(
-                builder: (context, count) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Align(
-                      alignment: AlignmentDirectional.bottomEnd,
-                      child: Text(
-                        
-                        '$count/${maxLength ?? 0} Characters',
-                        style: TextStyle(
-                          color: CustomColors.blackColor,
-                          fontSize: 12, 
-                        ),
+            BlocBuilder<CharacterCountCubit, int>(
+              builder: (context, count) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Align(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    child: Text(
+                      '$count/${maxLength ?? 0} Characters',
+                      style: TextStyle(
+                        color: CustomColors.blackColor,
+                        fontSize: 12,
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
+            ),
         ],
       ),
     );
   }
-} 
+}

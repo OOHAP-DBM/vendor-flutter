@@ -67,7 +67,7 @@ class _FinalAddHoardingSecondPageState
               leading: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: CircularButton(
-                  onTap: () {
+                  onPressed: () {
                     Navigator.pop(context);
                   },
                   backgroundColor: CustomColors.grey,

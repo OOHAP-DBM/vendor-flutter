@@ -63,6 +63,7 @@ class _OtpScreenState extends State<SignupOtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: CustomAppBar(
@@ -72,7 +73,7 @@ class _OtpScreenState extends State<SignupOtpScreen> {
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: CircularButton(
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
             backgroundColor: CustomColors.grey,
@@ -86,8 +87,9 @@ class _OtpScreenState extends State<SignupOtpScreen> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 18.0),
           child: SizedBox(
-            height: ScaleSize.height(85),
-            width: ScaleSize.width(100),
+            height: size.height * 0.85,
+            width: size.width,
+
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,7 +117,7 @@ class _OtpScreenState extends State<SignupOtpScreen> {
                 ),
 
                 Container(
-                  width: ScaleSize.width(70),
+                  width: size.width * 0.70,
                   // padding: const EdgeInsets.all(16.0),
                   alignment: Alignment.topLeft,
                   child: PinCodeTextField(
@@ -179,7 +181,7 @@ class _OtpScreenState extends State<SignupOtpScreen> {
                 ),
 
                 CustomTextBtn(
-                  onTap: () {},
+                  onPressed: () {},
                   text: 'Resend OTP',
                   alignment: Alignment.topLeft,
                 ),

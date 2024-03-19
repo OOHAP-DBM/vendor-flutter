@@ -45,6 +45,7 @@ class _TagsInputFieldState extends State<TagsInputField> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -56,7 +57,7 @@ class _TagsInputFieldState extends State<TagsInputField> {
           height: 12,
         ),
         Container(
-          height: ScaleSize.height(5.66),
+          height: size.height * 0.056,
           decoration: const BoxDecoration(
             color: Colors.white,
           ),

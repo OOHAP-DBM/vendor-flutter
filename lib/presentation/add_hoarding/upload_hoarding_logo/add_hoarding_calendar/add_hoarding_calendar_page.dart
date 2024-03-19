@@ -55,6 +55,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppBar(
         title: 'Business Details',
@@ -63,7 +64,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
         leading: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0),
           child: CircularButton(
-            onTap: () {
+            onPressed: () {
               Navigator.pop(context);
             },
             backgroundColor: CustomColors.grey,
@@ -130,6 +131,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
   }
 
   void _showCalendarBottomSheet(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -311,7 +313,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
                       CustomButton(
                         onTap: () {},
                         text: 'Block',
-                        width: ScaleSize.width(45),
+                        width: size.width * 0.45,
                         backgroundColor: const Color(0xFF282C3E),
                       ),
                       CustomButton(
@@ -319,7 +321,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
                           Navigator.pop(context);
                         },
                         text: 'Cancel',
-                        width: ScaleSize.width(45),
+                        width: size.width * 0.45,
                         backgroundColor: const Color(0xFFDDDDDD),
                       ),
                     ],
@@ -359,7 +361,7 @@ class _AddHoardingCalendarPageState extends State<AddHoardingCalendarPage> {
               bottom: 12), // Add margin for spacing between chip rows if needed
           child: SizedBox(
             height: 70,
-            width: ScaleSize.width(40),
+            width: MediaQuery.of(context).size.width * 0.40,
             child: Chip(
               backgroundColor: Color(0xFFEBEAEA),
               labelPadding: EdgeInsets.symmetric(horizontal: 12),

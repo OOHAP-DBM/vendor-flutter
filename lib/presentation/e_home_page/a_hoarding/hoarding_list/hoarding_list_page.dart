@@ -50,6 +50,7 @@ class _MyHordingListPageState extends State<MyHordingListPage> {
   }
 
   void _showSortBottomSheet(BuildContext context) {
+
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -131,6 +132,7 @@ class _MyHordingListPageState extends State<MyHordingListPage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppBar(
         title: 'My Hoarding',
@@ -164,7 +166,8 @@ class _MyHordingListPageState extends State<MyHordingListPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: ScaleSize.width(76),
+
+                      width: size.width * 0.76,
                       height: 44,
                       decoration: ShapeDecoration(
                         color: Colors.white,

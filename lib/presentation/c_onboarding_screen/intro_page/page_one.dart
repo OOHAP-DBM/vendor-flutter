@@ -10,14 +10,16 @@ class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+     Size size = MediaQuery.of(context).size;
     return SizedBox(
-      height: ScaleSize.height(100),
-      width: ScaleSize.width(100),
+      height:size.height,
+      width:size.width,
       child: Stack(
         children: [
           SizedBox(
-            height: ScaleSize.height(100),
-            width: ScaleSize.width(100),
+            height:size.height,
+            width:size.width,
             child: Image.asset(
               ImageConstant.test,
               fit: Responsive.isMobile(context)
@@ -28,8 +30,8 @@ class PageOne extends StatelessWidget {
             ),
           ),
           Container(
-            height: ScaleSize.height(100),
-            width: ScaleSize.width(100),
+            height:size.height,
+            width:size.width,
             decoration:  const BoxDecoration(
               gradient: CustomColors.blackGradient
             ),
@@ -42,7 +44,7 @@ class PageOne extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CustomSvgImageView(
-                      width: ScaleSize.width(80),
+                      width: size.width * 0.80,
                       svgPath: ImageConstant.primaryLogo,
                       fit: BoxFit.contain),
                   const SizedBox(

@@ -16,7 +16,7 @@ class ProfileScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: CircularButton(
-              onTap: () {
+              onPressed: () {
                 CustomSnackBar(
                         color: Colors.redAccent,
                         text: 'Notification clicked',

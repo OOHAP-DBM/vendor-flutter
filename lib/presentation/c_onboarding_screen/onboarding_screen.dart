@@ -14,6 +14,7 @@ class OnBoardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: BlocBuilder<OnboardingCubit, OnboardingState>(
         builder: (context, state) {
@@ -22,8 +23,8 @@ class OnBoardingScreen extends StatelessWidget {
           final bool getStarted = state.currentPageIndex == 2;
           bool isButtonTapped = false;
           return SizedBox(
-            height: ScaleSize.height(100),
-            width: ScaleSize.width(100),
+            height:size.height,
+            width:size.width,
             child: Stack(children: [
               PageView(
                   controller: _controller,
@@ -50,11 +51,11 @@ class OnBoardingScreen extends StatelessWidget {
                             visible: getStarted,
                             child: CustomButton(
                               height: Responsive.isTablet(context)
-                                  ? ScaleSize.height(10.0)
-                                  : ScaleSize.height(5.66),
+                                  ? size.height * 0.10
+                                  : size.height * 0.06,
                               width: Responsive.isTablet(context)
-                                  ? ScaleSize.width(60)
-                                  : ScaleSize.width(90),
+                                  ? size.width * 0.60
+                                  : size.width * 0.90,
                               onTap: () {
                                 NavigateUtils.pushNamedReplacement(context, Routes.loginScreen);
                               },
@@ -76,7 +77,7 @@ class OnBoardingScreen extends StatelessWidget {
                               const Spacer(),
                               if (showBackButton)
                                 CircularButton(
-                                  onTap: () {
+                                  onPressed: () {
                                     if (!isButtonTapped) {
                                       isButtonTapped = true;
                                       /*  context
@@ -98,14 +99,14 @@ class OnBoardingScreen extends StatelessWidget {
                                 ),
                               SizedBox(
                                 width: Responsive.isTablet(context)
-                                    ? ScaleSize.width(2)
-                                    : ScaleSize.width(8),
+                                    ? size.width * 0.02
+                                    : size.width * 0.08,
                               ),
                               CircularButton(
                                 backgroundColor: changeColor
                                     ? Colors.transparent
                                     : CustomColors.whiteColor,
-                                onTap: () {
+                                onPressed: () {
                                   if (!isButtonTapped) {
                                     isButtonTapped = true;
                                     _controller
