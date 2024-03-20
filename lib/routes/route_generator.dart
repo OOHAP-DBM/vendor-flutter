@@ -38,6 +38,7 @@ import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/final_r
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/hoarding_detail_page.dart';
 import 'package:oohapp/presentation/e_home_page/a_hoarding/hoarding_list/hoarding_list_page.dart';
 import 'package:oohapp/presentation/e_home_page/home_page.dart';
+import 'package:oohapp/presentation/f_my_hoarding_screen/my_hoarding.dart';
 import '../core/app_export.dart';
 import '../presentation/b_splash_screen/splash_screen.dart';
 import '../presentation/c_onboarding_screen/onboarding_screen.dart';
@@ -107,6 +108,11 @@ class RoutesGenerator {
       case Routes.hoardinglistscreen:
         return CupertinoPageRoute(builder: (_) => MyHordingListPage());
 
+        /// Aks
+
+      case Routes.myBooking:
+        return CupertinoPageRoute(builder: (_) => const MyBookings());
+
       case Routes.addhoardingScreen:
         return CupertinoPageRoute(
             builder: (_) => BlocProvider(
@@ -121,7 +127,7 @@ class RoutesGenerator {
                 ));
       case Routes.firsthoardinglocationScreen:
         return CupertinoPageRoute(builder: (_) => FirstHoardingLocationPage());
- 
+
       case Routes.secondhoardinglocationScreen:
         return CupertinoPageRoute(
             builder: (_) => const SecondLocationHoardingPage());

@@ -47,4 +47,11 @@ class ImageConstant {
   static String arrowdropdownicon='$imagePath/arrow_dropdown.png';
 
 
+
+  /// Aks
+
+  static String oIcon='$imagePath/o_icon.png';
+
+
+
 }

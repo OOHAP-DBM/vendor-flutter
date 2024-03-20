@@ -1,5 +1,6 @@
   import 'package:oohapp/core/app_export.dart';
 
+
 class AppConstant {
   static String appName = 'OohApp';
 

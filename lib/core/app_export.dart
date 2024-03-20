@@ -19,3 +19,4 @@ export 'package:oohapp/widgets/custom_text_form_field.dart';
 export 'package:oohapp/widgets/custom_image_view.dart';
 export 'package:oohapp/routes/route_generator.dart';
 export '../../widgets/circle_image_svg_image.dart';
+export 'package:flutter_screenutil/flutter_screenutil.dart';

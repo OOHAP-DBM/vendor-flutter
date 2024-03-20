@@ -46,7 +46,8 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CustomText.inputText(
-                          text: 'digital@gmail.com', textAlign: TextAlign.start),
+                          text: 'digital@gmail.com',
+                          textAlign: TextAlign.start),
                       const Icon(
                         Icons.arrow_forward_ios_outlined,
                         size: 18,
@@ -72,7 +73,11 @@ class ProfileScreen extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      if (index == 0) {
+                        Navigator.pushNamed(context, Routes.myBooking);
+                      }
+                    },
                     child: Column(
                       children: [
                         ListTile(

@@ -135,6 +135,9 @@ class _MyHordingListPageState extends State<MyHordingListPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: CustomAppBar(
+         leading: CircularButton(onPressed: (){
+           Navigator.of(context).pop();
+         }, icon: Icons.arrow_back),
         title: 'My Hoarding',
         centerTitle: true,
         actions: [

@@ -40,8 +40,8 @@ class CircularButton extends StatelessWidget {
       onTap: onPressed,
       borderRadius: BorderRadius.circular(100),
       child: Container(
-        height: size.height * 0.08,
-        width: size.width * 0.08,
+        height: height ?? size.height * 0.056,
+        width: width ?? size.width * 0.056,
         decoration: BoxDecoration(
             color: backgroundColor ?? Colors.transparent,
             shape: BoxShape.circle,
@@ -56,5 +56,3 @@ class CircularButton extends StatelessWidget {
     );
   }
 }
-
-
