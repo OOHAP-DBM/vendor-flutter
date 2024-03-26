@@ -1,50 +1,6 @@
 import '../core/app_export.dart';
 
 class CustomSnackBar {
-  final Color? color;
-  final String text;
-  final int? second;
-  final IconData? icon;
-  final Color? iconColor;
-
-  CustomSnackBar({
-    this.color,
-    required this.text,
-    this.second,
-    this.icon,
-    this.iconColor,
-  });
-
-  void showSnackBar(context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Center(
-          child: Row(
-            children: [
-              Icon(
-                icon,
-                color: iconColor ?? Colors.white,
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(text),
-            ],
-          ),
-        ),
-        backgroundColor: color,
-        duration: Duration(seconds: second ?? 1),
-      ),
-    );
-  }
-}
-
-
-/*
-
-import '../core/app_export.dart';
-
-class CustomSnackBar {
   static showCustomSnackBar(BuildContext context, String content,
       {IconData iconData = Icons.info,
         Color backgroundColor = CustomColors.buttonGreen,
@@ -72,9 +28,7 @@ class CustomSnackBar {
           borderRadius: BorderRadius.circular(10.0),
         ),
         behavior: SnackBarBehavior.floating,
-        */
-/* margin: EdgeInsets.only(bottom:  MediaQuery.of(context).size.height - MediaQuery.of(context).size.height * 0.20, left: 14.r, right: 14.r),*//*
-
+        /* margin: EdgeInsets.only(bottom:  MediaQuery.of(context).size.height - MediaQuery.of(context).size.height * 0.20, left: 14.r, right: 14.r),*/
 
         margin: EdgeInsets.all(16.r),
         padding: EdgeInsets.symmetric(
@@ -91,4 +45,3 @@ class CustomSnackBar {
     );
   }
 }
-*/

@@ -17,7 +17,11 @@ class SaleChart extends StatelessWidget {
         text: 'Weekly sale',
       ),
       primaryXAxis: CategoryAxis(),
-      series: <ChartSeries>[
+
+     /// I comment this due to error after update package
+
+
+     /* series: <ChartSeries>[
         BarSeries<SaleData, String>(
           dataSource: chartSaleData.getChartData(),
           xValueMapper: (SaleData sales, _) => sales.weekDay,
@@ -25,7 +29,9 @@ class SaleChart extends StatelessWidget {
           dataLabelSettings: const DataLabelSettings(isVisible: true),
         ),
         //  FastLineSeries(dataSource: chartSaleData.getChartData(), xValueMapper: , yValueMapper: yValueMapper)
-      ],
+      ],*/
+
+      ///
     );
     /* return SfCartesianChart(
       title: ChartTitle(text: 'Weekly Sale'),

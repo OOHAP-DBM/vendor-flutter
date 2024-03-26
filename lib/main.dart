@@ -1,4 +1,3 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:oohapp/core/app_export.dart';
 import 'package:oohapp/widgets/custom_bloc_provider.dart';
 
@@ -53,7 +52,10 @@ class MyApp extends StatelessWidget {
   }
 }*/
 
-void main() => runApp(const MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

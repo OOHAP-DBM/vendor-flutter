@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:oohapp/core/app_export.dart';
 import 'package:oohapp/presentation/e_home_page/profile_screen/list_builder/list_options.dart';
+import 'package:oohapp/presentation/g_appointment_screen/appointment_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({super.key});
@@ -16,14 +18,7 @@ class ProfileScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
             child: CircularButton(
-              onPressed: () {
-                CustomSnackBar(
-                        color: Colors.redAccent,
-                        text: 'Notification clicked',
-                        second: 1,
-                        icon: Icons.notifications_none)
-                    .showSnackBar(context);
-              },
+              onPressed: () {},
               icon: Icons.notifications_none,
               iconColor: CustomColors.blackColor,
             ),
@@ -76,6 +71,13 @@ class ProfileScreen extends StatelessWidget {
                     onTap: () {
                       if (index == 0) {
                         Navigator.pushNamed(context, Routes.myBooking);
+                      }
+                      if (index == 3) {
+                        Navigator.push(
+                            context,
+                            CupertinoPageRoute(
+                              builder: (context) => AppointmentScreen(),
+                            ));
                       }
                     },
                     child: Column(

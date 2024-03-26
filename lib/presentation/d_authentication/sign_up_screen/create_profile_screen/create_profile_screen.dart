@@ -77,12 +77,7 @@ class CreateProfileScreen extends StatelessWidget {
                             padding: const EdgeInsets.all(5.0),
                             child: InkWell(
                               onTap: () {
-                                CustomSnackBar(
-                                        color: Colors.pink,
-                                        text: 'Upload button clicked',
-                                        second: 1,
-                                        icon: Icons.camera)
-                                    .showSnackBar(context);
+
                               },
                               child: const Icon(
                                 Icons.camera_alt_outlined,

@@ -18,12 +18,7 @@ class DashboardScreen extends StatelessWidget {
         actions: [
           CircularButton(
             onPressed: () {
-              CustomSnackBar(
-                      color: Colors.redAccent,
-                      text: 'Notification clicked',
-                      second: 1,
-                      icon: Icons.notifications_none)
-                  .showSnackBar(context);
+
             },
             icon: Icons.notifications_none,
             iconColor: CustomColors.blackColor,
@@ -35,12 +30,7 @@ class DashboardScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 10.0),
             child: CustomCircleImage(
               onTap: () {
-                CustomSnackBar(
-                        color: Colors.redAccent,
-                        text: 'Profile clicked',
-                        second: 1,
-                        icon: Icons.image)
-                    .showSnackBar(context);
+
               },
               imagePath: ImageConstant.baby,
               fit: BoxFit.fill,

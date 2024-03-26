@@ -1,20 +1,28 @@
+import 'package:oohapp/presentation/f_my_hoarding_screen/widget/booking_progress_line.dart';
+
 import '../../../core/app_export.dart';
 import 'custom_booking_progress_bar.dart';
 
 class OrderCard extends StatelessWidget {
-  const OrderCard(
-      {super.key,
-      required this.child,
-      this.orderId = '#16449649',
-      this.bookedBy = 'Customer Name',
-      required this.currentStatusBgColor,
-      this.edgeInsets});
+  const OrderCard({
+    super.key,
+    required this.child,
+    this.orderId = '#16449649',
+    this.bookedBy = 'Customer Name',
+    required this.currentStatusBgColor,
+    this.edgeInsets, this.startDate, this.startYear, this.endDate, this.endYear,
+
+  });
 
   final Widget child;
   final String orderId;
   final String bookedBy;
   final Color currentStatusBgColor;
   final dynamic edgeInsets;
+  final String? startDate;
+  final String? startYear;
+  final String? endDate;
+  final String? endYear;
 
   @override
   Widget build(BuildContext context) {
@@ -77,21 +85,21 @@ class OrderCard extends StatelessWidget {
                   Column(
                     children: [
                       CustomText.text(
-                          text: '01 May',
+                          text:startDate ?? '01 May',
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600),
                       SizedBox(
                         height: 2.h,
                       ),
                       Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 1.sp, horizontal: 5.sp),
+                          padding:
+                          EdgeInsets.symmetric(vertical: 1.sp, horizontal: 5.sp),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.r),
                             color: Colors.black,
                           ),
                           child: CustomText.text(
-                              text: '2024',
+                              text: startYear ?? '2024',
                               fontSize: 8.sp,
                               color: Colors.white)),
                     ],
@@ -99,9 +107,7 @@ class OrderCard extends StatelessWidget {
                   SizedBox(
                     width: 5.0.w,
                   ),
-                  CustomBookingProgressBar(
-                    width: size.width * 0.75,
-                  ),
+                  CustomBookingProgressBar(width: size.width * 0.75,),
                   SizedBox(
                     width: 5.0.w,
                   ),
@@ -111,26 +117,29 @@ class OrderCard extends StatelessWidget {
                   Column(
                     children: [
                       CustomText.text(
-                          text: '01 Jun',
+                          text: endDate ?? '01 Jun',
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w600),
                       SizedBox(
                         height: 2.h,
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 1.sp, horizontal: 5.sp),
+                        padding: EdgeInsets.symmetric(vertical: 1.sp, horizontal: 5.sp),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.r),
                           color: Colors.black,
                         ),
                         child: CustomText.text(
-                            text: '2024', fontSize: 8.sp, color: Colors.white),
+                            text: endYear ?? '2024',
+                            fontSize: 8.sp,
+                            color: Colors.white),
                       ),
                     ],
                   ),
                 ],
               ),
+
+              ///
               SizedBox(
                 height: 7.h,
               ),

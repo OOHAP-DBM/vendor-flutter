@@ -105,6 +105,7 @@ class CustomTextBtn extends StatelessWidget {
           overflow: overflow,
           textAlign: textAlign,
           softWrap: softWrap,
+          fontSize: fontSize,
           decoration: decoration,
           underLineColor: underLineColor,
           maxLines: maxLines),
